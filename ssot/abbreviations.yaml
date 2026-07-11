@@ -16,12 +16,13 @@
 abbreviations:
   # --- Узлы chain-notation (клиенты/проекты) ---
   - abbr: BBM
-    full: BBM — холдинг (продюсерский медиабизнес в медицине)
+    full: Brain & Brand Mining — холдинг (продюсерский медиабизнес в медицине)
     scope: chain-notation
     parent: null
-    # TODO(Антон): каноническое написание полной расшифровки бренда —
-    # «Brain & Brand Myning» (design/src/bbm-principles.md) vs
-    # «Brain and Brand Mining» (design/src/[BBM] White Paper.md)
+    # Написание «Brain & Brand Mining» — по bbm/decisions-log.md [2026-01-20]
+    # и саммари встреч (design/src/…2026-01-20…, 2025-12-29). Вариант «Myning»
+    # встречается только в design/src/bbm-principles.md (стилизация «формулы
+    # Myning») — каноном не является. Разрешено в BBMP-101.
   - abbr: DS
     full: Doctor.School
     scope: chain-notation

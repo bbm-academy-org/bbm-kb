@@ -53,11 +53,14 @@ hosts:
   - id: mmproxy-prod-tw
     provider: Timeweb Cloud
     region: kz-1 (Алматы)
-    status: staging
+    status: retired
     description: >-
       Изолированный KZ reverse-proxy (nginx L4 SNI-passthrough) для обхода
-      блокировки ТСПУ Mattermost; cutover DNS за гейтом теста с РФ-оператора (BBMP-71).
-      # TODO(Антон): подтвердить текущий статус cutover chat.bbm.academy → KZ-IP
+      блокировки ТСПУ Mattermost (BBMP-71). Cutover DNS не выполнялся: VPS
+      уничтожен 2026-07-01 (terraform-state bbm: бэкап
+      tfstate.bak-pre-mmproxy-destroy-20260701, ресурса в state нет);
+      chat.bbm.academy указывает напрямую на tools-prod-tw. Реанимация — по
+      ветке feat/bbmp-71-mm-proxy-kz (не смержена). Разрешено в BBMP-101.
 
 services:
   - id: mattermost
@@ -156,15 +159,20 @@ services:
     description: >-
       CF Worker трансляций Zoom → YouTube (BBMP-9); его Zoom/YouTube-креды
       переиспользует zoom-rotation.
-      # TODO(Антон): подтвердить актуальный статус и хостинг воркера
+      # TODO(Антон): подтвердить, что воркер жив и где хостится (Cloudflare
+      # RF-blocked — противоречит правилу RF-доступности). Из данных репо bbm
+      # не выводится: локального клона/CI-следов воркера в bbm нет (BBMP-101).
 
   - id: mmproxy
     name: MM-proxy (обход ТСПУ)
-    domain: null  # проксирует SNI chat.bbm.academy без терминации TLS
+    domain: null  # проксировал SNI chat.bbm.academy без терминации TLS
     host: mmproxy-prod-tw
     repo: sidorovanthon/bbm  # infra/timeweb/terraform/mmproxy.tf (ветка feat/bbmp-71-mm-proxy-kz)
-    status: staging
-    description: nginx stream (ssl_preread) → tools-prod-tw:443; ноль секретов на проксе (BBMP-71).
+    status: retired
+    description: >-
+      nginx stream (ssl_preread) → tools-prod-tw:443; ноль секретов на проксе
+      (BBMP-71). VPS уничтожен 2026-07-01, cutover не выполнялся; код сохранён
+      в несмерженной ветке — восстановление по необходимости.
 
 storage:
   # Все бакеты — Timeweb S3, ru-1 СПб (гео-разнесены с VPS), account-level ключи.
@@ -205,7 +213,7 @@ repos:
     remote: bbm-academy-org/bbm-kb
     description: Этот репозиторий — база знаний BBM (SSOT-ядро + куррированный нарратив, Fumadocs).
   - id: bbm-platform-prd
-    remote: null  # TODO(Антон): подтвердить remote (локальный каталог bbm-platform-prd без .git)
+    remote: null  # подтверждено 2026-07-11 (BBMP-101): локальный каталог без .git/remote — git-remote нет
     description: PRD/спеки платформы BBM (decision log D-009/D-015/D-016/D-017 и др.).
   - id: bbm-portal
     remote: bbm-academy-org/bbm-portal
