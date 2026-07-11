@@ -1,4 +1,6 @@
-# CI: проверка, что статический экспорт Fumadocs собирается.
+# CI: проверка, что статический экспорт Fumadocs собирается,
+# + guard «правки только через PR» (компенсация отсутствия branch protection
+# на приватном репо бесплатной орги — включим protection при переходе на Team).
 # Секретов не требует. Деплой на kb.bbm.academy — отдельная задача (спека §6).
 name: build
 
@@ -31,3 +33,32 @@ jobs:
           name: kb-static-export
           path: out/
           retention-days: 7
+
+  # Guard: прямой пуш в main мимо PR → красный job.
+  # Проверяется только HEAD-коммит текущего пуша; коммиты с маркером
+  # [bootstrap] в сообщении пропускаются (bootstrap-фаза репо).
+  pr-guard:
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: read
+    steps:
+      - name: Коммит пришёл через merged PR?
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          SHA: ${{ github.sha }}
+        run: |
+          MSG=$(gh api "repos/$REPO/commits/$SHA" --jq '.commit.message')
+          if printf '%s' "$MSG" | grep -qF '[bootstrap]'; then
+            echo "Маркер [bootstrap] в сообщении коммита — guard пропущен."
+            exit 0
+          fi
+          MERGED=$(gh api "repos/$REPO/commits/$SHA/pulls" \
+            --jq '[.[] | select(.merged_at != null)] | length')
+          if [ "$MERGED" -eq 0 ]; then
+            echo "::error::Коммит $SHA попал в main прямым пушем, мимо PR. Правки — только через pull request (см. README/AGENTS). Локальная защита: git config core.hooksPath .githooks"
+            exit 1
+          fi
+          echo "OK: коммит ассоциирован с merged PR."
