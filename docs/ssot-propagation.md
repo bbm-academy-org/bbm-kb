@@ -9,27 +9,28 @@
 | Потребитель | Механизм | Статус |
 |---|---|---|
 | KB-сайт | страницы генерируются на билде из `ssot/` (`lib/ssot.ts`, BBMP-99) | работает |
-| Публичный сайт (Payload, `cms.bbm.academy`) | `.github/workflows/propagate-payload.yml` → `scripts/propagate-payload.mjs`: push в main с изменением `ssot/facts/*` → upsert канонических полей через REST | ждёт секрет `PAYLOAD_API_KEY` (до этого — DRY_RUN) |
+| Публичный сайт (Payload, `cms.bbm.academy`) | `.github/workflows/propagate-payload.yml` → `scripts/propagate-payload.mjs`: push в main с изменением `ssot/facts/*` → upsert канонических полей через REST | работает (секреты установлены 2026-07-12, боевой прогон writes=7) |
 | Hermes (@bbmka) | скилл `hermes-skills/bbm-ssot/` — ответы о команде/миссии/терминах только из `ssot/` с источником | ждёт `GITHUB_TOKEN` на хосте + установку скилла |
 
-## Payload (факт на 2026-07-11)
+## Payload (факт на 2026-07-12)
 
 - Payload 3.85.1 задеплоен: `https://cms.bbm.academy` (хост portal-prod-tw, репо `bbm-academy-org/bbm-portal`). Read REST публичный, write — `Authorization: users API-Key <key>`.
 - Канонические поля (перезаписываются из SSOT): `team.{name,role}`, `publicProjects.{name,description}`, `globals/philosophy.mission`. Editorial-поля (bio, photo, tagline, metrics, …) не трогаются.
 - Идемпотентность: upsert по SSOT id; alias-map расхождений (`igor-pirogov`→`igor`, `bbm`→`bbm-academy`) — в начале `scripts/propagate-payload.mjs`.
 - Пишем черновик (`?draft=true`); публикация — за editorial-flow (`/admin` → publish → `POST /api/publish-site`). TODO(Антон): решить про авто-публикацию.
 - Записи Payload вне SSOT (`team/maksim-a`, `publicProjects/otcy-i-deti`, `publicProjects/byt-dobru`) не удаляются, репортятся drift-warning'ом. TODO(Антон): канонизировать в SSOT или пометить editorial-only.
+- Фикс drift-репорта (2026-07-12): list-запрос в `reportDrift()` шёл с `draft=true` и возвращал только документы с draft-версией — published-only записи (те самые maksim-a / otcy-i-deti / byt-dobru) выпадали из выборки, drift по ним молчал (нарушение §7). Убрано `draft=true` из list; сравнение канонических полей не затронуто — оно живёт в `upsertDoc` и по-прежнему идёт по draft-версии.
 - SSOT-факт без записи в Payload = красный джоб + алёрт (не warning): непропагированный канон — то самое тихое расхождение из §7.
 - TODO(Антон) из ревью PR#2: (1) подтвердить каноничность `publicProjects.description` — в Payload там сейчас editorial-текст «проблемы» проекта, SSOT перезапишет его определением сущности из `company.yaml`; (2) `team.role` в SSOT на EN («Tech Lead / System Architect»), на RU-сайте роли были по-русски — решить язык канона ролей.
 
-### Включение записи (TODO-хост / TODO(Антон))
+### Включение записи — ✅ выполнено 2026-07-12
 
-1. `https://cms.bbm.academy/admin` → Users → создать `ssot-sync@bbm.academy` (или взять существующего) → «Enable API Key» → скопировать ключ.
-2. `gh secret set PAYLOAD_API_KEY -R bbm-academy-org/bbm-kb` (значение — из буфера, не в чат/файлы).
-3. `gh secret set MM_WEBHOOK_BBM -R bbm-academy-org/bbm-kb` — incoming webhook `chat.bbm.academy` канала BBM (мастер — `bbm/infra/plane/notes.md` §Mattermost; тот же, что `MM_WEBHOOK_BBM` в `bbm/infra/monitoring`).
-4. Проверка: Actions → `propagate-payload` → Run workflow (сначала с `dry_run=true`).
+1. ✅ `https://cms.bbm.academy/admin` → Users → sync-юзер → «Enable API Key».
+2. ✅ `PAYLOAD_API_KEY` установлен как secret репо `bbm-academy-org/bbm-kb` (2026-07-12).
+3. ✅ `MM_WEBHOOK_BBM` установлен (2026-07-12) — incoming webhook `chat.bbm.academy` канала BBM (мастер — `bbm/infra/plane/notes.md` §Mattermost; тот же, что `MM_WEBHOOK_BBM` в `bbm/infra/monitoring`).
+4. ✅ Прогон выполнен: DRY_RUN снят, боевой запуск зелёный, `writes=7` — канон записан в черновики Payload.
 
-Пока секрета нет, джоб работает в DRY_RUN (diff в лог, exit 0) — расхождение видно, но не чинится.
+Джоб работает в write-режиме; DRY_RUN остаётся доступен через Run workflow → `dry_run=true` (и включается принудительно, если секрет пропадёт).
 
 ## Hermes (факт на 2026-07-11)
 
@@ -63,4 +64,4 @@
 4. **Hermes**: `@bbmka кто у нас в команде?` → роль новая, источник указан.
 5. Негативный тест алёрта: Run workflow с заведомо сломанным `PAYLOAD_URL`? Нет — проще: временно отозвать API-ключ → джоб красный → в канале BBM сообщение «SSOT-пропагация в Payload упала».
 
-Прогнано 2026-07-11 (без секретов): шаг 3 в DRY_RUN против живого cms — diff корректный, идемпотентность подтверждена (`ok … канон совпадает` для philosophy); шаги с ключом/Hermes — после TODO-хост выше.
+Прогнано 2026-07-11 (без секретов): шаг 3 в DRY_RUN против живого cms — diff корректный, идемпотентность подтверждена (`ok … канон совпадает` для philosophy). 2026-07-12: секреты установлены, боевой write-прогон зелёный (`writes=7`); Hermes-шаги — после TODO-хост выше.

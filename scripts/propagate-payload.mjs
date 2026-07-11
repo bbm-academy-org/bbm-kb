@@ -111,11 +111,14 @@ async function upsertDoc(collection, ssotId, payloadId, desired) {
 // Payload-записи, которых нет в SSOT, — не удаляем (editorial-обёртка может
 // содержать презентационные записи), но репортим drift.
 async function reportDrift(collection, ssotPayloadIds) {
-  // draft=true только при наличии ключа: анонимный list с draft=true
-  // возвращает пустой docs[] (проверено на живом cms 2026-07-11).
-  const draft = API_KEY ? '&draft=true' : '';
+  // Без draft=true: list с draft=true отдаёт ТОЛЬКО документы, у которых есть
+  // draft-версия, — записи без черновика (published-only) выпадали из выборки
+  // и drift по ним молчал (тихое расхождение, запрещено спекой §7; фикс
+  // 2026-07-12). Обычный list видит все записи коллекции (published и
+  // never-published), а drift'у нужны только id — сравнение канонических
+  // полей живёт в upsertDoc и по-прежнему идёт по draft-версии.
   for (let page = 1, more = true; more; page++) {
-    const res = await api('GET', `/api/${collection}?limit=100&page=${page}&depth=0&locale=ru${draft}`);
+    const res = await api('GET', `/api/${collection}?limit=100&page=${page}&depth=0&locale=ru`);
     if (!res.ok) { console.log(`::warning::${collection}: не смог прочитать список для drift-репорта (${res.status})`); return; }
     const data = await res.json();
     for (const d of data.docs ?? []) {
