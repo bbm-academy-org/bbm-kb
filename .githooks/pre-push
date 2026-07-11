@@ -1,0 +1,20 @@
+#!/bin/sh
+# Блокирует прямой пуш в main: правки — только через PR (правило команды;
+# серверной branch protection нет — тарифное ограничение GitHub Free).
+# Включение хука: git config core.hooksPath .githooks
+# Аварийный обход: KB_ALLOW_MAIN_PUSH=1 git push …
+
+if [ "$KB_ALLOW_MAIN_PUSH" = "1" ]; then
+  echo "pre-push: KB_ALLOW_MAIN_PUSH=1 — пуш в main разрешён (аварийный обход)." >&2
+  exit 0
+fi
+
+while read -r local_ref local_sha remote_ref remote_sha; do
+  if [ "$remote_ref" = "refs/heads/main" ]; then
+    echo "pre-push: прямой пуш в main запрещён — откройте PR." >&2
+    echo "pre-push: аварийный обход: KB_ALLOW_MAIN_PUSH=1 git push …" >&2
+    exit 1
+  fi
+done
+
+exit 0
