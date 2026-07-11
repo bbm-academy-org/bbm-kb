@@ -1,0 +1,13 @@
+# SSOT: реестр сервисов/хостов/репо/доменов = карта экосистемы (authority: canonical).
+# Скелет; наполняется в BBMP-99. Контент сюда НЕ добавлять до курации SSOT-ядра.
+#
+# Схема записи:
+#   - id: <slug>            # напр. plane, mattermost, kb, id-bbm
+#     name: <название сервиса>
+#     domain: <FQDN | null>
+#     host: <хост, напр. tools-prod-tw | null>
+#     repo: <owner/repo | null>
+#     status: prod | staging | planned | retired
+#     description: <одно предложение>
+
+services: []

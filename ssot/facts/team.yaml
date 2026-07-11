@@ -1,0 +1,12 @@
+# SSOT: команда BBM — канонический реестр (authority: canonical).
+# Скелет; наполняется в BBMP-99. Контент сюда НЕ добавлять до курации SSOT-ядра.
+#
+# Схема записи:
+#   - id: <slug>            # уникальный идентификатор человека
+#     name: <Имя Фамилия>
+#     role: <роль в бирюзовой модели>
+#     email: <email @bbm.academy — канонический идентификатор>
+#     status: active | inactive
+#     timezone: <IANA, напр. Europe/Moscow>
+
+members: []

@@ -1,0 +1,11 @@
+# SSOT: сущности холдинга — канонический реестр (authority: canonical).
+# Скелет; наполняется в BBMP-99. Контент сюда НЕ добавлять до курации SSOT-ядра.
+#
+# Схема записи:
+#   - id: <slug>            # напр. bbm, doctor-school, orthobioschool, bbm-energy
+#     name: <название>
+#     kind: holding | client | project
+#     parent: <id родительской сущности | null>
+#     description: <одно предложение>
+
+entities: []
