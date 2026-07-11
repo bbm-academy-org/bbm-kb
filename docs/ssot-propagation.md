@@ -19,6 +19,8 @@
 - Идемпотентность: upsert по SSOT id; alias-map расхождений (`igor-pirogov`→`igor`, `bbm`→`bbm-academy`) — в начале `scripts/propagate-payload.mjs`.
 - Пишем черновик (`?draft=true`); публикация — за editorial-flow (`/admin` → publish → `POST /api/publish-site`). TODO(Антон): решить про авто-публикацию.
 - Записи Payload вне SSOT (`team/maksim-a`, `publicProjects/otcy-i-deti`, `publicProjects/byt-dobru`) не удаляются, репортятся drift-warning'ом. TODO(Антон): канонизировать в SSOT или пометить editorial-only.
+- SSOT-факт без записи в Payload = красный джоб + алёрт (не warning): непропагированный канон — то самое тихое расхождение из §7.
+- TODO(Антон) из ревью PR#2: (1) подтвердить каноничность `publicProjects.description` — в Payload там сейчас editorial-текст «проблемы» проекта, SSOT перезапишет его определением сущности из `company.yaml`; (2) `team.role` в SSOT на EN («Tech Lead / System Architect»), на RU-сайте роли были по-русски — решить язык канона ролей.
 
 ### Включение записи (TODO-хост / TODO(Антон))
 

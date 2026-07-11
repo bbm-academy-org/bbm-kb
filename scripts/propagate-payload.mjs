@@ -18,8 +18,8 @@
 //                      `Authorization: users API-Key <key>`); без него — только DRY_RUN
 //   DRY_RUN=1        — читать и показывать diff, ничего не писать
 //   PAYLOAD_CREATE_MISSING=1 — создавать отсутствующие записи (по умолчанию
-//                      только warning: голая запись без editorial-полей может
-//                      сломать вёрстку публичного сайта)
+//                      выключено: голая запись без editorial-полей может
+//                      сломать вёрстку; отсутствие записи = провал джоба)
 //
 // Payload: 3.x, drafts включены. Пишем с ?draft=true (обновляем черновик,
 // публикация остаётся за editorial-flow: /admin → publish → POST /api/publish-site).
@@ -66,6 +66,7 @@ async function api(method, pathname, body) {
     method,
     headers: headers(),
     body: body === undefined ? undefined : JSON.stringify(body),
+    signal: AbortSignal.timeout(30_000), // не висеть на недоступном cms
   });
   return res;
 }
@@ -85,7 +86,10 @@ async function upsertDoc(collection, ssotId, payloadId, desired) {
   const got = await api('GET', `/api/${collection}/${payloadId}?depth=0&draft=true&locale=ru`);
   if (got.status === 404) {
     if (!CREATE_MISSING) {
-      console.log(`::warning::${label}: записи нет в Payload; создание выключено (PAYLOAD_CREATE_MISSING=1 чтобы включить). SSOT-канон не пропагирован.`);
+      // SSOT-факт без записи в Payload = непропагированный канон → провал
+      // джоба и алёрт (спека §7: тихое расхождение недопустимо), не warning.
+      failures++;
+      console.log(`::error::${label}: записи нет в Payload — SSOT-канон не пропагирован. Создать запись в /admin (с editorial-полями) или включить PAYLOAD_CREATE_MISSING=1.`);
       return;
     }
     if (DRY_RUN) { console.log(`[dry-run] CREATE ${label}: ${JSON.stringify(desired)}`); return; }
@@ -126,7 +130,12 @@ async function reportDrift(collection, ssotPayloadIds) {
 function readMission() {
   const raw = fs.readFileSync(SSOT('facts/mission.md'), 'utf8');
   const m = raw.match(/^---\r?\n([\s\S]*?)\r?\n---/);
-  return m ? parseYaml(m[1]) : {};
+  const fm = m ? parseYaml(m[1]) : null;
+  if (!fm || typeof fm.short !== 'string' || !fm.short.trim()) {
+    // битый/пустой frontmatter не должен маскироваться под «миссия совпадает»
+    throw new Error('ssot/facts/mission.md: frontmatter не распарсен или поле short пустое — канон миссии нечитаем.');
+  }
+  return fm;
 }
 
 async function main() {
@@ -158,7 +167,7 @@ async function main() {
   if (!got.ok) { failures++; console.log(`::error::globals/philosophy: read failed ${got.status}`); }
   else {
     const cur = await got.json();
-    const patch = canonicalDiff(cur, { mission: mission.short?.trim() });
+    const patch = canonicalDiff(cur, { mission: mission.short.trim() });
     if (Object.keys(patch).length === 0) console.log('ok globals/philosophy: миссия совпадает');
     else if (DRY_RUN) console.log(`[dry-run] PATCH globals/philosophy: ${JSON.stringify(patch)}`);
     else {
