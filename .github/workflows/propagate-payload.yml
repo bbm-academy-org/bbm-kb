@@ -1,0 +1,71 @@
+# Пропагация SSOT → Payload (cms.bbm.academy), BBMP-102, спека bbm-kb-design §4.
+# push в main с изменением ssot/facts/* → upsert канонических полей в Payload
+# через REST (scripts/propagate-payload.mjs). Идемпотентно (upsert по SSOT id).
+#
+# Секреты (repo bbm-academy-org/bbm-kb):
+#   PAYLOAD_API_KEY — API-ключ users-коллекции Payload
+#     (cms.bbm.academy/admin → Users → sync-юзер → Enable API Key;
+#      затем: gh secret set PAYLOAD_API_KEY -R bbm-academy-org/bbm-kb)
+#     Пока секрет не задан — джоб идёт в DRY_RUN (diff без записи), не падает.
+#   MM_WEBHOOK_BBM — incoming webhook Mattermost (chat.bbm.academy, канал BBM;
+#     тот же, что в infra/monitoring bbm; мастер-ссылка на webhook —
+#     bbm/infra/plane/notes.md §Mattermost):
+#      gh secret set MM_WEBHOOK_BBM -R bbm-academy-org/bbm-kb
+#   Провал джоба = алёрт в MM (спека §7: тихое расхождение недопустимо).
+#   В организации нет готового паттерна CI-failure→MM (проверено 2026-07-11);
+#   образец конструкции — ds-platform product-note-mattermost.yml + if: failure().
+name: propagate-payload
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'ssot/facts/**'
+      - 'scripts/propagate-payload.mjs'
+      - '.github/workflows/propagate-payload.yml'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'DRY_RUN (только diff, без записи)'
+        type: boolean
+        default: false
+
+jobs:
+  propagate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      # js-yaml из package-lock; полный npm ci не нужен для одного скрипта
+      - name: Install js-yaml
+        run: npm ci --ignore-scripts --omit=dev || npm install --no-save js-yaml
+
+      - name: Propagate SSOT → Payload
+        env:
+          PAYLOAD_URL: https://cms.bbm.academy
+          PAYLOAD_API_KEY: ${{ secrets.PAYLOAD_API_KEY }}
+          DRY_RUN: ${{ inputs.dry_run && '1' || '' }}
+        run: node scripts/propagate-payload.mjs
+
+      # Алёрт при провале: incoming webhook Mattermost. Secret-optional:
+      # без MM_WEBHOOK_BBM шаг лишь пишет warning (джоб и так красный).
+      - name: Alert to Mattermost on failure
+        if: failure()
+        env:
+          MM_WEBHOOK_BBM: ${{ secrets.MM_WEBHOOK_BBM }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          if [ -z "$MM_WEBHOOK_BBM" ]; then
+            echo "::warning::MM_WEBHOOK_BBM не задан — алёрт в Mattermost не отправлен. gh secret set MM_WEBHOOK_BBM -R bbm-academy-org/bbm-kb"
+            exit 0
+          fi
+          # \\n — чтобы в JSON ушёл escape \n, а не сырой перевод строки
+          payload=$(printf '{"text":":rotating_light: **SSOT-пропагация в Payload упала** — возможен тихий drift канона.\\nРепо: %s · коммит: %s\\nRun: %s"}' \
+            "${{ github.repository }}" "${{ github.sha }}" "$RUN_URL")
+          curl -sS -m 15 -H 'Content-Type: application/json' -d "$payload" "$MM_WEBHOOK_BBM" \
+            || echo "::warning::не удалось отправить алёрт в Mattermost"
