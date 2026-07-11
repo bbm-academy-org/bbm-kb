@@ -1,13 +1,260 @@
 # SSOT: реестр сервисов/хостов/репо/доменов = карта экосистемы (authority: canonical).
-# Скелет; наполняется в BBMP-99. Контент сюда НЕ добавлять до курации SSOT-ядра.
+# Заполнено в BBMP-99. Источники: репо bbm — infra/* (README, terraform),
+# infra/backups.md, outputs/2026-06-23-observability-audit.md; спека
+# docs/superpowers/specs/2026-07-10-bbm-kb-design.md; memory reference_*/project_*.
 #
-# Схема записи:
-#   - id: <slug>            # напр. plane, mattermost, kb, id-bbm
-#     name: <название сервиса>
-#     domain: <FQDN | null>
-#     host: <хост, напр. tools-prod-tw | null>
-#     repo: <owner/repo | null>
-#     status: prod | staging | planned | retired
-#     description: <одно предложение>
+# Правила:
+# - Секретов (ключи, пароли, креды) здесь нет и быть не может — только имена,
+#   хосты, назначение.
+# - Личная инфра участников (напр. личный VPS Антона) — НЕ инфра BBM, не включается.
+# - Сервисы DS-контура (продукт Doctor.School) — отдельная платформа; здесь только
+#   как внешние ссылки в секции external.
+#
+# Схема:
+# hosts[]:    VPS-хосты BBM.  id (= имя хоста), provider, region, status, description
+# services[]: сервисы.        id, name, domain (FQDN|null), host (id хоста|null),
+#                             repo (owner/repo|null), status: prod|staging|planned|retired,
+#                             description
+# storage[]:  объектные хранилища (S3-бакеты). id (= имя бакета), provider, class, description
+# repos[]:    репозитории экосистемы. id, remote (owner/repo|null), description
+# external[]: внешние/смежные системы (не сервисы BBM). id, name, domain|null, description
 
-services: []
+hosts:
+  - id: tools-prod-tw
+    provider: Timeweb Cloud
+    region: ru-3 (Москва)
+    status: prod
+    description: Командный тулинг — Mattermost + Zitadel BBM; сюда же планируется KB (kb.bbm.academy).
+
+  - id: plane-prod-tw
+    provider: Timeweb Cloud
+    region: ru-2 (Новосибирск)
+    status: prod
+    description: Выделенный хост Plane (plane-only, отдельный failure-domain).
+
+  - id: mon-prod-tw
+    provider: Timeweb Cloud
+    region: ru-1 (Санкт-Петербург)
+    status: prod
+    description: Центральный observability-хост (Grafana/Loki/Prometheus/blackbox), отдельный failure-domain от tools/plane.
+
+  - id: portal-prod-tw
+    provider: Timeweb Cloud
+    region: ru-2 (Новосибирск)
+    status: prod
+    description: Публичный контур — сайт bbm.academy (Astro) + Payload CMS за Caddy.
+
+  - id: hermes-prod-tw
+    provider: Timeweb Cloud
+    region: kz-1 (Алматы, вне РФ)
+    status: prod
+    description: AI-агент Hermes + автопилот Zoom-ротации; вне РФ (Anthropic API недоступен с РФ-IP), наружу только SSH.
+
+  - id: mmproxy-prod-tw
+    provider: Timeweb Cloud
+    region: kz-1 (Алматы)
+    status: staging
+    description: >-
+      Изолированный KZ reverse-proxy (nginx L4 SNI-passthrough) для обхода
+      блокировки ТСПУ Mattermost; cutover DNS за гейтом теста с РФ-оператора (BBMP-71).
+      # TODO(Антон): подтвердить текущий статус cutover chat.bbm.academy → KZ-IP
+
+services:
+  - id: mattermost
+    name: Mattermost
+    domain: chat.bbm.academy
+    host: tools-prod-tw
+    repo: sidorovanthon/bbm  # infra/mattermost
+    status: prod
+    description: Командный мессенджер BBM (self-hosted); бэкап — restic → S3.
+
+  - id: zitadel-bbm
+    name: Zitadel BBM
+    domain: id.bbm.academy
+    host: tools-prod-tw
+    repo: sidorovanthon/bbm  # infra/zitadel
+    status: prod
+    description: >-
+      IdP BBM-контура (SSO тулинга: KB → Grafana → Plane → MM); логин = email
+      @bbm.academy; кросс-платформенный вход — OIDC-федерация с id.doctor.school
+      (общего user-store нет), локстеп мажора с DS-инстансом.
+
+  - id: kb
+    name: База знаний BBM (этот сайт)
+    domain: kb.bbm.academy
+    host: tools-prod-tw
+    repo: sidorovanthon/bbm-kb
+    status: planned
+    description: >-
+      Fumadocs static export за oauth2-proxy (OIDC → id.bbm.academy);
+      деплой — следующая задача плана BBMP-6.
+
+  - id: plane
+    name: Plane
+    domain: plane.bbm.academy
+    host: plane-prod-tw
+    repo: sidorovanthon/bbm  # infra/plane
+    status: prod
+    description: >-
+      Self-hosted PM-система команды; два workspace — bbm (холдинг/инфра:
+      BBMP/BBMB/BBMS/BBME) и doctor-school (продукт: DSP/DSC/DSM/DSO).
+
+  - id: monitoring
+    name: Observability-стек (Grafana/Loki/Prometheus)
+    domain: mon.bbm.academy
+    host: mon-prod-tw
+    repo: sidorovanthon/bbm  # infra/monitoring
+    status: prod
+    description: >-
+      Grafana + Loki + Prometheus + blackbox-пробы + алёрты (MM + TG + email);
+      push-телеметрия Alloy со всех хостов; независимые пробы свежести S3-бэкапов.
+
+  - id: public-site
+    name: Публичный сайт BBM
+    domain: bbm.academy  # apex → 301 → www.bbm.academy (Timeweb CDN)
+    host: portal-prod-tw
+    repo: bbm-academy-org/bbm-public-website
+    status: prod
+    description: Публичный сайт холдинга (Astro); www раздаётся через Timeweb CDN, origin — Caddy на portal-prod-tw.
+
+  - id: cms
+    name: Payload CMS (bbm-portal)
+    domain: cms.bbm.academy
+    host: portal-prod-tw
+    repo: bbm-academy-org/bbm-portal
+    status: prod
+    description: >-
+      Content-backend публичного сайта (Payload v3); зеркалит контракт коллекций
+      сайта; будущий потребитель пропагации SSOT из этого репо (спека §4).
+
+  - id: hermes
+    name: Hermes (@bbmka)
+    domain: null  # наружу только SSH; PTR hermes.bbm.academy, A-записи нет
+    host: hermes-prod-tw
+    repo: sidorovanthon/hermes-agent  # форк Nous Research; инфра — sidorovanthon/bbm infra/hermes
+    status: prod
+    description: >-
+      Командный AI-ops-агент: бот @bbmka в Mattermost + Plane (токен
+      bbm-automation-hermes) + KB (Phase 3); LLM — kie.ai (Anthropic-совместимый канал).
+
+  - id: zoom-rotation
+    name: Автопилот ротации Zoom-записей
+    domain: null
+    host: hermes-prod-tw
+    repo: sidorovanthon/bbm  # infra/zoom-rotation
+    status: prod
+    description: >-
+      Poll-only пайплайн Zoom → S3-буфер → YouTube (освобождение облака Zoom);
+      systemd-сервисы runner + reconcile на hermes-prod-tw (BBMP-67).
+
+  - id: zoom-yt-streaming
+    name: Автоматизация YouTube-трансляций из Zoom
+    domain: null
+    host: null  # Cloudflare Worker (вне VPS-парка BBM)
+    repo: sidorovanthon/bbm-zoom-yt-streaming-worker
+    status: prod
+    description: >-
+      CF Worker трансляций Zoom → YouTube (BBMP-9); его Zoom/YouTube-креды
+      переиспользует zoom-rotation.
+      # TODO(Антон): подтвердить актуальный статус и хостинг воркера
+
+  - id: mmproxy
+    name: MM-proxy (обход ТСПУ)
+    domain: null  # проксирует SNI chat.bbm.academy без терминации TLS
+    host: mmproxy-prod-tw
+    repo: sidorovanthon/bbm  # infra/timeweb/terraform/mmproxy.tf (ветка feat/bbmp-71)
+    status: staging
+    description: nginx stream (ssl_preread) → tools-prod-tw:443; ноль секретов на проксе (BBMP-71).
+
+storage:
+  # Все бакеты — Timeweb S3, ru-1 СПб (гео-разнесены с VPS), account-level ключи.
+  - id: bbm-plane-backups
+    provider: Timeweb S3
+    class: cold
+    description: Off-site бэкап Plane (tar + PG-дамп, ротация 30д).
+  - id: bbm-mattermost-backups
+    provider: Timeweb S3
+    class: cold
+    description: Off-site бэкап Mattermost (restic-репозиторий в /restic).
+  - id: bbm-hermes-backups
+    provider: Timeweb S3
+    class: cold
+    description: Off-site бэкап состояния Hermes (tar volume, ротация 30д).
+  - id: bbm-portal-backups
+    provider: Timeweb S3
+    class: cold
+    description: Off-site бэкап CMS-postgres bbm-portal (PG-дамп + env-tar, ротация 30д).
+  - id: bbm-zitadel-backups
+    provider: Timeweb S3
+    class: cold
+    description: Off-site бэкап Zitadel BBM (PG-дамп + env-tar, ротация 30д).
+  - id: bbm-portal-media
+    provider: Timeweb S3
+    class: hot
+    description: Durable-хранилище медиа Payload (логотипы/фото); без версионирования.
+  - id: bbm-zoom-rotation-buffer
+    provider: Timeweb S3
+    class: hot
+    description: Промежуточный буфер автопилота ротации Zoom-записей (versioning + lifecycle).
+
+repos:
+  - id: bbm
+    remote: sidorovanthon/bbm
+    description: Рабочий репозиторий холдинга — инфра (infra/*), драфты, исследования, транскрипты, модели.
+  - id: bbm-kb
+    remote: sidorovanthon/bbm-kb
+    description: Этот репозиторий — база знаний BBM (SSOT-ядро + куррированный нарратив, Fumadocs).
+  - id: bbm-platform-prd
+    remote: null  # TODO(Антон): подтвердить remote (локальный каталог bbm-platform-prd без .git)
+    description: PRD/спеки платформы BBM (decision log D-009/D-015/D-016/D-017 и др.).
+  - id: bbm-portal
+    remote: bbm-academy-org/bbm-portal
+    description: Payload CMS — content-backend публичного сайта (майлстоун BBMP-24).
+  - id: bbm-public-website
+    remote: bbm-academy-org/bbm-public-website
+    description: Публичный сайт bbm.academy (Astro).
+  - id: hermes-agent
+    remote: sidorovanthon/hermes-agent
+    description: Форк Hermes Agent (Nous Research, MIT) с патчами BBM.
+  - id: bbm-zoom-yt-streaming-worker
+    remote: sidorovanthon/bbm-zoom-yt-streaming-worker
+    description: CF Worker автоматизации YouTube-трансляций из Zoom (BBMP-9).
+
+external:
+  # Смежные системы и сервисы вне контура BBM — для полноты карты, не инфра BBM.
+  - id: zitadel-ds
+    name: Zitadel Doctor.School
+    domain: id.doctor.school
+    description: >-
+      IdP продукта Doctor.School (отдельная платформа, ~10k врачей, 152-ФЗ);
+      с id.bbm.academy связан только OIDC-федерацией — общего user-store нет.
+  - id: ds-platform
+    name: DS Platform
+    domain: null
+    description: >-
+      Платформа продукта Doctor.School (репо doctor-school/ds-platform, своя дока
+      apps/docs на Fumadocs) — отдельная платформа, KB на неё только ссылается.
+  - id: getcourse
+    name: GetCourse
+    domain: null
+    description: LMS Doctor.School / OrthoBioSchool (white-label, временно — по принципу Best of Breed).
+  - id: notion
+    name: Notion
+    domain: null
+    description: Бывшая общая база знаний; по решению спеки KB замораживается как архив.
+  - id: beget-dns
+    name: Beget (DNS)
+    domain: null
+    description: DNS-хостинг зон bbm.academy / doctor.school; записи добавляет владелец через UI (API-доступа нет).
+  - id: timeweb-cloud
+    name: Timeweb Cloud
+    domain: null
+    description: Облачный провайдер BBM — VPS-парк, S3, CDN (www.bbm.academy); проект bbm-tooling.
+  - id: github
+    name: GitHub
+    domain: null
+    description: Хостинг репозиториев (owner sidorovanthon + организации bbm-academy-org, doctor-school); CI — GitHub Actions.
+  - id: ds-knowledgebase-legacy
+    name: doctor-school-knowledgebase (legacy)
+    domain: null
+    description: Устаревшая KB DS (Docusaurus на Cloudflare Pages, RF-blocked); кандидат на архивацию после контент-волны 2.

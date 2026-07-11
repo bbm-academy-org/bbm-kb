@@ -1,5 +1,6 @@
 # SSOT: сущности холдинга — канонический реестр (authority: canonical).
-# Скелет; наполняется в BBMP-99. Контент сюда НЕ добавлять до курации SSOT-ядра.
+# Заполнено в BBMP-99. Источники: bbm/CLAUDE.md (раздел «Сущности»),
+# memory project_bbm_energy_market_analysis (BBM Energy).
 #
 # Схема записи:
 #   - id: <slug>            # напр. bbm, doctor-school, orthobioschool, bbm-energy
@@ -8,4 +9,41 @@
 #     parent: <id родительской сущности | null>
 #     description: <одно предложение>
 
-entities: []
+entities:
+  - id: bbm
+    name: BBM
+    kind: holding
+    parent: null
+    description: >-
+      Холдинг — продюсерский медиабизнес в медицине (бирюзовая организация):
+      запускает медобразовательные проекты на собственной IT-платформе,
+      в перспективе — децентрализованная экосистема с токенизацией и DAO.
+
+  - id: doctor-school
+    name: Doctor.School
+    kind: client
+    parent: bbm
+    description: >-
+      Первый клиент BBM — платформа медобразования (~10k врачей в БД),
+      связывает фарму с врачами через аккредитованные события с НМО-баллами;
+      зонтичный бренд (школы = проекты с общей БД), платформа временно на GetCourse.
+
+  - id: orthobioschool
+    name: OrthoBioSchool
+    kind: project
+    parent: doctor-school
+    description: >-
+      Пилот Doctor.School (ортобиология) — валидирует модель продаж образования
+      врачам через контентные воронки; платформа — GetCourse (white-label, временно).
+
+  - id: bbm-energy
+    name: BBM Energy
+    kind: project
+    parent: bbm
+    description: >-
+      Направление BBM: производство/продажа газопоршневых установок (ГПУ) в РФ,
+      долгосрочно — энергоцентры под вычислительные мощности (майнинг + AI/ЦОД)
+      на собственной генерации.
+
+# Будущие школы Doctor.School (RheumoSchool, NeuroSchool) упоминаются в стратегии
+# (bbm/CLAUDE.md), но как сущности ещё не запущены — заводить при старте.

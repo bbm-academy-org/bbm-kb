@@ -1,10 +1,68 @@
 # SSOT: реестр аббревиатур (authority: canonical).
-# Переезжает из Notion «[BBM] Реестр аббревиатур»; наполняется в BBMP-99.
-# Контент сюда НЕ добавлять до курации SSOT-ядра.
+# Заполнено в BBMP-99 из источников репо bbm (CLAUDE.md, docs/notion-integration.md,
+# docs/plane-operations.md). Мастер переезжает сюда из Notion «[BBM] Реестр
+# аббревиатур» (page ID 312d8ee3-eb6f-81f5-b741-f2e5251e889f).
+# TODO(Антон): сверить с Notion-страницей реестра и повесить там стаб-указатель на этот файл.
 #
 # Схема записи:
 #   - abbr: <аббревиатура>   # напр. OBS
 #     full: <расшифровка>
-#     scope: <уровень chain-notation, напр. "BBM · DS">
+#     scope: <где употребляется: chain-notation | plane-workspace-bbm | plane-workspace-doctor-school>
+#     parent: <код родителя | null>   # для chain-notation
+#
+# Chain-notation — префиксы названий страниц/документов (разделитель `·` = U+00B7):
+# [BBM] — уровень холдинга; [BBM · DS] — уровень клиента (НЕ [DS]); [DS · OBS] — уровень проекта.
 
-abbreviations: []
+abbreviations:
+  # --- Узлы chain-notation (клиенты/проекты) ---
+  - abbr: BBM
+    full: BBM — холдинг (продюсерский медиабизнес в медицине)
+    scope: chain-notation
+    parent: null
+    # TODO(Антон): каноническое написание полной расшифровки бренда —
+    # «Brain & Brand Myning» (design/src/bbm-principles.md) vs
+    # «Brain and Brand Mining» (design/src/[BBM] White Paper.md)
+  - abbr: DS
+    full: Doctor.School
+    scope: chain-notation
+    parent: BBM
+  - abbr: OBS
+    full: OrthoBioSchool
+    scope: chain-notation
+    parent: DS
+
+  # --- Проекты Plane, workspace bbm (холдинг/инфра) ---
+  - abbr: BBMP
+    full: BBM Platform
+    scope: plane-workspace-bbm
+    parent: BBM
+  - abbr: BBMB
+    full: BBM Business
+    scope: plane-workspace-bbm
+    parent: BBM
+  - abbr: BBMS
+    full: BBM Site
+    scope: plane-workspace-bbm
+    parent: BBM
+  - abbr: BBME
+    full: BBM Events
+    scope: plane-workspace-bbm
+    parent: BBM
+
+  # --- Проекты Plane, workspace doctor-school (продукт) ---
+  - abbr: DSP
+    full: Doctor School Platform
+    scope: plane-workspace-doctor-school
+    parent: DS
+  - abbr: DSC
+    full: Doctor School Content
+    scope: plane-workspace-doctor-school
+    parent: DS
+  - abbr: DSM
+    full: Doctor School Marketing & Sales
+    scope: plane-workspace-doctor-school
+    parent: DS
+  - abbr: DSO
+    full: Doctor School Operations
+    scope: plane-workspace-doctor-school
+    parent: DS
