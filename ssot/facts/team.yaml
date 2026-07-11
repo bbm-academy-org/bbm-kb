@@ -1,5 +1,6 @@
 # SSOT: команда BBM — канонический реестр (authority: canonical).
-# Скелет; наполняется в BBMP-99. Контент сюда НЕ добавлять до курации SSOT-ядра.
+# Заполнено в BBMP-99. Источники: bbm/CLAUDE.md (раздел «Команда»),
+# memory reference_team_roles (маппинг роль → человек → email @bbm.academy).
 #
 # Схема записи:
 #   - id: <slug>            # уникальный идентификатор человека
@@ -9,4 +10,30 @@
 #     status: active | inactive
 #     timezone: <IANA, напр. Europe/Moscow>
 
-members: []
+members:
+  - id: anton-sidorov
+    name: Антон Сидоров
+    role: Tech Lead / System Architect  # IT-архитектура, продукт, бизнес-моделирование, AI-агенты
+    email: as@bbm.academy
+    status: active
+    timezone: Europe/Moscow  # TODO(Антон): подтвердить таймзону
+
+  - id: eduard-ildarkhanov
+    name: Эдуард Ильдарханов
+    role: Product Lead  # владелец Doctor.School, MBA-маркетолог, фарма-доступ
+    email: ei@bbm.academy
+    status: active
+    timezone: Europe/Moscow  # TODO(Антон): подтвердить таймзону
+
+  - id: igor-pirogov
+    name: Игорь Пирогов
+    role: Partner / Strategic  # дата-центры, AI wellness; партнёр BBM с 2026-03-03
+    email: ip@bbm.academy
+    status: active
+    timezone: Europe/Moscow  # TODO(Антон): подтвердить таймзону
+
+# TODO(Антон): дополнить остальных членов команды — спека SSO (§5) говорит о ~8 учётках
+# @bbm.academy; в Plane фигурируют и другие участники (напр. Анна — проекты ENERGY/NGKOT),
+# но роль/email без надёжного источника не заводим.
+# Будущие роли (пока TBD, без записей): COO (Эдуард + Антон делят до найма),
+# Head of Content (lead DSC), Head of Growth (lead DSM).

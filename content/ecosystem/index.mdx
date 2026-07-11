@@ -1,6 +1,39 @@
 ---
 title: Экосистема
-description: Карта экосистемы — нарратив поверх ssot/facts/services.yaml
+description: Карта экосистемы BBM — хосты, сервисы, хранилища, репозитории (из ssot/facts/services.yaml)
 ---
 
-Заглушка раздела. Наполняется в контент-волне 1 (BBMP-99+); до курации контент сюда не добавлять.
+{/* Все таблицы генерируются на билде из ssot/facts/services.yaml (BBMP-99).
+    Рукописных копий реестра здесь нет и быть не должно — правки только в ssot/.
+    Нарративная часть поверх карты — контент-волна 1. */}
+
+import {
+  EcosystemHosts,
+  EcosystemServices,
+  EcosystemStorage,
+  EcosystemRepos,
+  EcosystemExternal,
+} from '@/components/ssot';
+
+## Сервисы
+
+<EcosystemServices />
+
+## Хосты
+
+<EcosystemHosts />
+
+## Объектные хранилища
+
+<EcosystemStorage />
+
+## Репозитории
+
+<EcosystemRepos />
+
+## Внешние и смежные системы
+
+Не инфраструктура BBM — приведены для полноты карты (DS-контур — отдельная
+платформа, связь только через OIDC-федерацию).
+
+<EcosystemExternal />
