@@ -31,3 +31,7 @@
   `content/**/*.mdx`. Перед PR проверять, что `npm run build` зелёный.
 - Скелеты `ssot/` и заглушки `content/` наполняются в задачах BBMP-99+;
   не наполнять контентом мимоходом, без задачи на курацию.
+- Пропагация SSOT в потребители (Payload / cms.bbm.academy, Hermes-skill
+  `hermes-skills/bbm-ssot/`) — `docs/ssot-propagation.md` (BBMP-102).
+  Канонические поля публичного сайта руками не правятся — только через
+  `ssot/facts/*` (иначе перезатрёт CI-джоб `propagate-payload`).
