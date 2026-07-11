@@ -83,7 +83,7 @@ services:
     name: База знаний BBM (этот сайт)
     domain: kb.bbm.academy
     host: tools-prod-tw
-    repo: sidorovanthon/bbm-kb
+    repo: bbm-academy-org/bbm-kb
     status: planned
     description: >-
       Fumadocs static export за oauth2-proxy (OIDC → id.bbm.academy);
@@ -162,7 +162,7 @@ services:
     name: MM-proxy (обход ТСПУ)
     domain: null  # проксирует SNI chat.bbm.academy без терминации TLS
     host: mmproxy-prod-tw
-    repo: sidorovanthon/bbm  # infra/timeweb/terraform/mmproxy.tf (ветка feat/bbmp-71)
+    repo: sidorovanthon/bbm  # infra/timeweb/terraform/mmproxy.tf (ветка feat/bbmp-71-mm-proxy-kz)
     status: staging
     description: nginx stream (ssl_preread) → tools-prod-tw:443; ноль секретов на проксе (BBMP-71).
 
@@ -202,7 +202,7 @@ repos:
     remote: sidorovanthon/bbm
     description: Рабочий репозиторий холдинга — инфра (infra/*), драфты, исследования, транскрипты, модели.
   - id: bbm-kb
-    remote: sidorovanthon/bbm-kb
+    remote: bbm-academy-org/bbm-kb
     description: Этот репозиторий — база знаний BBM (SSOT-ядро + куррированный нарратив, Fumadocs).
   - id: bbm-platform-prd
     remote: null  # TODO(Антон): подтвердить remote (локальный каталог bbm-platform-prd без .git)
