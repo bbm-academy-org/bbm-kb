@@ -1,7 +1,11 @@
 # CI: проверка, что статический экспорт Fumadocs собирается,
 # + guard «правки только через PR» (компенсация отсутствия branch protection
-# на приватном репо бесплатной орги — включим protection при переходе на Team).
-# Секретов не требует. Деплой на kb.bbm.academy — отдельная задача (спека §6).
+# на приватном репо бесплатной орги — включим protection при переходе на Team),
+# + деплой на kb.bbm.academy при push в main (BBMP-100): артефакт билда
+# доставляется rsync'ом на tools-prod-tw в /var/www/kb.bbm.academy, где его
+# раздаёт host-nginx за OIDC (oauth2-proxy → Zitadel BBM; конфиги — repo bbm,
+# infra/kb/). Секреты KB_DEPLOY_* — GitHub Actions secrets; SSH-ключ ограничен
+# на хосте rrsync'ом только каталогом статики (authorized_keys, command=rrsync).
 name: build
 
 on:
@@ -62,3 +66,40 @@ jobs:
             exit 1
           fi
           echo "OK: коммит ассоциирован с merged PR."
+
+  # Деплой статики на kb.bbm.academy (BBMP-100). Только после merge в main.
+  # Артефакт берём из job build этого же run — билд не повторяется.
+  # rsync --delete: /var/www/kb.bbm.academy зеркалит out/ (ключ на хосте
+  # заперт rrsync'ом в этом каталоге, ничего другого ключ сделать не может).
+  deploy:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    # pr-guard в needs — превентив, не только сигнал (ревью bbm-kb#3): прямой пуш
+    # в main мимо PR красит guard → deploy скипается (implicit success() в if).
+    needs: [build, pr-guard]
+    runs-on: ubuntu-latest
+    permissions: {}          # github.token шагам не нужен — обнуляем права токена
+    concurrency: kb-deploy   # деплои строго по одному, без гонок rsync
+    steps:
+      - name: Download static export
+        uses: actions/download-artifact@v4
+        with:
+          name: kb-static-export
+          path: out
+
+      - name: Настроить SSH
+        env:
+          SSH_KEY: ${{ secrets.KB_DEPLOY_SSH_KEY }}
+          KNOWN_HOSTS: ${{ secrets.KB_DEPLOY_KNOWN_HOSTS }}
+        run: |
+          mkdir -p ~/.ssh
+          printf '%s\n' "$SSH_KEY" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          printf '%s\n' "$KNOWN_HOSTS" > ~/.ssh/known_hosts
+
+      - name: Rsync на tools-prod-tw
+        env:
+          HOST: ${{ secrets.KB_DEPLOY_HOST }}
+        run: |
+          # rrsync на хосте маппит "/" в /var/www/kb.bbm.academy
+          rsync -az --delete out/ "deploy@${HOST}:/"
+          echo "Deployed to kb.bbm.academy"
