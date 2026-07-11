@@ -73,8 +73,11 @@ jobs:
   # заперт rrsync'ом в этом каталоге, ничего другого ключ сделать не может).
   deploy:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-    needs: build
+    # pr-guard в needs — превентив, не только сигнал (ревью bbm-kb#3): прямой пуш
+    # в main мимо PR красит guard → deploy скипается (implicit success() в if).
+    needs: [build, pr-guard]
     runs-on: ubuntu-latest
+    permissions: {}          # github.token шагам не нужен — обнуляем права токена
     concurrency: kb-deploy   # деплои строго по одному, без гонок rsync
     steps:
       - name: Download static export
