@@ -10,7 +10,7 @@ REPO_URL="https://github.com/bbm-academy-org/bbm-kb.git"
 
 if [ -z "${GITHUB_TOKEN:-}" ]; then
   echo "ERROR: GITHUB_TOKEN не задан — приватный bbm-kb недоступен. Канон SSOT прочитать нельзя." >&2
-  echo "Хост-процедура: добавить GITHUB_TOKEN в infra/hermes/.env (см. bbm-kb/docs/ssot-propagation.md)." >&2
+  echo "Хост-процедура: добавить GITHUB_TOKEN в compose .env деплоя Hermes (канон bbm/infra/hermes/; см. bbm-kb/docs/ssot-propagation.md)." >&2
   exit 2
 fi
 

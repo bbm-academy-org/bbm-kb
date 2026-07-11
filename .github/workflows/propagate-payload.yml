@@ -43,7 +43,7 @@ jobs:
 
       # js-yaml из package-lock; полный npm ci не нужен для одного скрипта
       - name: Install js-yaml
-        run: npm ci --ignore-scripts --omit=dev || npm install --no-save js-yaml
+        run: npm ci --ignore-scripts --omit=dev || npm install --no-save "js-yaml@^5.2.1"
 
       - name: Propagate SSOT → Payload
         env:

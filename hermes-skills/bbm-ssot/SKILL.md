@@ -52,8 +52,10 @@ metadata:
 
 ## Механика
 
-- Локальный клон: `$KB_DIR` (по умолчанию `$HOME/bbm-kb`, на volume `/data`).
-- Доступ: репо приватное; нужен `GITHUB_TOKEN` в env бота (`~/.hermes/.env`)
+- Локальный клон: `$KB_DIR` (по умолчанию `$HOME/bbm-kb` — HOME рантайма бота,
+  персистентный volume; тот же HOME использовать при `hermes skills install`).
+- Доступ: репо приватное; нужен `GITHUB_TOKEN` в env контейнера бота
+  (compose `.env` в каталоге деплоя на хосте, канон — `bbm/infra/hermes/`)
   с правом `contents:read` (для PR — `contents:write, pull_requests:write`)
   на `bbm-academy-org/bbm-kb`. Скрипт не сохраняет токен в `.git/config`.
 - Пропагация тех же фактов в Payload (cms.bbm.academy) — CI-джоб

@@ -51,9 +51,12 @@ const PROJECT_ID_ALIASES = { bbm: 'bbm-academy' };
 let failures = 0;
 let writes = 0;
 
-function headers(withAuth) {
+// Auth и на GET тоже: drafts анонимно не читаются, а сравнивать надо
+// именно draft-версию (иначе write-режим будет писать «изменения»
+// на каждый прогон, сравнивая канон с published) — ревью PR#2, major #1.
+function headers() {
   const h = { 'Content-Type': 'application/json' };
-  if (withAuth && API_KEY) h.Authorization = `users API-Key ${API_KEY}`;
+  if (API_KEY) h.Authorization = `users API-Key ${API_KEY}`;
   return h;
 }
 
@@ -61,7 +64,7 @@ async function api(method, pathname, body) {
   const url = `${BASE}${pathname}`;
   const res = await fetch(url, {
     method,
-    headers: headers(method !== 'GET'),
+    headers: headers(),
     body: body === undefined ? undefined : JSON.stringify(body),
   });
   return res;
@@ -104,15 +107,19 @@ async function upsertDoc(collection, ssotId, payloadId, desired) {
 // Payload-записи, которых нет в SSOT, — не удаляем (editorial-обёртка может
 // содержать презентационные записи), но репортим drift.
 async function reportDrift(collection, ssotPayloadIds) {
-  // без draft=true: list c draft=true без auth возвращает пустой docs[]
-  // (проверено на живом cms 2026-07-11); набор id у draft/published общий.
-  const res = await api('GET', `/api/${collection}?limit=100&depth=0&locale=ru`);
-  if (!res.ok) { console.log(`::warning::${collection}: не смог прочитать список для drift-репорта (${res.status})`); return; }
-  const { docs } = await res.json();
-  for (const d of docs) {
-    if (!ssotPayloadIds.has(d.id)) {
-      console.log(`::warning::drift: ${collection}/${d.id} есть в Payload, но отсутствует в ssot/ — источник этой записи не канонизирован (TODO(Антон): завести в SSOT или пометить как editorial-only).`);
+  // draft=true только при наличии ключа: анонимный list с draft=true
+  // возвращает пустой docs[] (проверено на живом cms 2026-07-11).
+  const draft = API_KEY ? '&draft=true' : '';
+  for (let page = 1, more = true; more; page++) {
+    const res = await api('GET', `/api/${collection}?limit=100&page=${page}&depth=0&locale=ru${draft}`);
+    if (!res.ok) { console.log(`::warning::${collection}: не смог прочитать список для drift-репорта (${res.status})`); return; }
+    const data = await res.json();
+    for (const d of data.docs ?? []) {
+      if (!ssotPayloadIds.has(d.id)) {
+        console.log(`::warning::drift: ${collection}/${d.id} есть в Payload, но отсутствует в ssot/ — источник этой записи не канонизирован (TODO(Антон): завести в SSOT или пометить как editorial-only).`);
+      }
     }
+    more = Boolean(data.hasNextPage);
   }
 }
 

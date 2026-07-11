@@ -37,13 +37,15 @@
 ### Включение скилла (TODO-хост, выполняет Антон)
 
 1. TODO(Антон): создать fine-grained PAT «hermes-bbm-kb», доступ только к `bbm-academy-org/bbm-kb`, права `Contents: read` (для Phase-3 PR-правок: `Contents: read/write` + `Pull requests: read/write`).
-2. На хосте (значение токена вводится на хосте, не в чат):
+2. На хосте (значение токена вводится на хосте, не в чат). Канон путей —
+   `bbm/infra/hermes/README.md`; `.env` лежит рядом с `compose.yml` в
+   каталоге деплоя:
    ```bash
    ssh hermes-prod-tw
-   nano ~/hermes/.env        # добавить строку GITHUB_TOKEN=<PAT>
-   docker compose -f ~/hermes/compose.yml up -d   # перечитать env
+   cd <каталог деплоя hermes>   # см. README; там compose.yml и .env
+   nano .env                    # добавить строку GITHUB_TOKEN=<PAT>
+   docker compose up -d         # перечитать env
    ```
-   (точный путь compose/.env — по `bbm/infra/hermes/README.md`).
 3. Установить скилл:
    ```bash
    docker exec -e HOME=/opt/data hermes /command/s6-setuidgid hermes \
