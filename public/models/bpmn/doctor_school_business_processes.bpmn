@@ -1,0 +1,1152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL"
+                  xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+                  xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
+                  xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
+                  id="Definitions_DoctorSchool"
+                  targetNamespace="http://bpmn.io/schema/bpmn">
+
+  <!-- ==================== COLLABORATION ==================== -->
+  <bpmn:collaboration id="Collaboration_DoctorSchool">
+    <bpmn:participant id="Participant_DoctorSchool" name="Doctor.School - Платформа медицинского образования" processRef="Process_Main"/>
+    <bpmn:participant id="Participant_Partner" name="Партнёр (фармкомпания)" processRef="Process_Partner"/>
+    <bpmn:messageFlow id="MessageFlow_COToPartner" sourceRef="Task_SendCOToPartner" targetRef="StartEvent_Partner"/>
+    <bpmn:messageFlow id="MessageFlow_ApprovalBack" name="Утверждение" sourceRef="Task_ApproveBudget" targetRef="Gateway_PartnerDecision"/>
+    <bpmn:messageFlow id="MessageFlow_ReportToPartner" sourceRef="Task_SendReportToPartner" targetRef="Task_ReceiveReport"/>
+  </bpmn:collaboration>
+
+  <!-- ==================== MAIN PROCESS ==================== -->
+  <bpmn:process id="Process_Main" isExecutable="false">
+    
+    <!-- LANES -->
+    <bpmn:laneSet id="LaneSet_Main">
+      <bpmn:lane id="Lane_ScientificLeader" name="Научный лидер">
+        <bpmn:flowNodeRef>StartEvent_Planning</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_InitiateEvent</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_ProposeDatesAndCities</bpmn:flowNodeRef>
+      </bpmn:lane>
+      
+      <bpmn:lane id="Lane_EventManager" name="Менеджер по мероприятиям">
+        <bpmn:flowNodeRef>Task_AgreeSchedule</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_PrepareCommercialOffer</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_SendCOToPartner</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_PartnerDecision</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_TransferInfoToOperator</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_RequestReport</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_SendReportToPartner</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_OfflineRegistrationDesk</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_PrintBadge</bpmn:flowNodeRef>
+      </bpmn:lane>
+      
+      <bpmn:lane id="Lane_PlatformOperator" name="Оператор платформы">
+        <bpmn:flowNodeRef>Task_CreateEventOnPlatform</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_AddSpeakers</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_UploadProgram</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_GeneratePartnerReport</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_ManualPointsAssignment</bpmn:flowNodeRef>
+      </bpmn:lane>
+      
+      <bpmn:lane id="Lane_Director" name="Режиссёр трансляции">
+        <bpmn:flowNodeRef>Task_StartBroadcast</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_LaunchTitleObjects</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_EndBroadcast</bpmn:flowNodeRef>
+      </bpmn:lane>
+      
+      <bpmn:lane id="Lane_Speaker" name="Спикер">
+        <bpmn:flowNodeRef>Task_SpeakerPresentation</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_SpeakerOfflinePresentation</bpmn:flowNodeRef>
+      </bpmn:lane>
+      
+      <bpmn:lane id="Lane_Support" name="Служба поддержки">
+        <bpmn:flowNodeRef>Task_SupportDuringBroadcast</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_HelpWithRegistration</bpmn:flowNodeRef>
+      </bpmn:lane>
+      
+      <bpmn:lane id="Lane_Doctor" name="Врач (пользователь)">
+        <bpmn:flowNodeRef>StartEvent_UserJourney</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_RegisterOnPlatform</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_FillVerification</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_BrowseEvents</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_RegisterForEvent</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_EventType</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_WatchBroadcast</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_ConfirmPresence</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_AttendOffline</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_ReceiveNMOPoints</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EndEvent_PointsReceived</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_WatchArchive</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EndEvent_ArchiveWatched</bpmn:flowNodeRef>
+      </bpmn:lane>
+      
+      <bpmn:lane id="Lane_Platform" name="Платформа (система)">
+        <bpmn:flowNodeRef>Task_CreateUserRecord</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_FixRegistration</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_TrackPresence</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_GeneratePresenceReport</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_NMOConditions</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_AutoAssignPoints</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_ArchiveEvent</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EndEvent_EventArchived</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_ManualCheck</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EndEvent_NoPoints</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+
+    <!-- ========== PLANNING SUBPROCESS ========== -->
+    <!-- Start: Scientific Leader initiates -->
+    <bpmn:startEvent id="StartEvent_Planning" name="Потребность в проведении мероприятия">
+      <bpmn:outgoing>Flow_ToInitiate</bpmn:outgoing>
+    </bpmn:startEvent>
+    
+    <bpmn:task id="Task_InitiateEvent" name="Инициировать проведение мероприятия">
+      <bpmn:incoming>Flow_ToInitiate</bpmn:incoming>
+      <bpmn:outgoing>Flow_ToProposeDates</bpmn:outgoing>
+    </bpmn:task>
+    
+    <bpmn:task id="Task_ProposeDatesAndCities" name="Предложить даты и города проведения">
+      <bpmn:incoming>Flow_ToProposeDates</bpmn:incoming>
+      <bpmn:outgoing>Flow_ToAgreeSchedule</bpmn:outgoing>
+    </bpmn:task>
+    
+    <!-- Event Manager -->
+    <bpmn:task id="Task_AgreeSchedule" name="Согласовать график мероприятий">
+      <bpmn:incoming>Flow_ToAgreeSchedule</bpmn:incoming>
+      <bpmn:outgoing>Flow_ToPrepareOffer</bpmn:outgoing>
+    </bpmn:task>
+    
+    <bpmn:task id="Task_PrepareCommercialOffer" name="Подготовить коммерческое предложение">
+      <bpmn:incoming>Flow_ToPrepareOffer</bpmn:incoming>
+      <bpmn:outgoing>Flow_ToSendCO</bpmn:outgoing>
+    </bpmn:task>
+    
+    <bpmn:task id="Task_SendCOToPartner" name="Отправить КП партнёру">
+      <bpmn:incoming>Flow_ToSendCO</bpmn:incoming>
+      <bpmn:outgoing>Flow_ToPartnerDecision</bpmn:outgoing>
+    </bpmn:task>
+    
+    <bpmn:exclusiveGateway id="Gateway_PartnerDecision" name="Партнёр утвердил?">
+      <bpmn:incoming>Flow_ToPartnerDecision</bpmn:incoming>
+      <bpmn:outgoing>Flow_ToTransferInfo</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    
+    <bpmn:task id="Task_TransferInfoToOperator" name="Передать информацию оператору платформы">
+      <bpmn:incoming>Flow_ToTransferInfo</bpmn:incoming>
+      <bpmn:outgoing>Flow_ToCreateEvent</bpmn:outgoing>
+    </bpmn:task>
+    
+    <!-- Platform Operator -->
+    <bpmn:task id="Task_CreateEventOnPlatform" name="Создать мероприятие на платформе">
+      <bpmn:incoming>Flow_ToCreateEvent</bpmn:incoming>
+      <bpmn:outgoing>Flow_ToAddSpeakers</bpmn:outgoing>
+    </bpmn:task>
+    
+    <bpmn:task id="Task_AddSpeakers" name="Добавить спикеров мероприятия">
+      <bpmn:incoming>Flow_ToAddSpeakers</bpmn:incoming>
+      <bpmn:outgoing>Flow_ToUploadProgram</bpmn:outgoing>
+    </bpmn:task>
+    
+    <bpmn:task id="Task_UploadProgram" name="Загрузить программу мероприятия (PDF)">
+      <bpmn:incoming>Flow_ToUploadProgram</bpmn:incoming>
+      <bpmn:outgoing>Flow_EventReady</bpmn:outgoing>
+    </bpmn:task>
+
+    <!-- ========== USER JOURNEY ========== -->
+    <bpmn:startEvent id="StartEvent_UserJourney" name="Врач узнал о платформе">
+      <bpmn:outgoing>Flow_ToRegisterPlatform</bpmn:outgoing>
+    </bpmn:startEvent>
+    
+    <bpmn:task id="Task_RegisterOnPlatform" name="Зарегистрироваться на платформе">
+      <bpmn:incoming>Flow_ToRegisterPlatform</bpmn:incoming>
+      <bpmn:outgoing>Flow_ToCreateUserRecord</bpmn:outgoing>
+    </bpmn:task>
+    
+    <!-- Platform creates user -->
+    <bpmn:task id="Task_CreateUserRecord" name="Создать запись пользователя">
+      <bpmn:incoming>Flow_ToCreateUserRecord</bpmn:incoming>
+      <bpmn:outgoing>Flow_ToFillVerification</bpmn:outgoing>
+    </bpmn:task>
+    
+    <bpmn:task id="Task_FillVerification" name="Заполнить данные для верификации (место работы, специальность)">
+      <bpmn:incoming>Flow_ToFillVerification</bpmn:incoming>
+      <bpmn:outgoing>Flow_ToBrowseEvents</bpmn:outgoing>
+    </bpmn:task>
+    
+    <bpmn:task id="Task_BrowseEvents" name="Просмотреть список мероприятий">
+      <bpmn:incoming>Flow_ToBrowseEvents</bpmn:incoming>
+      <bpmn:incoming>Flow_EventReady</bpmn:incoming>
+      <bpmn:outgoing>Flow_ToRegisterForEvent</bpmn:outgoing>
+    </bpmn:task>
+    
+    <bpmn:task id="Task_RegisterForEvent" name="Зарегистрироваться на мероприятие">
+      <bpmn:incoming>Flow_ToRegisterForEvent</bpmn:incoming>
+      <bpmn:outgoing>Flow_ToFixRegistration</bpmn:outgoing>
+    </bpmn:task>
+    
+    <bpmn:task id="Task_FixRegistration" name="Зафиксировать регистрацию участника">
+      <bpmn:incoming>Flow_ToFixRegistration</bpmn:incoming>
+      <bpmn:outgoing>Flow_ToEventTypeGateway</bpmn:outgoing>
+    </bpmn:task>
+    
+    <bpmn:exclusiveGateway id="Gateway_EventType" name="Тип мероприятия?">
+      <bpmn:incoming>Flow_ToEventTypeGateway</bpmn:incoming>
+      <bpmn:outgoing>Flow_ToOnline</bpmn:outgoing>
+      <bpmn:outgoing>Flow_ToOffline</bpmn:outgoing>
+      <bpmn:outgoing>Flow_ToArchive</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+
+    <!-- ========== ONLINE EVENT FLOW ========== -->
+    <bpmn:task id="Task_StartBroadcast" name="Запустить трансляцию">
+      <bpmn:incoming>Flow_ToOnline</bpmn:incoming>
+      <bpmn:outgoing>Flow_ToSpeakerPresentation</bpmn:outgoing>
+    </bpmn:task>
+    
+    <bpmn:task id="Task_SpeakerPresentation" name="Провести выступление (онлайн)">
+      <bpmn:incoming>Flow_ToSpeakerPresentation</bpmn:incoming>
+      <bpmn:outgoing>Flow_ToWatchBroadcast</bpmn:outgoing>
+    </bpmn:task>
+    
+    <bpmn:task id="Task_WatchBroadcast" name="Смотреть трансляцию и участвовать в чате">
+      <bpmn:incoming>Flow_ToWatchBroadcast</bpmn:incoming>
+      <bpmn:outgoing>Flow_ToTrackPresence</bpmn:outgoing>
+    </bpmn:task>
+    
+    <bpmn:task id="Task_TrackPresence" name="Отслеживать присутствие (push каждую минуту)">
+      <bpmn:incoming>Flow_ToTrackPresence</bpmn:incoming>
+      <bpmn:outgoing>Flow_ToLaunchTitleObjects</bpmn:outgoing>
+    </bpmn:task>
+    
+    <bpmn:task id="Task_SupportDuringBroadcast" name="Оказывать поддержку участникам">
+      <bpmn:incoming>Flow_SupportParallel</bpmn:incoming>
+      <bpmn:outgoing>Flow_SupportEnd</bpmn:outgoing>
+    </bpmn:task>
+    
+    <bpmn:task id="Task_LaunchTitleObjects" name="Запустить титровальные объекты присутствия">
+      <bpmn:incoming>Flow_ToLaunchTitleObjects</bpmn:incoming>
+      <bpmn:outgoing>Flow_ToConfirmPresence</bpmn:outgoing>
+    </bpmn:task>
+    
+    <bpmn:task id="Task_ConfirmPresence" name="Подтвердить присутствие (нажать кнопку)">
+      <bpmn:incoming>Flow_ToConfirmPresence</bpmn:incoming>
+      <bpmn:outgoing>Flow_ToEndBroadcast</bpmn:outgoing>
+    </bpmn:task>
+    
+    <bpmn:task id="Task_EndBroadcast" name="Завершить мероприятие">
+      <bpmn:incoming>Flow_ToEndBroadcast</bpmn:incoming>
+      <bpmn:outgoing>Flow_ToGeneratePresenceReport</bpmn:outgoing>
+    </bpmn:task>
+    
+    <!-- ========== OFFLINE EVENT FLOW ========== -->
+    <bpmn:task id="Task_AttendOffline" name="Прийти на офлайн-мероприятие">
+      <bpmn:incoming>Flow_ToOffline</bpmn:incoming>
+      <bpmn:outgoing>Flow_ToOfflineDesk</bpmn:outgoing>
+    </bpmn:task>
+    
+    <bpmn:task id="Task_OfflineRegistrationDesk" name="Принять регистрацию участника на месте">
+      <bpmn:incoming>Flow_ToOfflineDesk</bpmn:incoming>
+      <bpmn:outgoing>Flow_ToPrintBadge</bpmn:outgoing>
+    </bpmn:task>
+    
+    <bpmn:task id="Task_PrintBadge" name="Напечатать бейдж участника">
+      <bpmn:incoming>Flow_ToPrintBadge</bpmn:incoming>
+      <bpmn:outgoing>Flow_ToSpeakerOffline</bpmn:outgoing>
+    </bpmn:task>
+    
+    <bpmn:task id="Task_SpeakerOfflinePresentation" name="Провести выступление (офлайн)">
+      <bpmn:incoming>Flow_ToSpeakerOffline</bpmn:incoming>
+      <bpmn:outgoing>Flow_ToHelpRegistration</bpmn:outgoing>
+    </bpmn:task>
+    
+    <bpmn:task id="Task_HelpWithRegistration" name="Помочь с регистрацией на платформе">
+      <bpmn:incoming>Flow_ToHelpRegistration</bpmn:incoming>
+      <bpmn:outgoing>Flow_OfflineToNMO</bpmn:outgoing>
+    </bpmn:task>
+
+    <!-- ========== ARCHIVE FLOW ========== -->
+    <bpmn:task id="Task_WatchArchive" name="Посмотреть запись в архиве">
+      <bpmn:incoming>Flow_ToArchive</bpmn:incoming>
+      <bpmn:outgoing>Flow_ToArchiveEnd</bpmn:outgoing>
+    </bpmn:task>
+    
+    <bpmn:endEvent id="EndEvent_ArchiveWatched" name="Запись просмотрена (без баллов НМО)">
+      <bpmn:incoming>Flow_ToArchiveEnd</bpmn:incoming>
+    </bpmn:endEvent>
+
+    <!-- ========== NMO POINTS FLOW ========== -->
+    <bpmn:task id="Task_GeneratePresenceReport" name="Сгенерировать отчёт о присутствии">
+      <bpmn:incoming>Flow_ToGeneratePresenceReport</bpmn:incoming>
+      <bpmn:incoming>Flow_OfflineToNMO</bpmn:incoming>
+      <bpmn:outgoing>Flow_ToNMOConditions</bpmn:outgoing>
+    </bpmn:task>
+    
+    <bpmn:exclusiveGateway id="Gateway_NMOConditions" name="Условия НМО выполнены?&#10;(≥90 мин + 2 титр. объекта)">
+      <bpmn:incoming>Flow_ToNMOConditions</bpmn:incoming>
+      <bpmn:outgoing>Flow_ConditionsMet</bpmn:outgoing>
+      <bpmn:outgoing>Flow_ConditionsNotMet</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    
+    <bpmn:task id="Task_AutoAssignPoints" name="Автоматически начислить баллы НМО">
+      <bpmn:incoming>Flow_ConditionsMet</bpmn:incoming>
+      <bpmn:outgoing>Flow_ToReceivePoints</bpmn:outgoing>
+    </bpmn:task>
+    
+    <bpmn:exclusiveGateway id="Gateway_ManualCheck" name="Требуется ручная проверка?">
+      <bpmn:incoming>Flow_ConditionsNotMet</bpmn:incoming>
+      <bpmn:outgoing>Flow_ToManualAssignment</bpmn:outgoing>
+      <bpmn:outgoing>Flow_ToNoPoints</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    
+    <bpmn:task id="Task_ManualPointsAssignment" name="Вручную назначить баллы НМО">
+      <bpmn:incoming>Flow_ToManualAssignment</bpmn:incoming>
+      <bpmn:outgoing>Flow_ManualToReceive</bpmn:outgoing>
+    </bpmn:task>
+    
+    <bpmn:task id="Task_ReceiveNMOPoints" name="Получить баллы НМО">
+      <bpmn:incoming>Flow_ToReceivePoints</bpmn:incoming>
+      <bpmn:incoming>Flow_ManualToReceive</bpmn:incoming>
+      <bpmn:outgoing>Flow_ToPointsReceived</bpmn:outgoing>
+    </bpmn:task>
+    
+    <bpmn:endEvent id="EndEvent_PointsReceived" name="Баллы НМО получены">
+      <bpmn:incoming>Flow_ToPointsReceived</bpmn:incoming>
+    </bpmn:endEvent>
+    
+    <bpmn:endEvent id="EndEvent_NoPoints" name="Баллы НМО не начислены">
+      <bpmn:incoming>Flow_ToNoPoints</bpmn:incoming>
+    </bpmn:endEvent>
+
+    <!-- ========== REPORTING FLOW ========== -->
+    <bpmn:task id="Task_ArchiveEvent" name="Архивировать мероприятие">
+      <bpmn:incoming>Flow_ToArchiveEvent</bpmn:incoming>
+      <bpmn:outgoing>Flow_ToRequestReport</bpmn:outgoing>
+    </bpmn:task>
+    
+    <bpmn:task id="Task_RequestReport" name="Запросить отчёт для партнёра">
+      <bpmn:incoming>Flow_ToRequestReport</bpmn:incoming>
+      <bpmn:outgoing>Flow_ToGeneratePartnerReport</bpmn:outgoing>
+    </bpmn:task>
+    
+    <bpmn:task id="Task_GeneratePartnerReport" name="Сгенерировать отчёт партнёра (Excel)">
+      <bpmn:incoming>Flow_ToGeneratePartnerReport</bpmn:incoming>
+      <bpmn:outgoing>Flow_ToSendReport</bpmn:outgoing>
+    </bpmn:task>
+    
+    <bpmn:task id="Task_SendReportToPartner" name="Отправить отчёт партнёру">
+      <bpmn:incoming>Flow_ToSendReport</bpmn:incoming>
+      <bpmn:outgoing>Flow_ToEventArchived</bpmn:outgoing>
+    </bpmn:task>
+    
+    <bpmn:endEvent id="EndEvent_EventArchived" name="Мероприятие завершено и отчётность передана">
+      <bpmn:incoming>Flow_ToEventArchived</bpmn:incoming>
+    </bpmn:endEvent>
+
+    <!-- ========== SEQUENCE FLOWS ========== -->
+    <!-- Planning flows -->
+    <bpmn:sequenceFlow id="Flow_ToInitiate" sourceRef="StartEvent_Planning" targetRef="Task_InitiateEvent"/>
+    <bpmn:sequenceFlow id="Flow_ToProposeDates" sourceRef="Task_InitiateEvent" targetRef="Task_ProposeDatesAndCities"/>
+    <bpmn:sequenceFlow id="Flow_ToAgreeSchedule" sourceRef="Task_ProposeDatesAndCities" targetRef="Task_AgreeSchedule"/>
+    <bpmn:sequenceFlow id="Flow_ToPrepareOffer" sourceRef="Task_AgreeSchedule" targetRef="Task_PrepareCommercialOffer"/>
+    <bpmn:sequenceFlow id="Flow_ToSendCO" sourceRef="Task_PrepareCommercialOffer" targetRef="Task_SendCOToPartner"/>
+    <bpmn:sequenceFlow id="Flow_ToPartnerDecision" sourceRef="Task_SendCOToPartner" targetRef="Gateway_PartnerDecision"/>
+    <bpmn:sequenceFlow id="Flow_ToTransferInfo" name="Да" sourceRef="Gateway_PartnerDecision" targetRef="Task_TransferInfoToOperator"/>
+    <bpmn:sequenceFlow id="Flow_ToCreateEvent" sourceRef="Task_TransferInfoToOperator" targetRef="Task_CreateEventOnPlatform"/>
+    <bpmn:sequenceFlow id="Flow_ToAddSpeakers" sourceRef="Task_CreateEventOnPlatform" targetRef="Task_AddSpeakers"/>
+    <bpmn:sequenceFlow id="Flow_ToUploadProgram" sourceRef="Task_AddSpeakers" targetRef="Task_UploadProgram"/>
+    <bpmn:sequenceFlow id="Flow_EventReady" sourceRef="Task_UploadProgram" targetRef="Task_BrowseEvents"/>
+    
+    <!-- User journey flows -->
+    <bpmn:sequenceFlow id="Flow_ToRegisterPlatform" sourceRef="StartEvent_UserJourney" targetRef="Task_RegisterOnPlatform"/>
+    <bpmn:sequenceFlow id="Flow_ToCreateUserRecord" sourceRef="Task_RegisterOnPlatform" targetRef="Task_CreateUserRecord"/>
+    <bpmn:sequenceFlow id="Flow_ToFillVerification" sourceRef="Task_CreateUserRecord" targetRef="Task_FillVerification"/>
+    <bpmn:sequenceFlow id="Flow_ToBrowseEvents" sourceRef="Task_FillVerification" targetRef="Task_BrowseEvents"/>
+    <bpmn:sequenceFlow id="Flow_ToRegisterForEvent" sourceRef="Task_BrowseEvents" targetRef="Task_RegisterForEvent"/>
+    <bpmn:sequenceFlow id="Flow_ToFixRegistration" sourceRef="Task_RegisterForEvent" targetRef="Task_FixRegistration"/>
+    <bpmn:sequenceFlow id="Flow_ToEventTypeGateway" sourceRef="Task_FixRegistration" targetRef="Gateway_EventType"/>
+    
+    <!-- Online event flows -->
+    <bpmn:sequenceFlow id="Flow_ToOnline" name="Онлайн (трансляция)" sourceRef="Gateway_EventType" targetRef="Task_StartBroadcast"/>
+    <bpmn:sequenceFlow id="Flow_ToSpeakerPresentation" sourceRef="Task_StartBroadcast" targetRef="Task_SpeakerPresentation"/>
+    <bpmn:sequenceFlow id="Flow_ToWatchBroadcast" sourceRef="Task_SpeakerPresentation" targetRef="Task_WatchBroadcast"/>
+    <bpmn:sequenceFlow id="Flow_ToTrackPresence" sourceRef="Task_WatchBroadcast" targetRef="Task_TrackPresence"/>
+    <bpmn:sequenceFlow id="Flow_ToLaunchTitleObjects" sourceRef="Task_TrackPresence" targetRef="Task_LaunchTitleObjects"/>
+    <bpmn:sequenceFlow id="Flow_ToConfirmPresence" sourceRef="Task_LaunchTitleObjects" targetRef="Task_ConfirmPresence"/>
+    <bpmn:sequenceFlow id="Flow_ToEndBroadcast" sourceRef="Task_ConfirmPresence" targetRef="Task_EndBroadcast"/>
+    <bpmn:sequenceFlow id="Flow_ToGeneratePresenceReport" sourceRef="Task_EndBroadcast" targetRef="Task_GeneratePresenceReport"/>
+    
+    <!-- Offline event flows -->
+    <bpmn:sequenceFlow id="Flow_ToOffline" name="Офлайн (в городе)" sourceRef="Gateway_EventType" targetRef="Task_AttendOffline"/>
+    <bpmn:sequenceFlow id="Flow_ToOfflineDesk" sourceRef="Task_AttendOffline" targetRef="Task_OfflineRegistrationDesk"/>
+    <bpmn:sequenceFlow id="Flow_ToPrintBadge" sourceRef="Task_OfflineRegistrationDesk" targetRef="Task_PrintBadge"/>
+    <bpmn:sequenceFlow id="Flow_ToSpeakerOffline" sourceRef="Task_PrintBadge" targetRef="Task_SpeakerOfflinePresentation"/>
+    <bpmn:sequenceFlow id="Flow_ToHelpRegistration" sourceRef="Task_SpeakerOfflinePresentation" targetRef="Task_HelpWithRegistration"/>
+    <bpmn:sequenceFlow id="Flow_OfflineToNMO" sourceRef="Task_HelpWithRegistration" targetRef="Task_GeneratePresenceReport"/>
+    
+    <!-- Archive flows -->
+    <bpmn:sequenceFlow id="Flow_ToArchive" name="Архив (запись)" sourceRef="Gateway_EventType" targetRef="Task_WatchArchive"/>
+    <bpmn:sequenceFlow id="Flow_ToArchiveEnd" sourceRef="Task_WatchArchive" targetRef="EndEvent_ArchiveWatched"/>
+    
+    <!-- NMO flows -->
+    <bpmn:sequenceFlow id="Flow_ToNMOConditions" sourceRef="Task_GeneratePresenceReport" targetRef="Gateway_NMOConditions"/>
+    <bpmn:sequenceFlow id="Flow_ConditionsMet" name="Да" sourceRef="Gateway_NMOConditions" targetRef="Task_AutoAssignPoints"/>
+    <bpmn:sequenceFlow id="Flow_ConditionsNotMet" name="Нет" sourceRef="Gateway_NMOConditions" targetRef="Gateway_ManualCheck"/>
+    <bpmn:sequenceFlow id="Flow_ToReceivePoints" sourceRef="Task_AutoAssignPoints" targetRef="Task_ReceiveNMOPoints"/>
+    <bpmn:sequenceFlow id="Flow_ToManualAssignment" name="Да (участник присутствовал)" sourceRef="Gateway_ManualCheck" targetRef="Task_ManualPointsAssignment"/>
+    <bpmn:sequenceFlow id="Flow_ToNoPoints" name="Нет" sourceRef="Gateway_ManualCheck" targetRef="EndEvent_NoPoints"/>
+    <bpmn:sequenceFlow id="Flow_ManualToReceive" sourceRef="Task_ManualPointsAssignment" targetRef="Task_ReceiveNMOPoints"/>
+    <bpmn:sequenceFlow id="Flow_ToPointsReceived" sourceRef="Task_ReceiveNMOPoints" targetRef="EndEvent_PointsReceived"/>
+    
+    <!-- Reporting flows -->
+    <bpmn:sequenceFlow id="Flow_ToArchiveEvent" sourceRef="Task_AutoAssignPoints" targetRef="Task_ArchiveEvent"/>
+    <bpmn:sequenceFlow id="Flow_ToRequestReport" sourceRef="Task_ArchiveEvent" targetRef="Task_RequestReport"/>
+    <bpmn:sequenceFlow id="Flow_ToGeneratePartnerReport" sourceRef="Task_RequestReport" targetRef="Task_GeneratePartnerReport"/>
+    <bpmn:sequenceFlow id="Flow_ToSendReport" sourceRef="Task_GeneratePartnerReport" targetRef="Task_SendReportToPartner"/>
+    <bpmn:sequenceFlow id="Flow_ToEventArchived" sourceRef="Task_SendReportToPartner" targetRef="EndEvent_EventArchived"/>
+    
+    <!-- Support parallel flow -->
+    <bpmn:sequenceFlow id="Flow_SupportParallel" sourceRef="Task_StartBroadcast" targetRef="Task_SupportDuringBroadcast"/>
+    <bpmn:sequenceFlow id="Flow_SupportEnd" sourceRef="Task_SupportDuringBroadcast" targetRef="Task_EndBroadcast"/>
+
+  </bpmn:process>
+
+  <!-- ==================== PARTNER PROCESS ==================== -->
+  <bpmn:process id="Process_Partner" isExecutable="false">
+    <bpmn:startEvent id="StartEvent_Partner" name="Получено КП">
+      <bpmn:outgoing>Flow_PartnerReview</bpmn:outgoing>
+    </bpmn:startEvent>
+    
+    <bpmn:task id="Task_ReviewCO" name="Рассмотреть коммерческое предложение">
+      <bpmn:incoming>Flow_PartnerReview</bpmn:incoming>
+      <bpmn:outgoing>Flow_ToPartnerApprovalGateway</bpmn:outgoing>
+    </bpmn:task>
+    
+    <bpmn:exclusiveGateway id="Gateway_PartnerApproval" name="Утвердить?">
+      <bpmn:incoming>Flow_ToPartnerApprovalGateway</bpmn:incoming>
+      <bpmn:outgoing>Flow_Approved</bpmn:outgoing>
+      <bpmn:outgoing>Flow_Rejected</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    
+    <bpmn:task id="Task_ApproveBudget" name="Утвердить бюджет на мероприятия">
+      <bpmn:incoming>Flow_Approved</bpmn:incoming>
+      <bpmn:outgoing>Flow_ToInviteDoctors</bpmn:outgoing>
+    </bpmn:task>
+    
+    <bpmn:task id="Task_InviteDoctors" name="Пригласить врачей через свои каналы">
+      <bpmn:incoming>Flow_ToInviteDoctors</bpmn:incoming>
+      <bpmn:outgoing>Flow_ToReceiveReport</bpmn:outgoing>
+    </bpmn:task>
+    
+    <bpmn:task id="Task_ReceiveReport" name="Получить отчёт о мероприятии">
+      <bpmn:incoming>Flow_ToReceiveReport</bpmn:incoming>
+      <bpmn:outgoing>Flow_PartnerEnd</bpmn:outgoing>
+    </bpmn:task>
+    
+    <bpmn:endEvent id="EndEvent_Partner" name="Цикл мероприятия завершён">
+      <bpmn:incoming>Flow_PartnerEnd</bpmn:incoming>
+    </bpmn:endEvent>
+    
+    <bpmn:endEvent id="EndEvent_PartnerRejected" name="КП отклонено">
+      <bpmn:incoming>Flow_Rejected</bpmn:incoming>
+    </bpmn:endEvent>
+    
+    <bpmn:sequenceFlow id="Flow_PartnerReview" sourceRef="StartEvent_Partner" targetRef="Task_ReviewCO"/>
+    <bpmn:sequenceFlow id="Flow_ToPartnerApprovalGateway" sourceRef="Task_ReviewCO" targetRef="Gateway_PartnerApproval"/>
+    <bpmn:sequenceFlow id="Flow_Approved" name="Да" sourceRef="Gateway_PartnerApproval" targetRef="Task_ApproveBudget"/>
+    <bpmn:sequenceFlow id="Flow_Rejected" name="Нет" sourceRef="Gateway_PartnerApproval" targetRef="EndEvent_PartnerRejected"/>
+    <bpmn:sequenceFlow id="Flow_ToInviteDoctors" sourceRef="Task_ApproveBudget" targetRef="Task_InviteDoctors"/>
+    <bpmn:sequenceFlow id="Flow_ToReceiveReport" sourceRef="Task_InviteDoctors" targetRef="Task_ReceiveReport"/>
+    <bpmn:sequenceFlow id="Flow_PartnerEnd" sourceRef="Task_ReceiveReport" targetRef="EndEvent_Partner"/>
+  </bpmn:process>
+
+  <!-- ==================== DIAGRAM ==================== -->
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_DoctorSchool">
+      
+      <!-- Main Pool -->
+      <bpmndi:BPMNShape id="Participant_DoctorSchool_di" bpmnElement="Participant_DoctorSchool" isHorizontal="true">
+        <dc:Bounds x="160" y="80" width="2400" height="1400"/>
+      </bpmndi:BPMNShape>
+      
+      <!-- Lanes -->
+      <bpmndi:BPMNShape id="Lane_ScientificLeader_di" bpmnElement="Lane_ScientificLeader" isHorizontal="true">
+        <dc:Bounds x="190" y="80" width="2370" height="140"/>
+      </bpmndi:BPMNShape>
+      
+      <bpmndi:BPMNShape id="Lane_EventManager_di" bpmnElement="Lane_EventManager" isHorizontal="true">
+        <dc:Bounds x="190" y="220" width="2370" height="160"/>
+      </bpmndi:BPMNShape>
+      
+      <bpmndi:BPMNShape id="Lane_PlatformOperator_di" bpmnElement="Lane_PlatformOperator" isHorizontal="true">
+        <dc:Bounds x="190" y="380" width="2370" height="140"/>
+      </bpmndi:BPMNShape>
+      
+      <bpmndi:BPMNShape id="Lane_Director_di" bpmnElement="Lane_Director" isHorizontal="true">
+        <dc:Bounds x="190" y="520" width="2370" height="120"/>
+      </bpmndi:BPMNShape>
+      
+      <bpmndi:BPMNShape id="Lane_Speaker_di" bpmnElement="Lane_Speaker" isHorizontal="true">
+        <dc:Bounds x="190" y="640" width="2370" height="120"/>
+      </bpmndi:BPMNShape>
+      
+      <bpmndi:BPMNShape id="Lane_Support_di" bpmnElement="Lane_Support" isHorizontal="true">
+        <dc:Bounds x="190" y="760" width="2370" height="120"/>
+      </bpmndi:BPMNShape>
+      
+      <bpmndi:BPMNShape id="Lane_Doctor_di" bpmnElement="Lane_Doctor" isHorizontal="true">
+        <dc:Bounds x="190" y="880" width="2370" height="200"/>
+      </bpmndi:BPMNShape>
+      
+      <bpmndi:BPMNShape id="Lane_Platform_di" bpmnElement="Lane_Platform" isHorizontal="true">
+        <dc:Bounds x="190" y="1080" width="2370" height="400"/>
+      </bpmndi:BPMNShape>
+
+      <!-- Scientific Leader Lane Elements -->
+      <bpmndi:BPMNShape id="StartEvent_Planning_di" bpmnElement="StartEvent_Planning">
+        <dc:Bounds x="242" y="132" width="36" height="36"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="218" y="175" width="85" height="40"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      
+      <bpmndi:BPMNShape id="Task_InitiateEvent_di" bpmnElement="Task_InitiateEvent">
+        <dc:Bounds x="320" y="110" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      
+      <bpmndi:BPMNShape id="Task_ProposeDatesAndCities_di" bpmnElement="Task_ProposeDatesAndCities">
+        <dc:Bounds x="460" y="110" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+
+      <!-- Event Manager Lane Elements -->
+      <bpmndi:BPMNShape id="Task_AgreeSchedule_di" bpmnElement="Task_AgreeSchedule">
+        <dc:Bounds x="320" y="260" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      
+      <bpmndi:BPMNShape id="Task_PrepareCommercialOffer_di" bpmnElement="Task_PrepareCommercialOffer">
+        <dc:Bounds x="460" y="260" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      
+      <bpmndi:BPMNShape id="Task_SendCOToPartner_di" bpmnElement="Task_SendCOToPartner">
+        <dc:Bounds x="600" y="260" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      
+      <bpmndi:BPMNShape id="Gateway_PartnerDecision_di" bpmnElement="Gateway_PartnerDecision" isMarkerVisible="true">
+        <dc:Bounds x="745" y="275" width="50" height="50"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="727" y="251" width="86" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      
+      <bpmndi:BPMNShape id="Task_TransferInfoToOperator_di" bpmnElement="Task_TransferInfoToOperator">
+        <dc:Bounds x="840" y="260" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      
+      <bpmndi:BPMNShape id="Task_OfflineRegistrationDesk_di" bpmnElement="Task_OfflineRegistrationDesk">
+        <dc:Bounds x="1400" y="260" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      
+      <bpmndi:BPMNShape id="Task_PrintBadge_di" bpmnElement="Task_PrintBadge">
+        <dc:Bounds x="1540" y="260" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      
+      <bpmndi:BPMNShape id="Task_RequestReport_di" bpmnElement="Task_RequestReport">
+        <dc:Bounds x="2080" y="260" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      
+      <bpmndi:BPMNShape id="Task_SendReportToPartner_di" bpmnElement="Task_SendReportToPartner">
+        <dc:Bounds x="2320" y="260" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+
+      <!-- Platform Operator Lane Elements -->
+      <bpmndi:BPMNShape id="Task_CreateEventOnPlatform_di" bpmnElement="Task_CreateEventOnPlatform">
+        <dc:Bounds x="840" y="410" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      
+      <bpmndi:BPMNShape id="Task_AddSpeakers_di" bpmnElement="Task_AddSpeakers">
+        <dc:Bounds x="980" y="410" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      
+      <bpmndi:BPMNShape id="Task_UploadProgram_di" bpmnElement="Task_UploadProgram">
+        <dc:Bounds x="1120" y="410" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      
+      <bpmndi:BPMNShape id="Task_ManualPointsAssignment_di" bpmnElement="Task_ManualPointsAssignment">
+        <dc:Bounds x="2080" y="410" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      
+      <bpmndi:BPMNShape id="Task_GeneratePartnerReport_di" bpmnElement="Task_GeneratePartnerReport">
+        <dc:Bounds x="2200" y="410" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+
+      <!-- Director Lane Elements -->
+      <bpmndi:BPMNShape id="Task_StartBroadcast_di" bpmnElement="Task_StartBroadcast">
+        <dc:Bounds x="1400" y="550" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      
+      <bpmndi:BPMNShape id="Task_LaunchTitleObjects_di" bpmnElement="Task_LaunchTitleObjects">
+        <dc:Bounds x="1680" y="550" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      
+      <bpmndi:BPMNShape id="Task_EndBroadcast_di" bpmnElement="Task_EndBroadcast">
+        <dc:Bounds x="1820" y="550" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+
+      <!-- Speaker Lane Elements -->
+      <bpmndi:BPMNShape id="Task_SpeakerPresentation_di" bpmnElement="Task_SpeakerPresentation">
+        <dc:Bounds x="1540" y="670" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      
+      <bpmndi:BPMNShape id="Task_SpeakerOfflinePresentation_di" bpmnElement="Task_SpeakerOfflinePresentation">
+        <dc:Bounds x="1680" y="670" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+
+      <!-- Support Lane Elements -->
+      <bpmndi:BPMNShape id="Task_SupportDuringBroadcast_di" bpmnElement="Task_SupportDuringBroadcast">
+        <dc:Bounds x="1540" y="790" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      
+      <bpmndi:BPMNShape id="Task_HelpWithRegistration_di" bpmnElement="Task_HelpWithRegistration">
+        <dc:Bounds x="1820" y="790" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+
+      <!-- Doctor Lane Elements -->
+      <bpmndi:BPMNShape id="StartEvent_UserJourney_di" bpmnElement="StartEvent_UserJourney">
+        <dc:Bounds x="242" y="962" width="36" height="36"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="220" y="1005" width="81" height="27"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      
+      <bpmndi:BPMNShape id="Task_RegisterOnPlatform_di" bpmnElement="Task_RegisterOnPlatform">
+        <dc:Bounds x="320" y="940" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      
+      <bpmndi:BPMNShape id="Task_FillVerification_di" bpmnElement="Task_FillVerification">
+        <dc:Bounds x="600" y="940" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      
+      <bpmndi:BPMNShape id="Task_BrowseEvents_di" bpmnElement="Task_BrowseEvents">
+        <dc:Bounds x="740" y="940" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      
+      <bpmndi:BPMNShape id="Task_RegisterForEvent_di" bpmnElement="Task_RegisterForEvent">
+        <dc:Bounds x="880" y="940" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      
+      <bpmndi:BPMNShape id="Gateway_EventType_di" bpmnElement="Gateway_EventType" isMarkerVisible="true">
+        <dc:Bounds x="1265" y="955" width="50" height="50"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1246" y="1012" width="88" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      
+      <bpmndi:BPMNShape id="Task_WatchBroadcast_di" bpmnElement="Task_WatchBroadcast">
+        <dc:Bounds x="1540" y="940" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      
+      <bpmndi:BPMNShape id="Task_ConfirmPresence_di" bpmnElement="Task_ConfirmPresence">
+        <dc:Bounds x="1680" y="940" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      
+      <bpmndi:BPMNShape id="Task_AttendOffline_di" bpmnElement="Task_AttendOffline">
+        <dc:Bounds x="1400" y="940" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      
+      <bpmndi:BPMNShape id="Task_WatchArchive_di" bpmnElement="Task_WatchArchive">
+        <dc:Bounds x="1240" y="1040" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      
+      <bpmndi:BPMNShape id="Task_ReceiveNMOPoints_di" bpmnElement="Task_ReceiveNMOPoints">
+        <dc:Bounds x="2200" y="940" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      
+      <bpmndi:BPMNShape id="EndEvent_PointsReceived_di" bpmnElement="EndEvent_PointsReceived">
+        <dc:Bounds x="2352" y="962" width="36" height="36"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2330" y="1005" width="81" height="27"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      
+      <bpmndi:BPMNShape id="EndEvent_ArchiveWatched_di" bpmnElement="EndEvent_ArchiveWatched">
+        <dc:Bounds x="1272" y="1142" width="36" height="36"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1248" y="1185" width="85" height="40"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+
+      <!-- Platform Lane Elements -->
+      <bpmndi:BPMNShape id="Task_CreateUserRecord_di" bpmnElement="Task_CreateUserRecord">
+        <dc:Bounds x="460" y="1110" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      
+      <bpmndi:BPMNShape id="Task_FixRegistration_di" bpmnElement="Task_FixRegistration">
+        <dc:Bounds x="1020" y="1110" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      
+      <bpmndi:BPMNShape id="Task_TrackPresence_di" bpmnElement="Task_TrackPresence">
+        <dc:Bounds x="1540" y="1110" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      
+      <bpmndi:BPMNShape id="Task_GeneratePresenceReport_di" bpmnElement="Task_GeneratePresenceReport">
+        <dc:Bounds x="1820" y="1110" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      
+      <bpmndi:BPMNShape id="Gateway_NMOConditions_di" bpmnElement="Gateway_NMOConditions" isMarkerVisible="true">
+        <dc:Bounds x="1955" y="1125" width="50" height="50"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1936" y="1182" width="88" height="53"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      
+      <bpmndi:BPMNShape id="Task_AutoAssignPoints_di" bpmnElement="Task_AutoAssignPoints">
+        <dc:Bounds x="2040" y="1110" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      
+      <bpmndi:BPMNShape id="Gateway_ManualCheck_di" bpmnElement="Gateway_ManualCheck" isMarkerVisible="true">
+        <dc:Bounds x="1955" y="1245" width="50" height="50"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1875" y="1256" width="70" height="27"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      
+      <bpmndi:BPMNShape id="Task_ArchiveEvent_di" bpmnElement="Task_ArchiveEvent">
+        <dc:Bounds x="2040" y="1230" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      
+      <bpmndi:BPMNShape id="EndEvent_EventArchived_di" bpmnElement="EndEvent_EventArchived">
+        <dc:Bounds x="2352" y="1252" width="36" height="36"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2325" y="1295" width="90" height="40"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      
+      <bpmndi:BPMNShape id="EndEvent_NoPoints_di" bpmnElement="EndEvent_NoPoints">
+        <dc:Bounds x="1962" y="1362" width="36" height="36"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1937" y="1405" width="87" height="27"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+
+      <!-- Partner Pool -->
+      <bpmndi:BPMNShape id="Participant_Partner_di" bpmnElement="Participant_Partner" isHorizontal="true">
+        <dc:Bounds x="160" y="1520" width="1100" height="200"/>
+      </bpmndi:BPMNShape>
+      
+      <bpmndi:BPMNShape id="StartEvent_Partner_di" bpmnElement="StartEvent_Partner">
+        <dc:Bounds x="242" y="1602" width="36" height="36"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="229" y="1645" width="63" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      
+      <bpmndi:BPMNShape id="Task_ReviewCO_di" bpmnElement="Task_ReviewCO">
+        <dc:Bounds x="320" y="1580" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      
+      <bpmndi:BPMNShape id="Gateway_PartnerApproval_di" bpmnElement="Gateway_PartnerApproval" isMarkerVisible="true">
+        <dc:Bounds x="465" y="1595" width="50" height="50"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="459" y="1652" width="62" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      
+      <bpmndi:BPMNShape id="Task_ApproveBudget_di" bpmnElement="Task_ApproveBudget">
+        <dc:Bounds x="560" y="1580" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      
+      <bpmndi:BPMNShape id="Task_InviteDoctors_di" bpmnElement="Task_InviteDoctors">
+        <dc:Bounds x="700" y="1580" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      
+      <bpmndi:BPMNShape id="Task_ReceiveReport_di" bpmnElement="Task_ReceiveReport">
+        <dc:Bounds x="840" y="1580" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      
+      <bpmndi:BPMNShape id="EndEvent_Partner_di" bpmnElement="EndEvent_Partner">
+        <dc:Bounds x="992" y="1602" width="36" height="36"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="969" y="1645" width="82" height="27"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      
+      <bpmndi:BPMNShape id="EndEvent_PartnerRejected_di" bpmnElement="EndEvent_PartnerRejected">
+        <dc:Bounds x="472" y="1532" width="36" height="36"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="458" y="1502" width="65" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+
+      <!-- Sequence Flows - Planning -->
+      <bpmndi:BPMNEdge id="Flow_ToInitiate_di" bpmnElement="Flow_ToInitiate">
+        <di:waypoint x="278" y="150"/>
+        <di:waypoint x="320" y="150"/>
+      </bpmndi:BPMNEdge>
+      
+      <bpmndi:BPMNEdge id="Flow_ToProposeDates_di" bpmnElement="Flow_ToProposeDates">
+        <di:waypoint x="420" y="150"/>
+        <di:waypoint x="460" y="150"/>
+      </bpmndi:BPMNEdge>
+      
+      <bpmndi:BPMNEdge id="Flow_ToAgreeSchedule_di" bpmnElement="Flow_ToAgreeSchedule">
+        <di:waypoint x="510" y="190"/>
+        <di:waypoint x="510" y="225"/>
+        <di:waypoint x="370" y="225"/>
+        <di:waypoint x="370" y="260"/>
+      </bpmndi:BPMNEdge>
+      
+      <bpmndi:BPMNEdge id="Flow_ToPrepareOffer_di" bpmnElement="Flow_ToPrepareOffer">
+        <di:waypoint x="420" y="300"/>
+        <di:waypoint x="460" y="300"/>
+      </bpmndi:BPMNEdge>
+      
+      <bpmndi:BPMNEdge id="Flow_ToSendCO_di" bpmnElement="Flow_ToSendCO">
+        <di:waypoint x="560" y="300"/>
+        <di:waypoint x="600" y="300"/>
+      </bpmndi:BPMNEdge>
+      
+      <bpmndi:BPMNEdge id="Flow_ToPartnerDecision_di" bpmnElement="Flow_ToPartnerDecision">
+        <di:waypoint x="700" y="300"/>
+        <di:waypoint x="745" y="300"/>
+      </bpmndi:BPMNEdge>
+      
+      <bpmndi:BPMNEdge id="Flow_ToTransferInfo_di" bpmnElement="Flow_ToTransferInfo">
+        <di:waypoint x="795" y="300"/>
+        <di:waypoint x="840" y="300"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="811" y="282" width="14" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      
+      <bpmndi:BPMNEdge id="Flow_ToCreateEvent_di" bpmnElement="Flow_ToCreateEvent">
+        <di:waypoint x="890" y="340"/>
+        <di:waypoint x="890" y="410"/>
+      </bpmndi:BPMNEdge>
+      
+      <bpmndi:BPMNEdge id="Flow_ToAddSpeakers_di" bpmnElement="Flow_ToAddSpeakers">
+        <di:waypoint x="940" y="450"/>
+        <di:waypoint x="980" y="450"/>
+      </bpmndi:BPMNEdge>
+      
+      <bpmndi:BPMNEdge id="Flow_ToUploadProgram_di" bpmnElement="Flow_ToUploadProgram">
+        <di:waypoint x="1080" y="450"/>
+        <di:waypoint x="1120" y="450"/>
+      </bpmndi:BPMNEdge>
+      
+      <bpmndi:BPMNEdge id="Flow_EventReady_di" bpmnElement="Flow_EventReady">
+        <di:waypoint x="1170" y="490"/>
+        <di:waypoint x="1170" y="920"/>
+        <di:waypoint x="790" y="920"/>
+        <di:waypoint x="790" y="940"/>
+      </bpmndi:BPMNEdge>
+
+      <!-- Sequence Flows - User Journey -->
+      <bpmndi:BPMNEdge id="Flow_ToRegisterPlatform_di" bpmnElement="Flow_ToRegisterPlatform">
+        <di:waypoint x="278" y="980"/>
+        <di:waypoint x="320" y="980"/>
+      </bpmndi:BPMNEdge>
+      
+      <bpmndi:BPMNEdge id="Flow_ToCreateUserRecord_di" bpmnElement="Flow_ToCreateUserRecord">
+        <di:waypoint x="370" y="1020"/>
+        <di:waypoint x="370" y="1150"/>
+        <di:waypoint x="460" y="1150"/>
+      </bpmndi:BPMNEdge>
+      
+      <bpmndi:BPMNEdge id="Flow_ToFillVerification_di" bpmnElement="Flow_ToFillVerification">
+        <di:waypoint x="560" y="1150"/>
+        <di:waypoint x="580" y="1150"/>
+        <di:waypoint x="580" y="980"/>
+        <di:waypoint x="600" y="980"/>
+      </bpmndi:BPMNEdge>
+      
+      <bpmndi:BPMNEdge id="Flow_ToBrowseEvents_di" bpmnElement="Flow_ToBrowseEvents">
+        <di:waypoint x="700" y="980"/>
+        <di:waypoint x="740" y="980"/>
+      </bpmndi:BPMNEdge>
+      
+      <bpmndi:BPMNEdge id="Flow_ToRegisterForEvent_di" bpmnElement="Flow_ToRegisterForEvent">
+        <di:waypoint x="840" y="980"/>
+        <di:waypoint x="880" y="980"/>
+      </bpmndi:BPMNEdge>
+      
+      <bpmndi:BPMNEdge id="Flow_ToFixRegistration_di" bpmnElement="Flow_ToFixRegistration">
+        <di:waypoint x="980" y="980"/>
+        <di:waypoint x="1000" y="980"/>
+        <di:waypoint x="1000" y="1150"/>
+        <di:waypoint x="1020" y="1150"/>
+      </bpmndi:BPMNEdge>
+      
+      <bpmndi:BPMNEdge id="Flow_ToEventTypeGateway_di" bpmnElement="Flow_ToEventTypeGateway">
+        <di:waypoint x="1120" y="1150"/>
+        <di:waypoint x="1200" y="1150"/>
+        <di:waypoint x="1200" y="980"/>
+        <di:waypoint x="1265" y="980"/>
+      </bpmndi:BPMNEdge>
+
+      <!-- Sequence Flows - Online -->
+      <bpmndi:BPMNEdge id="Flow_ToOnline_di" bpmnElement="Flow_ToOnline">
+        <di:waypoint x="1290" y="955"/>
+        <di:waypoint x="1290" y="590"/>
+        <di:waypoint x="1400" y="590"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1300" y="750" width="80" height="27"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      
+      <bpmndi:BPMNEdge id="Flow_ToSpeakerPresentation_di" bpmnElement="Flow_ToSpeakerPresentation">
+        <di:waypoint x="1450" y="630"/>
+        <di:waypoint x="1450" y="710"/>
+        <di:waypoint x="1540" y="710"/>
+      </bpmndi:BPMNEdge>
+      
+      <bpmndi:BPMNEdge id="Flow_ToWatchBroadcast_di" bpmnElement="Flow_ToWatchBroadcast">
+        <di:waypoint x="1590" y="750"/>
+        <di:waypoint x="1590" y="940"/>
+      </bpmndi:BPMNEdge>
+      
+      <bpmndi:BPMNEdge id="Flow_ToTrackPresence_di" bpmnElement="Flow_ToTrackPresence">
+        <di:waypoint x="1590" y="1020"/>
+        <di:waypoint x="1590" y="1110"/>
+      </bpmndi:BPMNEdge>
+      
+      <bpmndi:BPMNEdge id="Flow_ToLaunchTitleObjects_di" bpmnElement="Flow_ToLaunchTitleObjects">
+        <di:waypoint x="1640" y="1150"/>
+        <di:waypoint x="1730" y="1150"/>
+        <di:waypoint x="1730" y="630"/>
+      </bpmndi:BPMNEdge>
+      
+      <bpmndi:BPMNEdge id="Flow_ToConfirmPresence_di" bpmnElement="Flow_ToConfirmPresence">
+        <di:waypoint x="1730" y="630"/>
+        <di:waypoint x="1730" y="940"/>
+      </bpmndi:BPMNEdge>
+      
+      <bpmndi:BPMNEdge id="Flow_ToEndBroadcast_di" bpmnElement="Flow_ToEndBroadcast">
+        <di:waypoint x="1780" y="980"/>
+        <di:waypoint x="1870" y="980"/>
+        <di:waypoint x="1870" y="630"/>
+      </bpmndi:BPMNEdge>
+      
+      <bpmndi:BPMNEdge id="Flow_ToGeneratePresenceReport_di" bpmnElement="Flow_ToGeneratePresenceReport">
+        <di:waypoint x="1870" y="630"/>
+        <di:waypoint x="1870" y="1110"/>
+      </bpmndi:BPMNEdge>
+      
+      <bpmndi:BPMNEdge id="Flow_SupportParallel_di" bpmnElement="Flow_SupportParallel">
+        <di:waypoint x="1500" y="590"/>
+        <di:waypoint x="1520" y="590"/>
+        <di:waypoint x="1520" y="830"/>
+        <di:waypoint x="1540" y="830"/>
+      </bpmndi:BPMNEdge>
+      
+      <bpmndi:BPMNEdge id="Flow_SupportEnd_di" bpmnElement="Flow_SupportEnd">
+        <di:waypoint x="1640" y="830"/>
+        <di:waypoint x="1800" y="830"/>
+        <di:waypoint x="1800" y="590"/>
+        <di:waypoint x="1820" y="590"/>
+      </bpmndi:BPMNEdge>
+
+      <!-- Sequence Flows - Offline -->
+      <bpmndi:BPMNEdge id="Flow_ToOffline_di" bpmnElement="Flow_ToOffline">
+        <di:waypoint x="1315" y="980"/>
+        <di:waypoint x="1400" y="980"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1320" y="962" width="75" height="27"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      
+      <bpmndi:BPMNEdge id="Flow_ToOfflineDesk_di" bpmnElement="Flow_ToOfflineDesk">
+        <di:waypoint x="1450" y="940"/>
+        <di:waypoint x="1450" y="340"/>
+      </bpmndi:BPMNEdge>
+      
+      <bpmndi:BPMNEdge id="Flow_ToPrintBadge_di" bpmnElement="Flow_ToPrintBadge">
+        <di:waypoint x="1500" y="300"/>
+        <di:waypoint x="1540" y="300"/>
+      </bpmndi:BPMNEdge>
+      
+      <bpmndi:BPMNEdge id="Flow_ToSpeakerOffline_di" bpmnElement="Flow_ToSpeakerOffline">
+        <di:waypoint x="1640" y="300"/>
+        <di:waypoint x="1730" y="300"/>
+        <di:waypoint x="1730" y="670"/>
+      </bpmndi:BPMNEdge>
+      
+      <bpmndi:BPMNEdge id="Flow_ToHelpRegistration_di" bpmnElement="Flow_ToHelpRegistration">
+        <di:waypoint x="1730" y="750"/>
+        <di:waypoint x="1730" y="830"/>
+        <di:waypoint x="1820" y="830"/>
+      </bpmndi:BPMNEdge>
+      
+      <bpmndi:BPMNEdge id="Flow_OfflineToNMO_di" bpmnElement="Flow_OfflineToNMO">
+        <di:waypoint x="1870" y="870"/>
+        <di:waypoint x="1870" y="1110"/>
+      </bpmndi:BPMNEdge>
+
+      <!-- Sequence Flows - Archive -->
+      <bpmndi:BPMNEdge id="Flow_ToArchive_di" bpmnElement="Flow_ToArchive">
+        <di:waypoint x="1290" y="1005"/>
+        <di:waypoint x="1290" y="1040"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1295" y="1010" width="70" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      
+      <bpmndi:BPMNEdge id="Flow_ToArchiveEnd_di" bpmnElement="Flow_ToArchiveEnd">
+        <di:waypoint x="1290" y="1120"/>
+        <di:waypoint x="1290" y="1142"/>
+      </bpmndi:BPMNEdge>
+
+      <!-- Sequence Flows - NMO -->
+      <bpmndi:BPMNEdge id="Flow_ToNMOConditions_di" bpmnElement="Flow_ToNMOConditions">
+        <di:waypoint x="1920" y="1150"/>
+        <di:waypoint x="1955" y="1150"/>
+      </bpmndi:BPMNEdge>
+      
+      <bpmndi:BPMNEdge id="Flow_ConditionsMet_di" bpmnElement="Flow_ConditionsMet">
+        <di:waypoint x="2005" y="1150"/>
+        <di:waypoint x="2040" y="1150"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2016" y="1132" width="14" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      
+      <bpmndi:BPMNEdge id="Flow_ConditionsNotMet_di" bpmnElement="Flow_ConditionsNotMet">
+        <di:waypoint x="1980" y="1175"/>
+        <di:waypoint x="1980" y="1245"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1986" y="1203" width="19" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      
+      <bpmndi:BPMNEdge id="Flow_ToReceivePoints_di" bpmnElement="Flow_ToReceivePoints">
+        <di:waypoint x="2140" y="1150"/>
+        <di:waypoint x="2170" y="1150"/>
+        <di:waypoint x="2170" y="980"/>
+        <di:waypoint x="2200" y="980"/>
+      </bpmndi:BPMNEdge>
+      
+      <bpmndi:BPMNEdge id="Flow_ToManualAssignment_di" bpmnElement="Flow_ToManualAssignment">
+        <di:waypoint x="2005" y="1270"/>
+        <di:waypoint x="2030" y="1270"/>
+        <di:waypoint x="2030" y="450"/>
+        <di:waypoint x="2080" y="450"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2035" y="1276" width="70" height="40"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      
+      <bpmndi:BPMNEdge id="Flow_ToNoPoints_di" bpmnElement="Flow_ToNoPoints">
+        <di:waypoint x="1980" y="1295"/>
+        <di:waypoint x="1980" y="1362"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1986" y="1316" width="19" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      
+      <bpmndi:BPMNEdge id="Flow_ManualToReceive_di" bpmnElement="Flow_ManualToReceive">
+        <di:waypoint x="2180" y="450"/>
+        <di:waypoint x="2250" y="450"/>
+        <di:waypoint x="2250" y="940"/>
+      </bpmndi:BPMNEdge>
+      
+      <bpmndi:BPMNEdge id="Flow_ToPointsReceived_di" bpmnElement="Flow_ToPointsReceived">
+        <di:waypoint x="2300" y="980"/>
+        <di:waypoint x="2352" y="980"/>
+      </bpmndi:BPMNEdge>
+
+      <!-- Sequence Flows - Reporting -->
+      <bpmndi:BPMNEdge id="Flow_ToArchiveEvent_di" bpmnElement="Flow_ToArchiveEvent">
+        <di:waypoint x="2090" y="1190"/>
+        <di:waypoint x="2090" y="1230"/>
+      </bpmndi:BPMNEdge>
+      
+      <bpmndi:BPMNEdge id="Flow_ToRequestReport_di" bpmnElement="Flow_ToRequestReport">
+        <di:waypoint x="2090" y="1230"/>
+        <di:waypoint x="2090" y="200"/>
+        <di:waypoint x="2130" y="200"/>
+        <di:waypoint x="2130" y="260"/>
+      </bpmndi:BPMNEdge>
+      
+      <bpmndi:BPMNEdge id="Flow_ToGeneratePartnerReport_di" bpmnElement="Flow_ToGeneratePartnerReport">
+        <di:waypoint x="2180" y="300"/>
+        <di:waypoint x="2250" y="300"/>
+        <di:waypoint x="2250" y="410"/>
+      </bpmndi:BPMNEdge>
+      
+      <bpmndi:BPMNEdge id="Flow_ToSendReport_di" bpmnElement="Flow_ToSendReport">
+        <di:waypoint x="2250" y="410"/>
+        <di:waypoint x="2250" y="300"/>
+        <di:waypoint x="2320" y="300"/>
+      </bpmndi:BPMNEdge>
+      
+      <bpmndi:BPMNEdge id="Flow_ToEventArchived_di" bpmnElement="Flow_ToEventArchived">
+        <di:waypoint x="2370" y="340"/>
+        <di:waypoint x="2370" y="1252"/>
+      </bpmndi:BPMNEdge>
+
+      <!-- Partner Pool Flows -->
+      <bpmndi:BPMNEdge id="Flow_PartnerReview_di" bpmnElement="Flow_PartnerReview">
+        <di:waypoint x="278" y="1620"/>
+        <di:waypoint x="320" y="1620"/>
+      </bpmndi:BPMNEdge>
+      
+      <bpmndi:BPMNEdge id="Flow_ToPartnerApprovalGateway_di" bpmnElement="Flow_ToPartnerApprovalGateway">
+        <di:waypoint x="420" y="1620"/>
+        <di:waypoint x="465" y="1620"/>
+      </bpmndi:BPMNEdge>
+      
+      <bpmndi:BPMNEdge id="Flow_Approved_di" bpmnElement="Flow_Approved">
+        <di:waypoint x="515" y="1620"/>
+        <di:waypoint x="560" y="1620"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="531" y="1602" width="14" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      
+      <bpmndi:BPMNEdge id="Flow_Rejected_di" bpmnElement="Flow_Rejected">
+        <di:waypoint x="490" y="1595"/>
+        <di:waypoint x="490" y="1568"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="495" y="1579" width="19" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      
+      <bpmndi:BPMNEdge id="Flow_ToInviteDoctors_di" bpmnElement="Flow_ToInviteDoctors">
+        <di:waypoint x="660" y="1620"/>
+        <di:waypoint x="700" y="1620"/>
+      </bpmndi:BPMNEdge>
+      
+      <bpmndi:BPMNEdge id="Flow_ToReceiveReport_di" bpmnElement="Flow_ToReceiveReport">
+        <di:waypoint x="800" y="1620"/>
+        <di:waypoint x="840" y="1620"/>
+      </bpmndi:BPMNEdge>
+      
+      <bpmndi:BPMNEdge id="Flow_PartnerEnd_di" bpmnElement="Flow_PartnerEnd">
+        <di:waypoint x="940" y="1620"/>
+        <di:waypoint x="992" y="1620"/>
+      </bpmndi:BPMNEdge>
+
+      <!-- Message Flows -->
+      <bpmndi:BPMNEdge id="MessageFlow_COToPartner_di" bpmnElement="MessageFlow_COToPartner">
+        <di:waypoint x="650" y="340"/>
+        <di:waypoint x="650" y="1400"/>
+        <di:waypoint x="260" y="1400"/>
+        <di:waypoint x="260" y="1602"/>
+      </bpmndi:BPMNEdge>
+      
+      <bpmndi:BPMNEdge id="MessageFlow_ApprovalBack_di" bpmnElement="MessageFlow_ApprovalBack">
+        <di:waypoint x="610" y="1580"/>
+        <di:waypoint x="610" y="1480"/>
+        <di:waypoint x="770" y="1480"/>
+        <di:waypoint x="770" y="325"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="655" y="1462" width="70" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      
+      <bpmndi:BPMNEdge id="MessageFlow_ReportToPartner_di" bpmnElement="MessageFlow_ReportToPartner">
+        <di:waypoint x="2370" y="340"/>
+        <di:waypoint x="2370" y="1460"/>
+        <di:waypoint x="890" y="1460"/>
+        <di:waypoint x="890" y="1580"/>
+      </bpmndi:BPMNEdge>
+
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+
+</bpmn:definitions>

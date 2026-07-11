@@ -1,6 +1,26 @@
 ---
 title: Модели
-description: BMC / VPC / IDEF0 — мастера переезжают из репо bbm
+description: Бизнес-модели BBM и Doctor.School — BMC, VPC, roadmap, IDEF0, BPMN
 ---
 
-Заглушка раздела. Наполняется в контент-волне 1 (BBMP-99+); до курации контент сюда не добавлять.
+{/* Контент-волна 1 (BBMP-101): мастера переехали из bbm/models/, в старых местах — стабы. */}
+
+Куррированные бизнес-модели холдинга. Сущности, о которых говорят модели
+(BBM, Doctor.School, OrthoBioSchool), канонически определены в
+`ssot/facts/company.yaml` — см. [Компания](/company); модели на них ссылаются
+и не переопределяют.
+
+| Модель | Что описывает | Дата фиксации |
+|---|---|---|
+| [BMC Doctor.School](/models/bmc-doctor-school) | Бизнес-модель As-Is → To-Be (канва Остервальдера) | 2025-12 — 2026-01 |
+| [VPC Doctor.School](/models/vpc-doctor-school) | Ценностные предложения по трём сегментам: врачи, эксперты, фарм-партнёры | 2025-12 — 2026-01 |
+| [Roadmap Doctor.School](/models/roadmap-doctor-school) | Фазы трансформации и decision gates | 2026-01 |
+| [IDEF0 «Управлять экосистемой BBM»](/models/idef0) | Функциональная архитектура холдинга (4 уровня декомпозиции) | 2026-02-25 |
+
+**BPMN.** Диаграмма бизнес-процессов Doctor.School — машиночитаемый артефакт
+[`doctor_school_business_processes.bpmn`](/models/bpmn/doctor_school_business_processes.bpmn)
+(открывать в BPMN-редакторе, напр. bpmn.io).
+
+**Не переехало (осталось в репо `bbm` как рабочий драфт):**
+`models/function-map/notes.md` — сырые заметки к карте функций; знание из них
+уже поглощено IDEF0-моделью и журналом решений (см. [Стратегия](/strategy/decisions-log)).
