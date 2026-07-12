@@ -16,7 +16,7 @@
 
 - Payload 3.85.1 задеплоен: `https://cms.bbm.academy` (хост portal-prod-tw, репо `bbm-academy-org/bbm-portal`). Read REST публичный, write — `Authorization: users API-Key <key>`.
 - Канонические поля (перезаписываются из SSOT): `team.{name,role}`, `publicProjects.{name,description}`, `globals/philosophy.mission`. Editorial-поля (bio, photo, tagline, metrics, …) не трогаются.
-- Идемпотентность: upsert по SSOT id; alias-map расхождений (`igor-pirogov`→`igor`, `bbm`→`bbm-academy`) — в начале `scripts/propagate-payload.mjs`.
+- Идемпотентность: upsert по SSOT id; alias-map расхождений (`bbm`→`bbm-academy`) — в начале `scripts/propagate-payload.mjs`. `team/igor` канонизирован в `igor-pirogov` 2026-07-12 (BBMP-102), его алиас снят; `TEAM_ID_ALIASES` теперь пуст.
 - Пишем черновик (`?draft=true`); публикация — за editorial-flow (`/admin` → publish → `POST /api/publish-site`). TODO(Антон): решить про авто-публикацию.
 - Записи Payload вне SSOT (`team/maksim-a`, `publicProjects/otcy-i-deti`, `publicProjects/byt-dobru`) не удаляются, репортятся drift-warning'ом. TODO(Антон): канонизировать в SSOT или пометить editorial-only.
 - Фикс drift-репорта (2026-07-12): list-запрос в `reportDrift()` шёл с `draft=true` и возвращал только документы с draft-версией — published-only записи (те самые maksim-a / otcy-i-deti / byt-dobru) выпадали из выборки, drift по ним молчал (нарушение §7). Убрано `draft=true` из list; сравнение канонических полей не затронуто — оно живёт в `upsertDoc` и по-прежнему идёт по draft-версии.

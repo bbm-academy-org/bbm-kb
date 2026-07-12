@@ -43,9 +43,10 @@ if (!API_KEY) {
 }
 
 // Alias-map: SSOT id → id записи в Payload, когда они исторически разошлись.
-// TODO(Антон): привести id в Payload к SSOT-slug'ам (igor → igor-pirogov,
-// bbm-academy → bbm) и убрать алиасы; до тех пор — маппинг здесь.
-const TEAM_ID_ALIASES = { 'igor-pirogov': 'igor' };
+// TODO(Антон): привести id в Payload к SSOT-slug'ам (bbm-academy → bbm) и
+// убрать оставшийся алиас; до тех пор — маппинг здесь.
+// team/igor канонизирован в igor-pirogov 2026-07-12 (BBMP-102) — алиас снят.
+const TEAM_ID_ALIASES = {};
 const PROJECT_ID_ALIASES = { bbm: 'bbm-academy' };
 
 let failures = 0;
