@@ -32,6 +32,13 @@ members:
     status: active
     timezone: Europe/Moscow  # TODO(Антон): подтвердить таймзону
 
+  - id: vsevolod-samoshkin
+    name: Всеволод Самошкин
+    role: Content / Methodology  # контент-производство, методология образовательных программ (DSC); в команде с 2026-07-16 (BBMP-114)
+    email: vs@bbm.academy
+    status: active
+    timezone: Europe/Moscow  # TODO(Антон): подтвердить таймзону
+
 # TODO(Антон): дополнить остальных членов команды — спека SSO (§5) говорит о ~8 учётках
 # @bbm.academy; в Plane фигурируют и другие участники (напр. Анна — проекты ENERGY/NGKOT),
 # но роль/email без надёжного источника не заводим.
