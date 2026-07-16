@@ -29,6 +29,12 @@ on:
         description: 'DRY_RUN (только diff, без записи)'
         type: boolean
         default: false
+      create_missing:
+        # Для онбординга: новая запись в ssot/facts ещё не существует в Payload.
+        # Голая запись без editorial-полей допустима — дозаполняется в /admin.
+        description: 'PAYLOAD_CREATE_MISSING (создавать отсутствующие записи)'
+        type: boolean
+        default: false
 
 jobs:
   propagate:
@@ -52,6 +58,7 @@ jobs:
           PAYLOAD_URL: https://cms.bbm.academy
           PAYLOAD_API_KEY: ${{ secrets.PAYLOAD_API_KEY }}
           DRY_RUN: ${{ inputs.dry_run && '1' || '' }}
+          PAYLOAD_CREATE_MISSING: ${{ inputs.create_missing && '1' || '' }}
         run: node scripts/propagate-payload.mjs
 
       # Алёрт при провале: incoming webhook Mattermost. Secret-optional:
