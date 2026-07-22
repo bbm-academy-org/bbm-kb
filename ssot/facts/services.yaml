@@ -138,7 +138,9 @@ services:
     status: prod
     description: >-
       Командный AI-ops-агент: бот @bbmka в Mattermost + Plane (токен
-      bbm-automation-hermes) + KB (Phase 3); LLM — kie.ai (Anthropic-совместимый канал).
+      bbm-automation-hermes) + KB (Phase 3); LLM — прямой Anthropic API
+      (ключ ANTHROPIC_API_KEY из Claude Console). Канал kie.ai и провайдер-шим
+      удалены в BBMP-69 (2026-07-03) — исправлено в BBMP-118.
 
   - id: zoom-rotation
     name: Автопилот ротации Zoom-записей
