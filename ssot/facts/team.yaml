@@ -39,6 +39,13 @@ members:
     status: active
     timezone: Europe/Moscow  # TODO(Антон): подтвердить таймзону
 
+  - id: yulia-tarasenko
+    name: Юлия Тарасенко
+    role: Developer  # разработка (платформа BBM / продуктовые сервисы); в команде с 2026-07-27 (BBMP-134)
+    email: yt@bbm.academy
+    status: active
+    timezone: Europe/Moscow  # TODO(Антон): подтвердить таймзону
+
 # TODO(Антон): дополнить остальных членов команды — спека SSO (§5) говорит о ~8 учётках
 # @bbm.academy; в Plane фигурируют и другие участники (напр. Анна — проекты ENERGY/NGKOT),
 # но роль/email без надёжного источника не заводим.
