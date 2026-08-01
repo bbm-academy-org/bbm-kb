@@ -1,6 +1,7 @@
 # SSOT: команда BBM — канонический реестр (authority: canonical).
-# Заполнено в BBMP-99. Источники: bbm/CLAUDE.md (раздел «Команда»),
-# memory reference_team_roles (маппинг роль → человек → email @bbm.academy).
+# Заполнено в BBMP-99, дополнено в BBMP-150. Источники: bbm/CLAUDE.md
+# (раздел «Команда»), актуальная карта ролей BBM и подтверждённые live-rosters
+# Mattermost / Zitadel / Plane (маппинг человек → email @bbm.academy).
 #
 # Схема записи:
 #   - id: <slug>            # уникальный идентификатор человека
@@ -32,6 +33,41 @@ members:
     status: active
     timezone: Europe/Moscow  # TODO(Антон): подтвердить таймзону
 
+  - id: alexander-gorbunov
+    name: Александр Горбунов
+    role: Marketing Strategy / Communications  # маркетинговая стратегия, продюсирование коммуникаций
+    email: ag@bbm.academy
+    status: active
+    timezone: Europe/Moscow  # TODO(Антон): подтвердить таймзону
+
+  - id: alisa-ildarkhanova
+    name: Алиса Ильдарханова
+    role: Content Producer  # продюсирование контента
+    email: ai@bbm.academy
+    status: active
+    timezone: Europe/Moscow  # TODO(Антон): подтвердить таймзону
+
+  - id: evgeniya-genrikh
+    name: Евгения Генрих
+    role: Writer / Meaning Editor  # сценарии и редактура смыслов
+    email: eg@bbm.academy
+    status: active
+    timezone: Europe/Moscow  # TODO(Антон): подтвердить таймзону
+
+  - id: ekaterina-platonova
+    name: Екатерина Платонова
+    role: Educational Multimedia Content Producer  # продюсирование образовательного мультимедийного контента
+    email: ep@bbm.academy
+    status: active
+    timezone: Europe/Moscow  # TODO(Антон): подтвердить таймзону
+
+  - id: petr-guryanov
+    name: Пётр Гурьянов
+    role: Organizational Development / Goal-Setting Advisor  # оргразвитие и целеполагание
+    email: pg@bbm.academy
+    status: active
+    timezone: Europe/Moscow  # TODO(Антон): подтвердить таймзону
+
   - id: vsevolod-samoshkin
     name: Всеволод Самошкин
     role: Content / Methodology  # контент-производство, методология образовательных программ (DSC); в команде с 2026-07-16 (BBMP-114)
@@ -46,8 +82,8 @@ members:
     status: active
     timezone: Europe/Moscow  # TODO(Антон): подтвердить таймзону
 
-# TODO(Антон): дополнить остальных членов команды — спека SSO (§5) говорит о ~8 учётках
-# @bbm.academy; в Plane фигурируют и другие участники (напр. Анна — проекты ENERGY/NGKOT),
-# но роль/email без надёжного источника не заводим.
+# Scope BBMP-150 (2026-08-01): реестр отражает текущую операционную команду.
+# Анна Шебырева (ash@) — бывшая участница, Юрий Баринов (yb@) — внешний
+# приглашённый консультант; сервисные и тестовые аккаунты в team не входят.
 # Будущие роли (пока TBD, без записей): COO (Эдуард + Антон делят до найма),
 # Head of Content (lead DSC), Head of Growth (lead DSM).
