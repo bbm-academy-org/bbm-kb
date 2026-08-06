@@ -5,6 +5,8 @@ version: 1.0.0
 author: BBM (BBMP-102)
 license: UNLICENSED
 platforms: [linux]
+required_environment_variables:
+  - BBM_KB_GITHUB_TOKEN
 metadata:
   hermes:
     tags: [BBM, SSOT, Knowledge-Base, Team, Glossary]
@@ -52,12 +54,20 @@ metadata:
 
 ## Механика
 
-- Локальный клон: `$KB_DIR` (по умолчанию `$HOME/bbm-kb` — HOME рантайма бота,
-  персистентный volume; тот же HOME использовать при `hermes skills install`).
-- Доступ: репо приватное; нужен `GITHUB_TOKEN` в env контейнера бота
+- Локальный клон: `$KB_DIR` (по умолчанию `$HERMES_HOME/bbm-kb`, fallback
+  `$HOME/bbm-kb`). НЕ `$HOME`: у песочницы бота (terminal/execute_code) свой
+  HOME, отличный от HOME рантайма; `HERMES_HOME` Hermes сам прокидывает в
+  песочницу, и путь получается один и тот же у бота и у ручного прогона.
+- Доступ: репо приватное; нужен `BBM_KB_GITHUB_TOKEN` в env контейнера бота
   (compose `.env` в каталоге деплоя на хосте, канон — `bbm/infra/hermes/`)
   с правом `contents:read` (для PR — `contents:write, pull_requests:write`)
   на `bbm-academy-org/bbm-kb`. Скрипт не сохраняет токен в `.git/config`.
+- Имя переменной НЕ `GITHUB_TOKEN` намеренно: песочница Hermes вычищает из
+  env команд бота креды провайдеров, а `GITHUB_TOKEN` закреплён за провайдером
+  GitHub Copilot (`hermes_cli/auth.py`, PROVIDER_REGISTRY) — пропустить его
+  нельзя ни скиллом, ни конфигом (защита после GHSA-rhgp-j443-p4rf).
+  Стороннее имя `BBM_KB_GITHUB_TOKEN` проходит через декларацию
+  `required_environment_variables` в frontmatter этого скилла.
 - Пропагация тех же фактов в Payload (cms.bbm.academy) — CI-джоб
   `propagate-payload` в этом же репо; расхождение KB↔сайт = баг, репортить.
 

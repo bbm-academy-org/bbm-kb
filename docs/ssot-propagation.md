@@ -10,7 +10,7 @@
 |---|---|---|
 | KB-сайт | страницы генерируются на билде из `ssot/` (`lib/ssot.ts`, BBMP-99) | работает |
 | Публичный сайт (Payload, `cms.bbm.academy`) | `.github/workflows/propagate-payload.yml` → `scripts/propagate-payload.mjs`: push в main с изменением `ssot/facts/*` → upsert канонических полей через REST | работает (секреты установлены 2026-07-12, боевой прогон writes=7) |
-| Hermes (@bbmka) | скилл `hermes-skills/bbm-ssot/` — ответы о команде/миссии/терминах только из `ssot/` с источником | ждёт `GITHUB_TOKEN` на хосте + установку скилла |
+| Hermes (@bbmka) | скилл `hermes-skills/bbm-ssot/` — ответы о команде/миссии/терминах только из `ssot/` с источником | PAT на хосте + скилл установлены 2026-08-06; ждёт финальный smoke в Mattermost (эпик bbm-portal#110) |
 
 ## Payload (факт на 2026-07-12)
 
@@ -32,22 +32,31 @@
 
 Джоб работает в write-режиме; DRY_RUN остаётся доступен через Run workflow → `dry_run=true` (и включается принудительно, если секрет пропадёт).
 
-## Hermes (факт на 2026-07-11)
+## Hermes (факт на 2026-08-06)
 
-- Хост `hermes-prod-tw` (94.198.221.20, Timeweb kz-1), деплой-канон — `bbm/infra/hermes/`. Скиллы ставятся в рантайме на volume: `hermes skills install <owner>/<repo>/<path>`.
-- GitHub-токена в env бота нет → приватный `bbm-kb` ему пока недоступен.
+- Хост `hermes-prod-tw` (94.198.221.20, Timeweb kz-1), деплой-канон — `bbm/infra/hermes/`. Скиллы ставятся в рантайме: `hermes skills install <owner>/<repo>/<path>` кладёт файлы в `/data/skills/<name>/` (персистентный volume — установка переживает пересоздание контейнера; посылка `sidorovanthon/bbm#97` про гибель скиллов вместе с анонимным `/opt/data` к скиллам не относится).
+- PAT `hermes-bbm-kb` создан и лежит в `.env` хоста (2026-08-06, эпик bbm-portal#110); скилл установлен. Финальный smoke — вопрос `@bbmka` в Mattermost.
 
 ### Включение скилла (TODO-хост, выполняет Антон)
 
 1. TODO(Антон): создать fine-grained PAT «hermes-bbm-kb», доступ только к `bbm-academy-org/bbm-kb`, права `Contents: read` (для Phase-3 PR-правок: `Contents: read/write` + `Pull requests: read/write`).
 2. На хосте (значение токена вводится на хосте, не в чат). Канон путей —
    `bbm/infra/hermes/README.md`; `.env` лежит рядом с `compose.yml` в
-   каталоге деплоя:
+   каталоге деплоя. Токен кладётся **двумя строками под разными именами**:
+   `GITHUB_TOKEN` видит только main-процесс Hermes (Skills Hub, установка
+   скиллов из приватного репо), а в песочницу shell-команд бота он не
+   проходит — имя закреплено за кредом провайдера GitHub Copilot
+   (`hermes_cli/auth.py`, PROVIDER_REGISTRY), и после GHSA-rhgp-j443-p4rf
+   провайдерские креды не пропускаются ни скиллом, ни конфигом. Скилл
+   поэтому читает стороннее имя `BBM_KB_GITHUB_TOKEN` (frontmatter
+   `required_environment_variables`):
    ```bash
    ssh hermes-prod-tw
    cd <каталог деплоя hermes>   # см. README; там compose.yml и .env
-   nano .env                    # добавить строку GITHUB_TOKEN=<PAT>
-   docker compose up -d         # перечитать env
+   nano .env                    # добавить ДВЕ строки с одним значением:
+                                #   GITHUB_TOKEN=<PAT>        (main-процесс: Skills Hub)
+                                #   BBM_KB_GITHUB_TOKEN=<PAT> (песочница бота: kb-pull.sh)
+   docker compose up -d         # пересоздать контейнер, перечитать env
    ```
 3. Установить скилл:
    ```bash
