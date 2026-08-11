@@ -1,0 +1,48 @@
+# SSOT: переменные финансовой модели BBM (authority: canonical).
+# Заполнено в BBMB-29 из канона репо bbm
+# (outputs/2026-07-24-bbm-finmodel/2026-08-07-finmodel-consolidated.md §3,
+# резолюции 2026-08-10-sverka-eduard-checklist.md).
+# Правила и формулы фиксирует нормативный документ content/finmodel/index.mdx;
+# здесь — только значения переменных. Числовые значения с пометкой model_example
+# — модельные (переменные калькулятора, не фиксы канона; резолюция Антона 2026-08-10).
+#
+# Два уровня (канон §3.0): policy — универсальная политика BBM (одинакова для
+# всех проектов); projects.<slug> — предметные значения конкретного проекта.
+# Потребители: bbm-portal (tools/ssot/pull-finmodel.mjs → снапшот), далее — любые.
+#
+# Схема:
+#   policy:
+#     profit_shares: {investors, author, coauthors}  # доли 7x, целые
+#     royalty_percent: {total, mission_fund, bbm_holders}  # % от чистой прибыли; total = сумма
+#     reserve_percent: <число>          # model_example; % сплита каждой входящей суммы в резерв
+#     emission_price_rub: <число>       # model_example; цена первичной эмиссии токена
+#     examples:                          # модельные значения для публичных примеров
+#       team_monthly_rate_rub: <число>  # model_example; ставка роли в примерах трека «работаю»
+#       team_hours_norm: <число>        # норма часов в месяц в примерах
+#   projects:
+#     doctor_school:
+#       unit_price_rub: <число>         # model_example; цена юнита (урока)
+#       mining_weights: {pul, bre, con} # веса майнинга внимания w_p:w_b:w_c (на сверке с Эдуардом)
+
+policy:
+  profit_shares:
+    investors: 4
+    author: 2
+    coauthors: 1
+  royalty_percent:
+    total: 5
+    mission_fund: 2
+    bbm_holders: 3
+  reserve_percent: 15          # model_example
+  emission_price_rub: 1000     # model_example (пример звонка 06.08)
+  examples:
+    team_monthly_rate_rub: 200000   # model_example
+    team_hours_norm: 160
+
+projects:
+  doctor_school:
+    unit_price_rub: 2000000    # model_example (резолюция №1, 2026-08-10)
+    mining_weights:            # предложение BBM 4:1:2, на асинхронной сверке с Эдуардом
+      pul: 4
+      bre: 1
+      con: 2
