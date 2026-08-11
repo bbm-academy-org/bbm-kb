@@ -7,6 +7,7 @@ import {
 } from 'fumadocs-ui/page';
 import { notFound } from 'next/navigation';
 import defaultMdxComponents, { createRelativeLink } from 'fumadocs-ui/mdx';
+import { V } from '@/components/finmodel';
 
 export default async function Page(props: {
   params: Promise<{ slug?: string[] }>;
@@ -27,6 +28,9 @@ export default async function Page(props: {
             ...defaultMdxComponents,
             // Относительные ссылки между .mdx-страницами резолвятся в URL.
             a: createRelativeLink(source, page),
+            // Переменные финмодели (content/finmodel) — через map, не import в MDX:
+            // тот же MDX рендерит bbm-portal через next-mdx-remote, где import не работает.
+            V,
           }}
         />
       </DocsBody>
