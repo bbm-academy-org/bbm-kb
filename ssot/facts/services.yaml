@@ -24,7 +24,10 @@ hosts:
     provider: Timeweb Cloud
     region: ru-3 (Москва)
     status: prod
-    description: Командный тулинг — Mattermost + Zitadel BBM; сюда же планируется KB (kb.bbm.academy).
+    description: >-
+      Командный тулинг — Mattermost + Zitadel BBM; сюда же планируется KB
+      (kb.bbm.academy). Host-nginx этого хоста раздаёт также статику сайта
+      конгресса ОРТОБИОЛОГИЯ-2027 (orthobio-site) и proto-app.doctor.school.
 
   - id: plane-prod-tw
     provider: Timeweb Cloud
@@ -176,6 +179,22 @@ services:
       (BBMP-71). VPS уничтожен 2026-07-01, cutover не выполнялся; код сохранён
       в несмерженной ветке — восстановление по необходимости.
 
+  - id: orthobio-site
+    name: Сайт конгресса ОРТОБИОЛОГИЯ-2027
+    domain: new.orthobio.ru  # временный URL; apex orthobio.ru — переключение владельцем
+    host: tools-prod-tw
+    repo: doctor-school/orthobio-site
+    status: prod
+    description: >-
+      Временный статичный сайт конгресса (Astro SSG) + архив 2021–2026;
+      продукт DS-контура, но живёт на инфре BBM — поэтому здесь, а не в external.
+      Раздаётся host-nginx из /var/www/new.orthobio.ru/public, TLS — certbot;
+      деплой — GitHub Actions rsync через ключ, запертый forced-command
+      (паттерн kb.bbm.academy). Карта 301-редиректов генерируется из
+      infra/redirects.yaml репо — переезд на платформу Doctor.School (ноябрь
+      2026) правится данными. Публичный HTTPS ждёт A-записи new.orthobio.ru
+      в Beget (действие владельца, orthobio-site#5).
+
 storage:
   # Все бакеты — Timeweb S3, ru-1 СПб (гео-разнесены с VPS), account-level ключи.
   - id: bbm-plane-backups
@@ -206,6 +225,13 @@ storage:
     provider: Timeweb S3
     class: hot
     description: Промежуточный буфер автопилота ротации Zoom-записей (versioning + lifecycle).
+  - id: orthobio-media
+    provider: Timeweb S3
+    class: hot
+    description: >-
+      Public-read медиа-архив конгрессов ОРТОБИОЛОГИЯ 2021–2026 (фото и PDF,
+      ~8.9 ГиБ); объекты неизменяемые, Cache-Control immutable. Terraform —
+      doctor-school/orthobio-site infra/terraform.
 
 repos:
   - id: bbm
@@ -229,6 +255,11 @@ repos:
   - id: bbm-zoom-yt-streaming-worker
     remote: sidorovanthon/bbm-zoom-yt-streaming-worker
     description: CF Worker автоматизации YouTube-трансляций из Zoom (BBMP-9).
+  - id: orthobio-site
+    remote: doctor-school/orthobio-site
+    description: >-
+      Временный сайт конгресса ОРТОБИОЛОГИЯ-2027 (Astro) + инфра его хостинга
+      (nginx-vhost, деплой-скрипты хоста, terraform бакета orthobio-media).
 
 external:
   # Смежные системы и сервисы вне контура BBM — для полноты карты, не инфра BBM.
@@ -255,7 +286,7 @@ external:
   - id: beget-dns
     name: Beget (DNS)
     domain: null
-    description: DNS-хостинг зон bbm.academy / doctor.school; записи добавляет владелец через UI (API-доступа нет).
+    description: DNS-хостинг зон bbm.academy / doctor.school / orthobio.ru; записи добавляет владелец через UI (API-доступа нет).
   - id: timeweb-cloud
     name: Timeweb Cloud
     domain: null
