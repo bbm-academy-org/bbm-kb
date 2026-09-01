@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "meetings": [
+    {
+      "uuid": "kYmh8S7RSf2qbDHZXCJWoA==",
+      "id": 88400586059,
+      "topic": "BBM Status meeting",
+      "start_time": "2026-09-01T06:58:15Z",
+      "timezone": "Europe/Moscow",
+      "duration": 63,
+      "participants": [
+        "Anton Sidorov",
+        "Эдуард Ильдарханов",
+        "Ильдарханова",
+        "Julia Tarasenko",
+        "Petr Guryanov",
+        "iPhone (Екатерина)",
+        "Alexandr Gorbunov",
+        "dobroyar",
+        "Евгения Генрих"
+      ],
+      "base": "2026-09-01-0958-bbm-status-meeting"
+    }
+  ]
+}
