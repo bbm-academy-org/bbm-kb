@@ -20,6 +20,20 @@
         "Евгения Генрих"
       ],
       "base": "2026-09-01-0958-bbm-status-meeting"
+    },
+    {
+      "uuid": "of2WgaMFRPiM3NkGfKOH5A==",
+      "id": 88400586059,
+      "topic": "BBM Status meeting",
+      "start_time": "2026-09-01T12:59:25Z",
+      "timezone": "Europe/Moscow",
+      "duration": 71,
+      "participants": [
+        "Анна Маслова",
+        "Эдуард Ильдарханов",
+        "Пользователь Zoom"
+      ],
+      "base": "2026-09-01-1559-bbm-status-meeting"
     }
   ]
 }
