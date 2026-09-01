@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "meetings": [
+    {
+      "uuid": "M3GY61z6QziNPejt82aIAQ==",
+      "id": 88400586059,
+      "topic": "BBM Status meeting",
+      "start_time": "2026-08-28T06:58:39Z",
+      "timezone": "Europe/Moscow",
+      "duration": 80,
+      "participants": [
+        "Alexandr Gorbunov",
+        "iPhone (Екатерина)",
+        "Ильдарханова",
+        "Anton Sidorov",
+        "Dobroyar (Igor)",
+        "Эдуард Ильдарханов",
+        "Audio shared by iPhone (Екатерина)",
+        "Audio shared by Anton Sidorov"
+      ],
+      "base": "2026-08-28-0958-bbm-status-meeting"
+    }
+  ]
+}
