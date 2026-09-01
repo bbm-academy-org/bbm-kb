@@ -2,6 +2,20 @@
   "schemaVersion": 1,
   "meetings": [
     {
+      "uuid": "2dmbvSFCRv+OSVRc4zHDKw==",
+      "id": 88400586059,
+      "topic": "BBM Status meeting",
+      "start_time": "2026-08-25T08:59:40Z",
+      "timezone": "Europe/Moscow",
+      "duration": 67,
+      "participants": [
+        "Ильдарханова",
+        "Alexandr Gorbunov",
+        "Эдуард Ильдарханов"
+      ],
+      "base": "2026-08-25-1159-bbm-status-meeting"
+    },
+    {
       "uuid": "ZLcLzJa/T4ea8fiPbHsX/w==",
       "id": 88400586059,
       "topic": "BBM Status meeting",
