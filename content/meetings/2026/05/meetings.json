@@ -1,0 +1,98 @@
+{
+  "schemaVersion": 1,
+  "meetings": [
+    {
+      "uuid": "8Hvix9E0SyqhlM7ed85xDQ==",
+      "id": 88400586059,
+      "topic": "BBM Status meeting",
+      "start_time": "2026-05-05T09:59:25Z",
+      "timezone": "Europe/Moscow",
+      "duration": 130,
+      "participants": [
+        "BBM Academy",
+        "Евгения Генрих",
+        "Эдуард Ильдарханов",
+        "Alexandr Gorbunov",
+        "Ильдарханова"
+      ],
+      "base": "2026-05-05-1259-bbm-status-meeting"
+    },
+    {
+      "uuid": "kFzJknhRSZ+dnN7RBCTRsg==",
+      "id": 88400586059,
+      "topic": "BBM Status meeting",
+      "start_time": "2026-05-07T09:59:31Z",
+      "timezone": "Europe/Moscow",
+      "duration": 76,
+      "participants": [
+        "Эдуард Ильдарханов",
+        "BBM Academy",
+        "Евгения Генрих",
+        "Anton Sidorov",
+        "Alexandr Gorbunov",
+        "Ильдарханова"
+      ],
+      "base": "2026-05-07-1259-bbm-status-meeting"
+    },
+    {
+      "uuid": "WWu8niwwSPWM82DUdAc2Sg==",
+      "id": 88400586059,
+      "topic": "BBM Status meeting",
+      "start_time": "2026-05-07T18:04:14Z",
+      "timezone": "Europe/Moscow",
+      "duration": 57,
+      "participants": [
+        "Alexandr Gorbunov",
+        "Эдуард И",
+        "Ильдарханова"
+      ],
+      "base": "2026-05-07-2104-bbm-status-meeting"
+    },
+    {
+      "uuid": "OPt7e1N1R1G8nuDHmUZ0Jg==",
+      "id": 88400586059,
+      "topic": "BBM Status meeting",
+      "start_time": "2026-05-12T09:59:35Z",
+      "timezone": "Europe/Moscow",
+      "duration": 89,
+      "participants": [
+        "Anton Sidorov",
+        "Эдуард Ильдарханов",
+        "Ильдарханова",
+        "Alexandr Gorbunov"
+      ],
+      "base": "2026-05-12-1259-bbm-status-meeting"
+    },
+    {
+      "uuid": "13smz3TMQuOXqoV0Duod/A==",
+      "id": 88400586059,
+      "topic": "BBM Status meeting",
+      "start_time": "2026-05-26T09:57:48Z",
+      "timezone": "Europe/Moscow",
+      "duration": 31,
+      "participants": [
+        "Ильдарханова",
+        "Эдуард Ильдарханов",
+        "Alexandr Gorbunov",
+        "Евгения Генрих"
+      ],
+      "base": "2026-05-26-1257-bbm-status-meeting"
+    },
+    {
+      "uuid": "XOpu2QXvSQGaO77AuiC0CA==",
+      "id": 88400586059,
+      "topic": "BBM Status meeting",
+      "start_time": "2026-05-28T09:59:24Z",
+      "timezone": "Europe/Moscow",
+      "duration": 66,
+      "participants": [
+        "Anton Sidorov",
+        "Евгения Генрих",
+        "Ильдарханова",
+        "Alexandr Gorbunov",
+        "iPhone (Екатерина)"
+      ],
+      "base": "2026-05-28-1259-bbm-status-meeting"
+    }
+  ]
+}
