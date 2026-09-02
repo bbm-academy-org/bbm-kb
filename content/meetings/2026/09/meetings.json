@@ -34,6 +34,23 @@
         "Пользователь Zoom"
       ],
       "base": "2026-09-01-1559-bbm-status-meeting"
+    },
+    {
+      "uuid": "SEXYf63XT6KGHwVM5SPaOg==",
+      "id": 88400586059,
+      "topic": "BBM Status meeting",
+      "start_time": "2026-09-02T09:00:03Z",
+      "timezone": "Europe/Moscow",
+      "duration": 98,
+      "participants": [
+        "Эдуард Ильдарханов",
+        "Anton Sidorov",
+        "dobroyar",
+        "iPhone ",
+        "Екатерина",
+        "Alexandr Gorbunov"
+      ],
+      "base": "2026-09-02-1200-bbm-status-meeting"
     }
   ]
 }
