@@ -56,6 +56,26 @@
       "description": "Основное внимание на совещании было уделено разработке презентационной и маркетинговой стратегии нового продукта, направленного на решение проблем в…"
     },
     {
+      "uuid": "T5xiRsdRRjegzRaX1FQBtg==",
+      "id": 88400586059,
+      "topic": "BBM Status meeting",
+      "start_time": "2026-09-03T06:59:11Z",
+      "timezone": "Europe/Moscow",
+      "duration": 67,
+      "participants": [
+        "Anton Sidorov",
+        "Ильдарханова",
+        "Julia Tarasenko",
+        "dobroyar",
+        "Alexandr Gorbunov",
+        "iPhone (Екатерина)",
+        "Евгения Генрих",
+        "Эдуард Ильдарханов"
+      ],
+      "base": "2026-09-03-0959-bbm-status-meeting",
+      "description": "Основное внимание на встрече было уделено обновлению проектов, управлению контентом и стратегическому планированию BIM Academy и связанных с ней…"
+    },
+    {
       "uuid": "xcucXArnQgmKcTGiEzLGmA==",
       "id": 88400586059,
       "topic": "BBM Status meeting",
