@@ -17,7 +17,8 @@
         "Dobroyar (Igor)",
         "Alexandr Gorbunov"
       ],
-      "base": "2026-04-07-1302-bbm-status-meeting"
+      "base": "2026-04-07-1302-bbm-status-meeting",
+      "description": "На этой встрече были обсуждены несколько ключевых проектов и инициатив команды Бибием."
     },
     {
       "uuid": "wWYdJJlZS6m4oEykRHsKFA==",
@@ -33,7 +34,8 @@
         "Ильдарханова",
         "Alexandr Gorbunov"
       ],
-      "base": "2026-04-07-1500-bbm-status-meeting"
+      "base": "2026-04-07-1500-bbm-status-meeting",
+      "description": "Эта встреча была посвящена разработке сценария для образовательного видео по спортивной медицине, где участники обсудили концепцию серии видеороликов…"
     },
     {
       "uuid": "ae9DGe5UQuK4vKiY7ufLvw==",
@@ -49,7 +51,8 @@
         "Zero",
         "Dobroyar (Igor)"
       ],
-      "base": "2026-04-09-1258-bbm-status-meeting"
+      "base": "2026-04-09-1258-bbm-status-meeting",
+      "description": "Встреча была посвящена обсуждению разработки приложения для врачей в рамках проекта Bibiem, с акцентом на дизайне, механике игры и контенте."
     },
     {
       "uuid": "GTlDqTN8S5ie4gK9c+2i5g==",
@@ -65,7 +68,8 @@
         "Alexandr Gorbunov",
         "Ильдарханова"
       ],
-      "base": "2026-04-13-1829-bbm-status-meeting"
+      "base": "2026-04-13-1829-bbm-status-meeting",
+      "description": "Эдуард Ильдарханов и его команда провели встречу с экспертами для обсуждения их проекта по созданию образовательного сериала для врачей,…"
     },
     {
       "uuid": "xbXEigpoSF6M6DPhK09TCw==",
@@ -83,7 +87,8 @@
         "Zero",
         "BBM Academy"
       ],
-      "base": "2026-04-14-1259-bbm-status-meeting"
+      "base": "2026-04-14-1259-bbm-status-meeting",
+      "description": "На заседании команды обсуждалась разработка прототипа мобильного приложения для медицинского образовательного проекта, который планируется…"
     },
     {
       "uuid": "qq0/jcxWQGedgRbJ01QACQ==",
@@ -99,7 +104,8 @@
         "Ильдарханова",
         "BBM Academy"
       ],
-      "base": "2026-04-14-1456-bbm-status-meeting"
+      "base": "2026-04-14-1456-bbm-status-meeting",
+      "description": "Эта встреча была посвящена разработке приложения для обучения ортопедических врачей, включая обсуждение дизайна интерфейса, контента и игровой…"
     },
     {
       "uuid": "TO0aRZvjTrCHNyqIKaL2Qw==",
@@ -114,7 +120,8 @@
         "Ильдарханова",
         "Alexandr Gorbunov"
       ],
-      "base": "2026-04-16-1530-bbm-status-meeting"
+      "base": "2026-04-16-1530-bbm-status-meeting",
+      "description": "Эта встреча была посвящена разработке учебного материала и тестов по ортобиологии и реабилитационной медицине."
     },
     {
       "uuid": "S+SRhZSgRJyhyAETrVYndg==",
@@ -129,7 +136,8 @@
         "Ильдарханова",
         "Эдуард И"
       ],
-      "base": "2026-04-20-1559-bbm-status-meeting"
+      "base": "2026-04-20-1559-bbm-status-meeting",
+      "description": "Основное внимание на совещании было уделено разработке медицинского образовательного приложения с интерактивным контентом и вебинарами по…"
     },
     {
       "uuid": "mlBG25KAQomyhsk9WmAaIA==",
@@ -144,7 +152,8 @@
         "Alexandr Gorbunov",
         "Эдуард Ильдарханов"
       ],
-      "base": "2026-04-21-1259-bbm-status-meeting"
+      "base": "2026-04-21-1259-bbm-status-meeting",
+      "description": "Основное внимание на встрече было уделено планированию презентации и вебинара для предстоящего конгресса, а обсуждения были сосредоточены на создании…"
     },
     {
       "uuid": "GyBLG4DwShiGkQNPmLfMxw==",
@@ -159,7 +168,8 @@
         "Alexandr Gorbunov",
         "Григорий"
       ],
-      "base": "2026-04-23-1300-bbm-status-meeting"
+      "base": "2026-04-23-1300-bbm-status-meeting",
+      "description": "Эта стенограмма представляет собой многочастный разговор с участием нескольких участников, обсуждающих различные темы, включая психологию, интуицию,…"
     },
     {
       "uuid": "3kGyGF5DSBWHMpuJ7c4rfw==",
@@ -173,7 +183,8 @@
         "Anton Sidorov",
         "Alexandr Gorbunov"
       ],
-      "base": "2026-04-25-1149-bbm-status-meeting"
+      "base": "2026-04-25-1149-bbm-status-meeting",
+      "description": "Основное внимание на встрече было уделено разработке прототипа образовательной платформы и обсуждению стратегий создания контента."
     },
     {
       "uuid": "YRY5hBbMTjW73+qSHXuZyQ==",
@@ -189,7 +200,8 @@
         "Эдуард И",
         "Audio shared by Эдуард И"
       ],
-      "base": "2026-04-25-1500-bbm-status-meeting"
+      "base": "2026-04-25-1500-bbm-status-meeting",
+      "description": "The meeting focused on preparing for and discussing a medical education conference presentation about the Ortobiology School project."
     },
     {
       "uuid": "ku6EVZSMQgKb1EhK4rGbEg==",
@@ -208,7 +220,8 @@
         "Ильдарханова",
         "alice_suslova"
       ],
-      "base": "2026-04-28-1259-bbm-status-meeting"
+      "base": "2026-04-28-1259-bbm-status-meeting",
+      "description": "Основное внимание на совещании было уделено оценке недавнего проекта группы, в частности обзору мероприятия Конгресса и обсуждению методов оценки…"
     },
     {
       "uuid": "hryisv1uThWlMC0Z+6HeBA==",
@@ -224,7 +237,8 @@
         "Ильдарханова",
         "евгения"
       ],
-      "base": "2026-04-30-1259-bbm-status-meeting"
+      "base": "2026-04-30-1259-bbm-status-meeting",
+      "description": "Основное внимание на совещании было уделено обсуждению разработки и запуска образовательного продукта, а участники подвели итоги достигнутого…"
     }
   ]
 }
