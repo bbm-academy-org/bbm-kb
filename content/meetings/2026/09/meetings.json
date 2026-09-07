@@ -117,6 +117,20 @@
       "description": "На встрече Юлии Тарасенко и Антона Сидорова обсуждались их рабочие процессы и организационные системы управления агентами ИИ и репозиториями проектов."
     },
     {
+      "uuid": "Smtaq/P9R1yPu7++zk1N1Q==",
+      "id": 88400586059,
+      "topic": "BBM Status meeting",
+      "start_time": "2026-09-07T06:47:51Z",
+      "timezone": "Europe/Moscow",
+      "duration": 127,
+      "participants": [
+        "Alexandr Gorbunov",
+        "Ильдарханова"
+      ],
+      "base": "2026-09-07-0947-bbm-status-meeting",
+      "description": "Основное внимание на встрече было уделено созданию и тестированию новостной рассылки с использованием новой электронной платформы, а Александр…"
+    },
+    {
       "uuid": "wYzybozoRl+0CsjrPiklUQ==",
       "id": 88400586059,
       "topic": "BBM Status meeting",
