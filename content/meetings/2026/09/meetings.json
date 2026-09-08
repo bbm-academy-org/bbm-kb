@@ -143,6 +143,26 @@
       ],
       "base": "2026-09-07-1318-bbm-status-meeting",
       "description": "Эта стенограмма представляет собой неоднозначный разговор между Ильдарханова и Александром Горбуновым, в ходе которого обсуждались технические…"
+    },
+    {
+      "uuid": "7izTDBYjTeG4uSgL+Hb/3A==",
+      "id": 88400586059,
+      "topic": "BBM Status meeting",
+      "start_time": "2026-09-08T06:52:51Z",
+      "timezone": "Europe/Moscow",
+      "duration": 88,
+      "participants": [
+        "Эдуард Ильдарханов",
+        "Anton Sidorov",
+        "Julia Tarasenko",
+        "iPhone (Екатерина)",
+        "Евгения Генрих",
+        "Ильдарханова",
+        "Alexandr Gorbunov",
+        "Dobroyar (Igor)"
+      ],
+      "base": "2026-09-08-0952-bbm-status-meeting",
+      "description": "На встрече обсуждались обновления и вопросы разработки и управления платформой Dr."
     }
   ]
 }
