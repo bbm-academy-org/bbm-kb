@@ -163,6 +163,22 @@
       ],
       "base": "2026-09-08-0952-bbm-status-meeting",
       "description": "На встрече обсуждались обновления и вопросы разработки и управления платформой Dr."
+    },
+    {
+      "uuid": "yPsqevjlRGSDuof4+x9hwQ==",
+      "id": 88400586059,
+      "topic": "BBM Status meeting",
+      "start_time": "2026-09-09T08:57:57Z",
+      "timezone": "Europe/Moscow",
+      "duration": 66,
+      "participants": [
+        "Ильдарханова",
+        "Dobroyar (Igor)",
+        "Polina Shirochkova",
+        "Anton Sidorov"
+      ],
+      "base": "2026-09-09-1157-bbm-status-meeting",
+      "description": "Встреча представляла собой консультацию между Доброяром (Игорем), Ильдархановой, Антоном и Полиной Широкковой по вопросам продвижения мобильного…"
     }
   ]
 }
