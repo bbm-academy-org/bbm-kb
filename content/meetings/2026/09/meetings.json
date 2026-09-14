@@ -214,6 +214,20 @@
       "description": "На встрече основное внимание было уделено объединению команды вокруг эволюционной цели, миссии и ценностей проекта, отказавшись от обсуждений,…"
     },
     {
+      "uuid": "g+9oIohpR02Hi3rnvkll2w==",
+      "id": 88400586059,
+      "topic": "BBM Status meeting",
+      "start_time": "2026-09-14T09:59:19Z",
+      "timezone": "Europe/Moscow",
+      "duration": 5,
+      "participants": [
+        "iPhone (Екатерина)",
+        "Anton Sidorov"
+      ],
+      "base": "2026-09-14-1259-bbm-status-meeting",
+      "description": "На встрече состоялось обсуждение между iPhone (Екатерина) и Антоном Сидоровым относительно связей и некоторых запланированных мероприятий. iPhone…"
+    },
+    {
       "uuid": "gIoQz0SxQQypMstj3gd6ww==",
       "id": 88400586059,
       "topic": "BBM Status meeting",
