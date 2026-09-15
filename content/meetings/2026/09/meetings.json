@@ -244,6 +244,26 @@
       "description": "Основное внимание на встрече было уделено брендингу и визуальной идентичности Академии Бибием и связанных с ней проектов, в частности Dr."
     },
     {
+      "uuid": "YzFs/XJTR6mLlmkzg9D+0Q==",
+      "id": 88400586059,
+      "topic": "BBM Status meeting",
+      "start_time": "2026-09-15T06:59:21Z",
+      "timezone": "Europe/Moscow",
+      "duration": 61,
+      "participants": [
+        "Anton Sidorov",
+        "iPhone (Екатерина)",
+        "Julia Tarasenko",
+        "Эдуард Ильдарханов",
+        "Alexandr Gorbunov",
+        "Анна Маслова",
+        "Dobroyar (Igor)",
+        "Ильдарханова"
+      ],
+      "base": "2026-09-15-0959-bbm-status-meeting",
+      "description": "На совещании обсуждались обновленные данные о разделении платформы на академию и демонстрационную платформу, текущая работа над инструментом…"
+    },
+    {
       "uuid": "YScgwQy6RQ2g9bBbXKECrg==",
       "id": 88400586059,
       "topic": "BBM Status meeting",
