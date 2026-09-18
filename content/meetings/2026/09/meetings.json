@@ -312,6 +312,24 @@
       "description": "На встрече обсуждалась разработка бренд-бука для Академии Бибием, миссия, ценности и позиционирование бренда."
     },
     {
+      "uuid": "+fUeTH+CS+K9dIWKgYXJAA==",
+      "id": 88400586059,
+      "topic": "BBM Status meeting",
+      "start_time": "2026-09-18T06:59:23Z",
+      "timezone": "Europe/Moscow",
+      "duration": 117,
+      "participants": [
+        "Anton Sidorov",
+        "Dobroyar (Igor)",
+        "Эдуард Ильдарханов",
+        "Ильдарханова",
+        "iPhone (Екатерина)",
+        "Alexandr Gorbunov"
+      ],
+      "base": "2026-09-18-0959-bbm-status-meeting",
+      "description": "На встрече обсуждались методы синхронизации работы команды и принципы компании."
+    },
+    {
       "uuid": "murj273qToOoPXxaK0KHcQ==",
       "id": 88400586059,
       "topic": "BBM Status meeting",
