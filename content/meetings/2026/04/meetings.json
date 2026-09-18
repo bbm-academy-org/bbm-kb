@@ -147,8 +147,8 @@
       "timezone": "Europe/Moscow",
       "duration": 54,
       "participants": [
-        "Ильдарханова",
         "Anton Sidorov",
+        "Ильдарханова",
         "Alexandr Gorbunov",
         "Эдуард Ильдарханов"
       ],
@@ -197,8 +197,7 @@
         "Anton Sidorov",
         "евгения",
         "Ильдарханова",
-        "Эдуард И",
-        "Audio shared by Эдуард И"
+        "Эдуард И"
       ],
       "base": "2026-04-25-1500-bbm-status-meeting",
       "description": "The meeting focused on preparing for and discussing a medical education conference presentation about the Ortobiology School project."
