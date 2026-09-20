@@ -23,8 +23,8 @@
       "timezone": "Europe/Moscow",
       "duration": 24,
       "participants": [
-        "Anton Sidorov",
-        "Эдуард Ильдарханов"
+        "Эдуард Ильдарханов",
+        "Anton Sidorov"
       ],
       "base": "2026-06-02-1138-bbm-status-meeting",
       "description": "Основное внимание на встрече было уделено обсуждению презентации по привлечению средств и разработке продукта платформы здравоохранения."
@@ -69,11 +69,11 @@
       "timezone": "Europe/Moscow",
       "duration": 50,
       "participants": [
-        "Anton Sidorov",
         "Эдуард Ильдарханов",
+        "Anton Sidorov",
+        "iPhone (Екатерина)",
         "Dobroyar (Igor)",
         "евгения",
-        "iPhone (Екатерина)",
         "Alexandr Gorbunov",
         "Ильдарханова"
       ],
@@ -88,8 +88,8 @@
       "timezone": "Europe/Moscow",
       "duration": 164,
       "participants": [
-        "Alexandr Gorbunov",
         "Эдуард Ильдарханов",
+        "Alexandr Gorbunov",
         "Ильдарханова"
       ],
       "base": "2026-06-05-1000-bbm-status-meeting",
