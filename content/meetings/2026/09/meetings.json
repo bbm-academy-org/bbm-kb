@@ -343,6 +343,26 @@
       "description": "Эта встреча представляла собой мозговой штурм, посвященный разработке презентации социального проекта и поиску ответственного партнера."
     },
     {
+      "uuid": "GQmHXWRqRa+qgXI5kWvu2A==",
+      "id": 88400586059,
+      "topic": "BBM Status meeting",
+      "start_time": "2026-09-22T06:59:14Z",
+      "timezone": "Europe/Moscow",
+      "duration": 51,
+      "participants": [
+        "Anton Sidorov",
+        "Julia Tarasenko",
+        "Alexandr Gorbunov",
+        "Эдуард Ильдарханов",
+        "Анна Маслова",
+        "Ильдарханова",
+        "iPhone (Екатерина)",
+        "Dobroyar (Igor)"
+      ],
+      "base": "2026-09-22-0959-bbm-status-meeting",
+      "description": "В ходе встречи были обсуждены актуальные вопросы интеграции и развития различных платформ и систем, в том числе объединение витрин магазинов в единую…"
+    },
+    {
       "uuid": "Sx5kPs/8RfmgLTgqfCD7RA==",
       "id": 88400586059,
       "topic": "BBM Status meeting",
