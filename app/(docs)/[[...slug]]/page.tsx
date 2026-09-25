@@ -8,6 +8,8 @@ import {
 import { notFound } from 'next/navigation';
 import defaultMdxComponents, { createRelativeLink } from 'fumadocs-ui/mdx';
 import { V } from '@/components/finmodel';
+import { MeetingActions } from '@/components/meeting-actions';
+import { isMeetingPage, markdownUrl } from '@/lib/meeting-markdown';
 
 export default async function Page(props: {
   params: Promise<{ slug?: string[] }>;
@@ -22,6 +24,12 @@ export default async function Page(props: {
     <DocsPage toc={page.data.toc ?? []} full={page.data.full ?? false}>
       <DocsTitle>{page.data.title}</DocsTitle>
       <DocsDescription>{page.data.description}</DocsDescription>
+      {isMeetingPage(page) && (
+        <MeetingActions
+          markdownUrl={markdownUrl(page)}
+          fileName={`${page.slugs[page.slugs.length - 1]}.md`}
+        />
+      )}
       <DocsBody>
         <MDX
           components={{
