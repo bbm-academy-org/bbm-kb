@@ -396,6 +396,25 @@
       ],
       "base": "2026-09-25-0958-bbm-status-meeting",
       "description": "На встрече обсуждались эволюционные цели команды и формирование целей для их проекта медицинского образования."
+    },
+    {
+      "uuid": "rZVcYPsEQwSH9lr4BY+4ig==",
+      "id": 88400586059,
+      "topic": "BBM Status meeting",
+      "start_time": "2026-09-29T06:57:44Z",
+      "timezone": "Europe/Moscow",
+      "duration": 48,
+      "participants": [
+        "Anton Sidorov",
+        "iPhone (Екатерина)",
+        "Julia Tarasenko",
+        "Alexandr Gorbunov",
+        "Ильдарханова",
+        "Эдуард Ильдарханов",
+        "Dobroyar (Igor)"
+      ],
+      "base": "2026-09-29-0957-bbm-status-meeting",
+      "description": "Основное внимание на встрече было уделено обновлениям и обсуждениям, связанным с разработкой и управлением приложением и платформой Dr."
     }
   ]
 }
