@@ -417,6 +417,23 @@
       "description": "Основное внимание на встрече было уделено обновлениям и обсуждениям, связанным с разработкой и управлением приложением и платформой Dr."
     },
     {
+      "uuid": "01OHNmx/Ryythxb755PV+A==",
+      "id": 88400586059,
+      "topic": "BBM Status meeting",
+      "start_time": "2026-09-30T06:59:38Z",
+      "timezone": "Europe/Moscow",
+      "duration": 187,
+      "participants": [
+        "Julia Tarasenko",
+        "Anton Sidorov",
+        "Эдуард Ильдарханов",
+        "Анна Маслова",
+        "iPhone (Екатерина)"
+      ],
+      "base": "2026-09-30-0959-bbm-status-meeting",
+      "description": "На встрече основное внимание было уделено моделированию и стандартизации процесса создания и доставки медицинского образовательного контента, включая…"
+    },
+    {
       "uuid": "ouawk+CBTCySO79oPTbmng==",
       "id": 88400586059,
       "topic": "BBM Status meeting",
