@@ -415,6 +415,20 @@
       ],
       "base": "2026-09-29-0957-bbm-status-meeting",
       "description": "Основное внимание на встрече было уделено обновлениям и обсуждениям, связанным с разработкой и управлением приложением и платформой Dr."
+    },
+    {
+      "uuid": "ouawk+CBTCySO79oPTbmng==",
+      "id": 88400586059,
+      "topic": "BBM Status meeting",
+      "start_time": "2026-09-30T12:46:43Z",
+      "timezone": "Europe/Moscow",
+      "duration": 6,
+      "participants": [
+        "Anton Sidorov",
+        "iPhone (Екатерина)"
+      ],
+      "base": "2026-09-30-1546-bbm-status-meeting",
+      "description": "На встрече основное внимание уделялось устранению проблем технического доступа, когда iPhone (Екатерина) испытывал проблемы с загрузкой контента из…"
     }
   ]
 }
