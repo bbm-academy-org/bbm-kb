@@ -9,7 +9,9 @@ import { notFound } from 'next/navigation';
 import defaultMdxComponents, { createRelativeLink } from 'fumadocs-ui/mdx';
 import { V } from '@/components/finmodel';
 import { MeetingActions } from '@/components/meeting-actions';
+import { MeetingVideo } from '@/components/meeting-video';
 import { isMeetingPage, markdownUrl } from '@/lib/meeting-markdown';
+import { getMeetingVideo } from '@/lib/meeting-video';
 
 export default async function Page(props: {
   params: Promise<{ slug?: string[] }>;
@@ -19,6 +21,7 @@ export default async function Page(props: {
   if (!page) notFound();
 
   const MDX = page.data.body;
+  const video = getMeetingVideo(page);
 
   return (
     <DocsPage toc={page.data.toc ?? []} full={page.data.full ?? false}>
@@ -28,6 +31,12 @@ export default async function Page(props: {
         <MeetingActions
           markdownUrl={markdownUrl(page)}
           fileName={`${page.slugs[page.slugs.length - 1]}.md`}
+        />
+      )}
+      {video && (
+        <MeetingVideo
+          videoId={video.id}
+          title={typeof page.data.title === 'string' ? page.data.title : 'Запись встречи'}
         />
       )}
       <DocsBody>
