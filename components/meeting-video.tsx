@@ -27,6 +27,10 @@ export function MeetingVideo({
             title={title}
             allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
             allowFullScreen
+            // YouTube не играет встроенный ролик без Referer («Ошибка 153»), а nginx
+            // kb.bbm.academy отдаёт строгий Referrer-Policy. Атрибут сильнее политики
+            // страницы: YouTube получает только домен, путь страницы не уходит.
+            referrerPolicy="strict-origin-when-cross-origin"
           />
         ) : (
           <button
