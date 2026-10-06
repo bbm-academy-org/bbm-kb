@@ -20,6 +20,26 @@
         "id": "zSznxYQhivk",
         "source": "upload"
       }
+    },
+    {
+      "uuid": "HpyhW0qYQfyc806cM+ZSig==",
+      "id": 88400586059,
+      "topic": "BBM Status meeting",
+      "start_time": "2026-10-06T06:59:19Z",
+      "timezone": "Europe/Moscow",
+      "duration": 78,
+      "participants": [
+        "Anton Sidorov",
+        "Julia Tarasenko",
+        "bbm",
+        "Alexandr Gorbunov",
+        "Dobroyar (Igor)",
+        "Ильдарханова",
+        "iPhone (Екатерина)",
+        "Евгения Генрих"
+      ],
+      "base": "2026-10-06-0959-bbm-status-meeting",
+      "description": "На встрече обсуждались бизнес-процессы, разработка систем и обновление проектов."
     }
   ]
 }
