@@ -44,6 +44,20 @@
         "id": "vkB9YsdRnlQ",
         "source": "upload"
       }
+    },
+    {
+      "uuid": "4xwIxTI+RiGM0j41xQEgxg==",
+      "id": 88400586059,
+      "topic": "BBM Status meeting",
+      "start_time": "2026-10-07T12:23:16Z",
+      "timezone": "Europe/Moscow",
+      "duration": 41,
+      "participants": [
+        "Ильдарханова",
+        "Alexandr Gorbunov"
+      ],
+      "base": "2026-10-07-1523-bbm-status-meeting",
+      "description": "Основное внимание на встрече было уделено обсуждению разработки и продвижения социального проекта, в частности образовательного приложения и…"
     }
   ]
 }
