@@ -46,6 +46,20 @@
       }
     },
     {
+      "uuid": "YgKjyo53QuCRwEdDduozCw==",
+      "id": 88400586059,
+      "topic": "BBM Status meeting",
+      "start_time": "2026-10-07T10:17:02Z",
+      "timezone": "Europe/Moscow",
+      "duration": 105,
+      "participants": [
+        "bbm",
+        "Julia Tarasenko"
+      ],
+      "base": "2026-10-07-1317-bbm-status-meeting",
+      "description": "На встрече обсуждались вопросы развития и структурирования бренда Bibiem и связанных с ним проектов, включая Академию докторских школ и различные…"
+    },
+    {
       "uuid": "4xwIxTI+RiGM0j41xQEgxg==",
       "id": 88400586059,
       "topic": "BBM Status meeting",
