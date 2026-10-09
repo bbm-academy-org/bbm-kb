@@ -102,6 +102,23 @@
         "id": "Fmrn2Cw1e4o",
         "source": "upload"
       }
+    },
+    {
+      "uuid": "Ljb/es3DQWClDNEsbiw13Q==",
+      "id": 88400586059,
+      "topic": "BBM Status meeting",
+      "start_time": "2026-10-09T06:59:08Z",
+      "timezone": "Europe/Moscow",
+      "duration": 87,
+      "participants": [
+        "Anton Sidorov",
+        "iPhone (Екатерина)",
+        "Эдуард Ильдарханов",
+        "Alexandr Gorbunov",
+        "Ильдарханова"
+      ],
+      "base": "2026-10-09-0959-bbm-status-meeting",
+      "description": "На встрече обсуждались организационные ценности и принципы их компании с участием Антона Сидорова, Эдуарда Илдарханова и Кати."
     }
   ]
 }
