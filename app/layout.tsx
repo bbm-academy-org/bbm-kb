@@ -1,5 +1,5 @@
 import './global.css';
-import { RootProvider } from 'fumadocs-ui/provider/next';
+import { Providers } from '@/components/providers';
 import type { ReactNode } from 'react';
 
 export default function Layout({ children }: { children: ReactNode }) {
@@ -12,11 +12,8 @@ export default function Layout({ children }: { children: ReactNode }) {
           minHeight: '100vh',
         }}
       >
-        {/* type: 'static' — Orama-поиск целиком на клиенте,
-            индекс генерируется на билде (static export, спека §6). */}
-        <RootProvider search={{ options: { type: 'static' } }}>
-          {children}
-        </RootProvider>
+        {/* Orama остаётся статическим; точные синонимы ведут к рабочим инструментам. */}
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

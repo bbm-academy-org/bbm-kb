@@ -69,6 +69,8 @@ export const { staticGET: GET } = createFromSource(source, {
       url: page.url,
       title: data.title ?? page.url,
       description: data.description,
+      // Штатный фильтр Fumadocs: можно искать только в библиотеке инструментов.
+      tag: page.url.startsWith('/teal-practices') ? 'teal-practices' : undefined,
       structuredData,
     };
   },
