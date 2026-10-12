@@ -123,6 +123,20 @@
         "id": "wBqLfQki2ww",
         "source": "upload"
       }
+    },
+    {
+      "uuid": "AKT2tUcPRBOvX9YwBqnQ9g==",
+      "id": 88400586059,
+      "topic": "BBM Status meeting",
+      "start_time": "2026-10-12T06:59:48Z",
+      "timezone": "Europe/Moscow",
+      "duration": 58,
+      "participants": [
+        "Julia Tarasenko",
+        "Anton Sidorov"
+      ],
+      "base": "2026-10-12-0959-bbm-status-meeting",
+      "description": "На встрече Юлии Тарасенко и Антона Сидорова обсуждалось текущее состояние и вызовы их образовательной платформы, включая разработку веб-сайтов,…"
     }
   ]
 }
