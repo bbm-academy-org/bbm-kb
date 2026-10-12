@@ -30,6 +30,9 @@ jobs:
       - name: Build (static export)
         run: npm run build
 
+      - name: Check handbook links and search synonyms
+        run: npm run check:teal
+
       # Артефакт билда — для ручной проверки/будущего деплоя
       - name: Upload static export
         uses: actions/upload-artifact@v4

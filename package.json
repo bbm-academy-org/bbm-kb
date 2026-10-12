@@ -7,6 +7,7 @@
     "dev": "next dev --webpack",
     "build": "next build --webpack",
     "typecheck": "tsc --noEmit",
+    "check:teal": "node scripts/check-teal-handbook.mjs",
     "postinstall": "fumadocs-mdx"
   },
   "dependencies": {
