@@ -141,6 +141,26 @@
         "id": "_bFrMbS8xg0",
         "source": "upload"
       }
+    },
+    {
+      "uuid": "vIJ1AIV0TDOCKdEaPXOGKQ==",
+      "id": 88400586059,
+      "topic": "BBM Status meeting",
+      "start_time": "2026-10-13T06:58:18Z",
+      "timezone": "Europe/Moscow",
+      "duration": 119,
+      "participants": [
+        "Anton Sidorov",
+        "Евгения Генрих",
+        "Julia Tarasenko",
+        "Dobroyar (Igor)",
+        "iPhone ",
+        "Эдуард Ильдарханов",
+        "iPhone (Екатерина)",
+        "Alexandr Gorbunov"
+      ],
+      "base": "2026-10-13-0958-bbm-status-meeting",
+      "description": "Встреча началась с личных новостей, в том числе Антон Сидоров описал сильный шторм, а Юлия Тарасенко упомянула свое местонахождение в Мексике."
     }
   ]
 }
