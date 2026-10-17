@@ -10,8 +10,8 @@
       "duration": 85,
       "participants": [
         "iPhone (Екатерина)",
-        "Dobroyar (Igor)",
         "Anton Sidorov",
+        "Dobroyar (Igor)",
         "Эдуард Ильдарханов",
         "Petr Guryanov",
         "Alexandr Gorbunov",
@@ -53,8 +53,8 @@
       "timezone": "Europe/Moscow",
       "duration": 148,
       "participants": [
-        "iPhone (Екатерина)",
         "Anton Sidorov",
+        "iPhone (Екатерина)",
         "dobroyar",
         "Юрий"
       ],
@@ -73,8 +73,8 @@
       "timezone": "Europe/Moscow",
       "duration": 71,
       "participants": [
-        "Petr Guryanov",
         "Anton Sidorov",
+        "Petr Guryanov",
         "dobroyar",
         "Ильдарханова"
       ],
@@ -96,8 +96,8 @@
         "Anton Sidorov",
         "Dobroyar (Igor)",
         "Petr Guryanov",
-        "евгения",
-        "Эдуард Ильдарханов"
+        "Эдуард Ильдарханов",
+        "евгения"
       ],
       "base": "2026-07-07-0957-bbm-status-meeting",
       "description": "На встрече обсуждались вопросы разработки и внедрения образовательной платформы, включающей видеоуроки и вебинары.",
@@ -114,8 +114,8 @@
       "timezone": "Europe/Moscow",
       "duration": 76,
       "participants": [
-        "iPhone (Екатерина)",
         "Anton Sidorov",
+        "iPhone (Екатерина)",
         "Эдуард Ильдарханов",
         "Petr Guryanov",
         "Dobroyar (Igor)"
