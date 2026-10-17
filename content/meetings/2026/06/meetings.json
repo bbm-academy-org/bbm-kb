@@ -123,10 +123,10 @@
       "duration": 155,
       "participants": [
         "Anton Sidorov",
-        "евгения",
         "Эдуард Ильдарханов",
-        "iPhone (Екатерина)",
+        "евгения",
         "Dobroyar (Igor)",
+        "iPhone (Екатерина)",
         "Ильдарханова",
         "Alexandr Gorbunov"
       ],
@@ -160,12 +160,11 @@
       "timezone": "Europe/Moscow",
       "duration": 74,
       "participants": [
-        "евгения",
         "Anton Sidorov",
+        "евгения",
         "iPhone (Екатерина)",
         "Эдуард Ильдарханов",
-        "Dobroyar (Igor)",
-        "Эдуард И"
+        "Dobroyar (Igor)"
       ],
       "base": "2026-06-17-0959-bbm-status-meeting",
       "description": "Семинар под руководством Антона Сидорова был посвящен объяснению концепций искусственного интеллекта, в частности больших языковых моделей (LLM) и их…"
