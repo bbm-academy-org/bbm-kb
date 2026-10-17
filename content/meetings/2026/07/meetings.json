@@ -437,8 +437,8 @@
       "timezone": "Europe/Moscow",
       "duration": 34,
       "participants": [
-        "Anton Sidorov",
-        "Petr Guryanov"
+        "Petr Guryanov",
+        "Anton Sidorov"
       ],
       "base": "2026-07-24-1402-bbm-status-meeting",
       "description": "На встрече Антон и Петр обсудили использование и интеграцию агентов ИИ и инструментов для управления проектами и автоматизации.",
