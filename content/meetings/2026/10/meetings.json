@@ -188,6 +188,22 @@
         "id": "Z6t6Df7-lTw",
         "source": "live"
       }
+    },
+    {
+      "uuid": "9DU0EDA+Swqe3/ibDxyztg==",
+      "id": 88400586059,
+      "topic": "BBM Status meeting",
+      "start_time": "2026-10-19T06:00:09Z",
+      "timezone": "Europe/Moscow",
+      "duration": 134,
+      "participants": [
+        "Anton Sidorov",
+        "iPhone (Екатерина)",
+        "Julia Tarasenko",
+        "Эдуард Ильдарханов"
+      ],
+      "base": "2026-10-19-0900-bbm-status-meeting",
+      "description": "На встрече обсуждались вопросы разработки коммерческого предложения и гибкой рекламной модели образовательной платформы."
     }
   ]
 }
