@@ -208,6 +208,28 @@
         "id": "07p1N6eTngU",
         "source": "live"
       }
+    },
+    {
+      "uuid": "wKlxIzJUTjenA6vvrNpujg==",
+      "id": 88400586059,
+      "topic": "BBM Status meeting",
+      "start_time": "2026-10-20T06:58:29Z",
+      "timezone": "Europe/Moscow",
+      "duration": 108,
+      "participants": [
+        "Anton Sidorov",
+        "iPhone (Екатерина)",
+        "Dobroyar (Igor)",
+        "Petr Guryanov",
+        "iPhone ",
+        "Julia Tarasenko",
+        "Alexandr Gorbunov",
+        "Эдуард Ильдарханов",
+        "Евгения Генрих",
+        "Ильдарханова"
+      ],
+      "base": "2026-10-20-0958-bbm-status-meeting",
+      "description": "На совещании обсуждались вопросы обновления операционной деятельности и совершенствования процессов в рамках нескольких проектов."
     }
   ]
 }
