@@ -255,6 +255,25 @@
         "id": "Ta_Y1GQwNtQ",
         "source": "live"
       }
+    },
+    {
+      "uuid": "Oi68bo4/RCyzQY7X7KsFMw==",
+      "id": 88400586059,
+      "topic": "BBM Status meeting",
+      "start_time": "2026-10-23T06:59:15Z",
+      "timezone": "Europe/Moscow",
+      "duration": 133,
+      "participants": [
+        "Anton Sidorov",
+        "Petr Guryanov",
+        "Dobroyar (Igor)",
+        "Эдуард Ильдарханов",
+        "Евгения Генрих",
+        "Alexandr Gorbunov",
+        "iPhone (Екатерина)"
+      ],
+      "base": "2026-10-23-0959-bbm-status-meeting",
+      "description": "На встрече обсуждались основные ценности и принципы проекта, а также внутренняя культура команды."
     }
   ]
 }
