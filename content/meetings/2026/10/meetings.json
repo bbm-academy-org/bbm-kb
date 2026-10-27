@@ -280,6 +280,20 @@
       }
     },
     {
+      "uuid": "34RYbnlKTjiUcVp92vzDpQ==",
+      "id": 88400586059,
+      "topic": "BBM Status meeting",
+      "start_time": "2026-10-26T13:18:16Z",
+      "timezone": "Europe/Moscow",
+      "duration": 24,
+      "participants": [
+        "Alexandr Gorbunov",
+        "Ильдарханова"
+      ],
+      "base": "2026-10-26-1618-bbm-status-meeting",
+      "description": "На встрече обсуждались вопросы разработки ведущего магнита и контентной стратегии для врачей с использованием инструментов ИИ."
+    },
+    {
       "uuid": "/ybzbW8fRIGDQt1GxB+FPQ==",
       "id": 88400586059,
       "topic": "BBM Status meeting",
