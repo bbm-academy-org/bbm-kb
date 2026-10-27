@@ -278,6 +278,26 @@
         "id": "GAQs6FDUj5M",
         "source": "live"
       }
+    },
+    {
+      "uuid": "a8FScfjPRn6WiSL6awkEDQ==",
+      "id": 88400586059,
+      "topic": "BBM Status meeting",
+      "start_time": "2026-10-27T06:57:57Z",
+      "timezone": "Europe/Moscow",
+      "duration": 109,
+      "participants": [
+        "Anton Sidorov",
+        "iPhone (Екатерина)",
+        "Petr Guryanov",
+        "Julia Tarasenko",
+        "Dobroyar (Igor)",
+        "Эдуард Ильдарханов",
+        "Ильдарханова",
+        "Alexandr Gorbunov"
+      ],
+      "base": "2026-10-27-0957-bbm-status-meeting",
+      "description": "Встреча началась с неформальной беседы о путешествиях, погоде и личных новостях, а затем перешла к презентации Антона Сидорова о новом визуальном…"
     }
   ]
 }
