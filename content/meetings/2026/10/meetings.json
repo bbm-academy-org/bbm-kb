@@ -280,6 +280,21 @@
       }
     },
     {
+      "uuid": "/ybzbW8fRIGDQt1GxB+FPQ==",
+      "id": 88400586059,
+      "topic": "BBM Status meeting",
+      "start_time": "2026-10-26T13:52:03Z",
+      "timezone": "Europe/Moscow",
+      "duration": 22,
+      "participants": [
+        "iPhone (Екатерина)",
+        "Ильдарханова",
+        "Alexandr Gorbunov"
+      ],
+      "base": "2026-10-26-1652-bbm-status-meeting",
+      "description": "Основное внимание на встрече было уделено разработке контентной стратегии с использованием Lit Magnet для создания образовательных материалов для…"
+    },
+    {
       "uuid": "a8FScfjPRn6WiSL6awkEDQ==",
       "id": 88400586059,
       "topic": "BBM Status meeting",
