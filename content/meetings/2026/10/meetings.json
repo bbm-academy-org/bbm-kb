@@ -339,6 +339,21 @@
         "id": "toK_xGPEDzE",
         "source": "upload"
       }
+    },
+    {
+      "uuid": "MRtLbQX2T8ufEEAVmW6Emg==",
+      "id": 88400586059,
+      "topic": "BBM Status meeting",
+      "start_time": "2026-10-28T07:01:48Z",
+      "timezone": "Europe/Moscow",
+      "duration": 94,
+      "participants": [
+        "Евгения Генрих",
+        "iPhone (Екатерина)",
+        "Эдуард Ильдарханов"
+      ],
+      "base": "2026-10-28-1001-bbm-status-meeting",
+      "description": "На встрече обсуждались вопросы творческого и структурного развития медицинского сериала."
     }
   ]
 }
