@@ -44,6 +44,21 @@
         "id": "WhaiQrY4UgY",
         "source": "upload"
       }
+    },
+    {
+      "uuid": "bg5XqwYNRRa2QGPNK+bR/Q==",
+      "id": 88400586059,
+      "topic": "BBM Status meeting",
+      "start_time": "2026-11-05T06:58:58Z",
+      "timezone": "Europe/Moscow",
+      "duration": 51,
+      "participants": [
+        "Julia Tarasenko",
+        "Anton Sidorov",
+        "Эдуард Ильдарханов"
+      ],
+      "base": "2026-11-05-0958-bbm-status-meeting",
+      "description": "Основное внимание на совещании было уделено обсуждению и совершенствованию финансовых и административных процессов управления платежами подрядчикам и…"
     }
   ]
 }
