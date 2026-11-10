@@ -86,6 +86,29 @@
         "id": "AqAyrWpMzgQ",
         "source": "upload"
       }
+    },
+    {
+      "uuid": "qTgwgJ0bQ2a+B4TPfpdthA==",
+      "id": 88400586059,
+      "topic": "BBM Status meeting",
+      "start_time": "2026-11-10T06:59:00Z",
+      "timezone": "Europe/Moscow",
+      "duration": 149,
+      "participants": [
+        "Anton Sidorov",
+        "Alexandr Gorbunov",
+        "Евгения Генрих",
+        "iPhone ",
+        "Julia Tarasenko",
+        "Petr Guryanov",
+        "Ильдарханова",
+        "Эдуард Ильдарханов",
+        "Dobroyar (Igor)",
+        "iPhone (Екатерина)",
+        "Андрей | Юрист"
+      ],
+      "base": "2026-11-10-0959-bbm-status-meeting",
+      "description": "На этом совещании основное внимание было уделено техническим вопросам, связанным с платформой и системой вещания, а участники обсудили проблемы…"
     }
   ]
 }
