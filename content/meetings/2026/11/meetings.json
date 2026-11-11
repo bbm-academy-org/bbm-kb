@@ -113,6 +113,22 @@
         "id": "zw0trQ8iOKI",
         "source": "upload"
       }
+    },
+    {
+      "uuid": "q+scTt5kTRaEynCGruvlKQ==",
+      "id": 88400586059,
+      "topic": "BBM Status meeting",
+      "start_time": "2026-11-11T07:15:22Z",
+      "timezone": "Europe/Moscow",
+      "duration": 138,
+      "participants": [
+        "Ильдарханова",
+        "iPhone (Екатерина)",
+        "Alexandr Gorbunov",
+        "Эдуард Ильдарханов"
+      ],
+      "base": "2026-11-11-1015-bbm-status-meeting",
+      "description": "На встрече обсуждались вопросы развития идентичности бренда Bibiem, контентной стратегии и механизмов роста на основе продуктов. iPhone (Екатерина)…"
     }
   ]
 }
