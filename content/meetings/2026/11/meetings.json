@@ -133,6 +133,20 @@
         "id": "dgH1dCy5LyQ",
         "source": "upload"
       }
+    },
+    {
+      "uuid": "upfT8PKoRR2fiaJZC7Wtmg==",
+      "id": 88400586059,
+      "topic": "BBM Status meeting",
+      "start_time": "2026-11-12T09:36:35Z",
+      "timezone": "Europe/Moscow",
+      "duration": 57,
+      "participants": [
+        "Petr Guryanov",
+        "Julia Tarasenko"
+      ],
+      "base": "2026-11-12-1236-bbm-status-meeting",
+      "description": "На встрече Петра Гурьянова и Юлии Тарасенко обсуждались операционные проблемы, автоматизация процессов и организационная структура в их компании по…"
     }
   ]
 }
