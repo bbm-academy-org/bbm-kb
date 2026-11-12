@@ -135,6 +135,21 @@
       }
     },
     {
+      "uuid": "V2MryX2zR6WmC0KeYmiiZg==",
+      "id": 88400586059,
+      "topic": "BBM Status meeting",
+      "start_time": "2026-11-12T09:11:07Z",
+      "timezone": "Europe/Moscow",
+      "duration": 25,
+      "participants": [
+        "Petr Guryanov",
+        "Julia Tarasenko",
+        "Эдуард Ильдарханов"
+      ],
+      "base": "2026-11-12-1211-bbm-status-meeting",
+      "description": "Основное внимание на совещании было уделено организации производственного процесса для серии из трех видеороликов и установлению более четкой…"
+    },
+    {
       "uuid": "upfT8PKoRR2fiaJZC7Wtmg==",
       "id": 88400586059,
       "topic": "BBM Status meeting",
