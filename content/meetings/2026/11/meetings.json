@@ -135,6 +135,25 @@
       }
     },
     {
+      "uuid": "qh3I5HAvREeRIfyRMCjDVg==",
+      "id": 88400586059,
+      "topic": "BBM Status meeting",
+      "start_time": "2026-11-12T07:57:50Z",
+      "timezone": "Europe/Moscow",
+      "duration": 69,
+      "participants": [
+        "Anton Sidorov",
+        "Julia Tarasenko",
+        "iPhone (Екатерина)",
+        "Petr Guryanov",
+        "Эдуард Ильдарханов",
+        "Евгения Генрих",
+        "Ильдарханова"
+      ],
+      "base": "2026-11-12-1057-bbm-status-meeting",
+      "description": "Основное внимание на совещании было уделено переходу подхода команды от этапа прототипирования к более структурированному, бизнес-ориентированному…"
+    },
+    {
       "uuid": "V2MryX2zR6WmC0KeYmiiZg==",
       "id": 88400586059,
       "topic": "BBM Status meeting",
