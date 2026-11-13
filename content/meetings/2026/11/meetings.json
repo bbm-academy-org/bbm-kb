@@ -193,6 +193,21 @@
         "id": "5FxjnqR9a2Q",
         "source": "upload"
       }
+    },
+    {
+      "uuid": "06UiyDF5TfmCuhmMPJ91jA==",
+      "id": 88400586059,
+      "topic": "BBM Status meeting",
+      "start_time": "2026-11-13T08:20:57Z",
+      "timezone": "Europe/Moscow",
+      "duration": 31,
+      "participants": [
+        "Petr Guryanov",
+        "Anton Sidorov",
+        "Julia Tarasenko"
+      ],
+      "base": "2026-11-13-1120-bbm-status-meeting",
+      "description": "Основное внимание на встрече было уделено определению критериев готовности продукта и текущему состоянию проекта."
     }
   ]
 }
