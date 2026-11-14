@@ -236,6 +236,21 @@
         "id": "KFErWjr2cb0",
         "source": "upload"
       }
+    },
+    {
+      "uuid": "CfPddm8cTG+59R6X8mtUNw==",
+      "id": 88400586059,
+      "topic": "BBM Status meeting",
+      "start_time": "2026-11-14T07:59:20Z",
+      "timezone": "Europe/Moscow",
+      "duration": 67,
+      "participants": [
+        "Alexandr Gorbunov",
+        "iPhone (Екатерина)",
+        "Petr Guryanov"
+      ],
+      "base": "2026-11-14-1059-bbm-status-meeting",
+      "description": "Основное внимание на совещании было уделено определению критериев приемлемости и состава продукта для образовательной серии, сочетающей контент…"
     }
   ]
 }
