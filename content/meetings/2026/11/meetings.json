@@ -255,6 +255,26 @@
         "id": "TeVYpnF3s7k",
         "source": "upload"
       }
+    },
+    {
+      "uuid": "uuHpMh8mQ12JRL+fSvD9UQ==",
+      "id": 88400586059,
+      "topic": "BBM Status meeting",
+      "start_time": "2026-11-16T06:59:16Z",
+      "timezone": "Europe/Moscow",
+      "duration": 94,
+      "participants": [
+        "Anton Sidorov",
+        "Эдуард Ильдарханов",
+        "Julia Tarasenko",
+        "iPhone (Екатерина)",
+        "Petr Guryanov",
+        "Alexandr Gorbunov",
+        "Евгения Генрих",
+        "Ильдарханова"
+      ],
+      "base": "2026-11-16-0959-bbm-status-meeting",
+      "description": "В ходе встречи основное внимание было уделено разработке производственного процесса и рабочего процесса для создания образовательного контента,…"
     }
   ]
 }
