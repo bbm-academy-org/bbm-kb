@@ -22,8 +22,13 @@ const shortcuts: Record<string, string> = {
   s3: 's3-consent', consent: 's3-consent', cobudget: 'cobudget', patagonia: 'stewardship',
 };
 
+const HANDBOOK_TAG = 'teal-practices';
+const admitsHandbook = (tag: StaticOptions['tag']) =>
+  tag === undefined || (Array.isArray(tag) ? tag.every((t) => t === HANDBOOK_TAG) : tag === HANDBOOK_TAG);
+
 export function createHandbookSearchClient(options: StaticOptions = {}): SearchClient {
   const base = oramaStaticClient(options);
+  const handbook = oramaStaticClient({ ...options, tag: HANDBOOK_TAG });
   return {
     deps: base.deps,
     async search(query) {
@@ -35,10 +40,19 @@ export function createHandbookSearchClient(options: StaticOptions = {}): SearchC
       const results = await base.search(isSalaryAbbreviation ? 'зарплата' : query);
       if (!preferred) return results;
       const url = `/teal-practices/${preferred}`;
-      const preferredResults = results.filter((item) => item.url.split('#')[0] === url);
+      const isPreferred = (item: { url: string }) => item.url.split('#')[0] === url;
+      let preferredResults = results.filter(isPreferred);
+      // Fumadocs caps a search at 60 hits: a large page elsewhere in the KB (a registry
+      // with hundreds of matching rows) can push the tool out of the cap. Then look the
+      // same query up inside the handbook itself — a real search of the built index,
+      // only when the active filter admits the handbook.
+      if (preferredResults.length === 0 && admitsHandbook(options.tag)) {
+        const inHandbook = await handbook.search(isSalaryAbbreviation ? 'зарплата' : query);
+        preferredResults = inHandbook.filter(isPreferred);
+      }
       // Promote an existing Fumadocs group, including heading hits. Never invent
       // a result when the built index or an active filter does not contain it.
-      return [...preferredResults, ...results.filter((item) => item.url.split('#')[0] !== url)];
+      return [...preferredResults, ...results.filter((item) => !isPreferred(item))];
     },
   };
 }

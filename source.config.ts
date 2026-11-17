@@ -23,6 +23,15 @@ export const docs = defineDocs({
       },
     },
   },
+  // Мета-файлы навигации — только meta.json / meta.yaml. По умолчанию fumadocs-mdx
+  // валидирует как мета любой *.json / *.yaml в content/, а там лежат данные:
+  // реестры встреч meetings.json (читаются через fs, lib/meeting-video.ts) и YAML
+  // IDEF0-модели и калькулятора content/processes/ds-content-production/ (их поле
+  // `root` — строка, а у меты `root` — boolean). Навигацию fumadocs и так берёт
+  // только из файлов с именем meta.
+  meta: {
+    files: ['**/meta.{json,yaml}'],
+  },
 });
 
 export default defineConfig({
