@@ -26,6 +26,27 @@ function isTranscriptPage(url: string): boolean {
 
 const EMPTY: StructuredData = { headings: [], contents: [] };
 
+/**
+ * Справочные таблицы пакета «Производство контента DS» попадают в индекс только
+ * заголовком, описанием и разделами, без строк таблиц.
+ *
+ * Fumadocs отдаёт не больше 60 результатов на запрос. Реестр объектов и функций,
+ * трассировка, глоссарий, ставки и черновые часы — тысячи строк таблиц (почти
+ * половина записей индекса); целиком они занимали все 60 мест по общим словам
+ * («курс» — 60 из 60), и остальная база по таким запросам не находилась. Страницу
+ * находят по названию и разделам, ID и термины — поиском браузера на ней.
+ * Проверка — scripts/check-search-crowding.mjs (CI).
+ */
+const REFERENCE_TABLE_PAGES = new Set(
+  [
+    'registry-ru',
+    'registry-trace-ru',
+    'glossary-ru',
+    'rates/rates-ru',
+    'model/effort-draft-ru',
+  ].map((slug) => `/processes/ds-content-production/${slug}`),
+);
+
 export const { staticGET: GET } = createFromSource(source, {
   /**
    * Русский разборщик слов вместо английского по умолчанию.
@@ -61,6 +82,9 @@ export const { staticGET: GET } = createFromSource(source, {
         structuredData = (await data.load()).structuredData;
       } else {
         throw new Error(`нет structuredData для страницы ${page.url}`);
+      }
+      if (REFERENCE_TABLE_PAGES.has(page.url)) {
+        structuredData = { headings: structuredData.headings, contents: [] };
       }
     }
 

@@ -27,11 +27,22 @@ jobs:
       - name: Install
         run: npm ci
 
+      # Пакет «Производство контента DS» (content/processes/ds-content-production):
+      # трассировка IDEF0-модели к реестру и проверки калькулятора себестоимости.
+      - name: Check DS content-production model trace
+        run: npm run check:ds-model
+
+      - name: Test DS cost calculator
+        run: npm run test:ds-calculator
+
       - name: Build (static export)
         run: npm run build
 
       - name: Check handbook links and search synonyms
         run: npm run check:teal
+
+      - name: Check generic search queries reach the whole KB
+        run: npm run check:search
 
       # Артефакт билда — для ручной проверки/будущего деплоя
       - name: Upload static export

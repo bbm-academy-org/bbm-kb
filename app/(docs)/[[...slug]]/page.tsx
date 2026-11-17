@@ -8,6 +8,7 @@ import {
 import { notFound } from 'next/navigation';
 import defaultMdxComponents, { createRelativeLink } from 'fumadocs-ui/mdx';
 import { V } from '@/components/finmodel';
+import { Idef0Viewer } from '@/components/idef0-viewer';
 import { MeetingActions } from '@/components/meeting-actions';
 import { MeetingVideo } from '@/components/meeting-video';
 import { isMeetingPage, markdownUrl } from '@/lib/meeting-markdown';
@@ -48,6 +49,8 @@ export default async function Page(props: {
             // Переменные финмодели (content/finmodel) — через map, не import в MDX:
             // тот же MDX рендерит bbm-portal через next-mdx-remote, где import не работает.
             V,
+            // Просмотрщик IDEF0 (content/processes/ds-content-production/idef0.mdx) — тоже через map.
+            Idef0Viewer,
           }}
         />
       </DocsBody>
