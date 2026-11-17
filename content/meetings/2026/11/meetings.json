@@ -281,6 +281,22 @@
       }
     },
     {
+      "uuid": "TU+Wi5NlQM+23Uc4dfmZgw==",
+      "id": 88400586059,
+      "topic": "BBM Status meeting",
+      "start_time": "2026-11-17T08:23:16Z",
+      "timezone": "Europe/Moscow",
+      "duration": 38,
+      "participants": [
+        "Anton Sidorov",
+        "Julia Tarasenko",
+        "Petr Guryanov",
+        "Эдуард Ильдарханов"
+      ],
+      "base": "2026-11-17-1123-bbm-status-meeting",
+      "description": "В ходе встречи обсуждались вопросы разработки и запуска образовательных уроков на медицинской платформе, в которых приняли участие Антон Сидоров,…"
+    },
+    {
       "uuid": "vo37L+RBTCq3I6WEDSfCCw==",
       "id": 85891000359,
       "topic": "Юридика",
