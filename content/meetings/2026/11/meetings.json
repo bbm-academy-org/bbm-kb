@@ -281,6 +281,24 @@
       }
     },
     {
+      "uuid": "oPb6UtgRRbK5AweNO5OJ+A==",
+      "id": 85891000359,
+      "topic": "Юридика",
+      "start_time": "2026-11-16T08:59:08Z",
+      "timezone": "Europe/Moscow",
+      "duration": 56,
+      "participants": [
+        "Екатерина Платонова",
+        "Андрей | Юрист",
+        "Anton Sidorov",
+        "Julia Tarasenko",
+        "Petr Guryanov",
+        "Эдуард Ильдарханов"
+      ],
+      "base": "2026-11-16-1159-yuridika",
+      "description": "Основное внимание на встрече было уделено обсуждению правовых и договорных основ управления членами команды и экспертами в рамках деятельности…"
+    },
+    {
       "uuid": "9wKoOPNRSxysdZiCI0dDUg==",
       "id": 88400586059,
       "topic": "BBM Status meeting",
