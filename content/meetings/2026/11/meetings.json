@@ -279,6 +279,23 @@
         "id": "DncG-sl3y8w",
         "source": "upload"
       }
+    },
+    {
+      "uuid": "vo37L+RBTCq3I6WEDSfCCw==",
+      "id": 85891000359,
+      "topic": "Юридика",
+      "start_time": "2026-11-17T09:02:03Z",
+      "timezone": "Europe/Moscow",
+      "duration": 90,
+      "participants": [
+        "Julia Tarasenko",
+        "Андрей | Юрист",
+        "Petr Guryanov",
+        "Эдуард Ильдарханов",
+        "Ильдарханова"
+      ],
+      "base": "2026-11-17-1202-yuridika",
+      "description": "Основное внимание на совещании было уделено обсуждению правовых и оперативных рамок отношений с подрядчиками в рамках организации Dr."
     }
   ]
 }
