@@ -8,6 +8,7 @@
     "build": "next build --webpack",
     "typecheck": "tsc --noEmit",
     "check:teal": "node scripts/check-teal-handbook.mjs",
+    "check:search": "node scripts/check-search-crowding.mjs",
     "check:ds-model": "node content/processes/ds-content-production/model/trace-check.mjs",
     "test:ds-calculator": "node --test \"content/processes/ds-content-production/calculator/*.test.mjs\"",
     "postinstall": "fumadocs-mdx"

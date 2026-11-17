@@ -21,7 +21,6 @@ import {
   MarkerType,
 } from "@xyflow/react";
 import htm from "htm";
-import { parse as parseYaml } from "yaml";
 
 // Lowest zoom at which box names and arrow labels stay legible; the initial view never goes below it.
 const READABLE_ZOOM = 0.65;
@@ -1252,7 +1251,12 @@ function initialHoverCard() {
 }
 
 function readHash(fallback) {
-  return decodeURIComponent(location.hash.replace(/^#/, "")) || fallback;
+  try {
+    return decodeURIComponent(location.hash.replace(/^#/, "")) || fallback;
+  } catch {
+    // a malformed escape (#%E0) is no level of the model: open the root
+    return fallback;
+  }
 }
 
 function App({ model }) {

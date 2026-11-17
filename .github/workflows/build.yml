@@ -41,6 +41,9 @@ jobs:
       - name: Check handbook links and search synonyms
         run: npm run check:teal
 
+      - name: Check generic search queries reach the whole KB
+        run: npm run check:search
+
       # Артефакт билда — для ручной проверки/будущего деплоя
       - name: Upload static export
         uses: actions/upload-artifact@v4
