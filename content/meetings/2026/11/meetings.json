@@ -281,6 +281,23 @@
       }
     },
     {
+      "uuid": "Eho83aTnQdGOpsU6+T4/tA==",
+      "id": 88400586059,
+      "topic": "BBM Status meeting",
+      "start_time": "2026-11-17T08:21:27Z",
+      "timezone": "Europe/Moscow",
+      "duration": 1,
+      "participants": [
+        "Petr Guryanov",
+        "Julia Tarasenko",
+        "iPhone (Екатерина)",
+        "Anton Sidorov",
+        "BBM Academy"
+      ],
+      "base": "2026-11-17-1121-bbm-status-meeting",
+      "description": "Встреча была короткой, фрагментарной беседой, в ходе которой участники обсуждали различные оперативные и личные темы. iPhone (Екатерина) упомянула о…"
+    },
+    {
       "uuid": "TU+Wi5NlQM+23Uc4dfmZgw==",
       "id": 88400586059,
       "topic": "BBM Status meeting",
