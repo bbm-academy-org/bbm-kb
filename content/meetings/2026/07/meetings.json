@@ -304,9 +304,9 @@
         "Anton Sidorov",
         "Ильдарханова",
         "iPhone (Екатерина)",
+        "Эдуард Ильдарханов",
         "Dobroyar (Igor)",
         "Petr Guryanov",
-        "Эдуард Ильдарханов",
         "Игорь",
         "Евгения Генрих",
         "Екатерина"
@@ -326,9 +326,9 @@
       "timezone": "Europe/Moscow",
       "duration": 93,
       "participants": [
+        "Anton Sidorov",
         "Эдуард Ильдарханов",
         "iPhone (Екатерина)",
-        "Anton Sidorov",
         "Alexandr Gorbunov",
         "Dobroyar (Igor)",
         "Petr Guryanov",
@@ -394,8 +394,8 @@
       "timezone": "Europe/Moscow",
       "duration": 192,
       "participants": [
-        "Petr Guryanov",
-        "Anton Sidorov"
+        "Anton Sidorov",
+        "Petr Guryanov"
       ],
       "base": "2026-07-22-1029-bbm-status-meeting",
       "description": "На встрече обсуждались вопросы структурирования Академии докторской школы и ее платформы, уточнения целей и согласования процессов.",
