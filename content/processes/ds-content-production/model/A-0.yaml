@@ -85,6 +85,11 @@ arrows:
     objects: [O-133, O-205]
     from: { boundary: C6 }
     to: { box: A0, side: C }
+  - id: C7
+    label: Согласие на обработку персональных данных (152-ФЗ)
+    objects: [O-225]
+    from: { boundary: C7 }
+    to: { box: A0, side: C }
   # ---- Outputs ----
   - id: O1
     label: Опубликованные продукты — уроки, модули, курсы, подкасты, мероприятия — и анонсы

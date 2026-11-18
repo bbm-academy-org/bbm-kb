@@ -44,6 +44,9 @@ diagrams:
   - id: A316
     file: A316.yaml
     parent: A31
+  - id: A317
+    file: A317.yaml
+    parent: A31
   - id: A32
     file: A32.yaml
     parent: A3
@@ -59,6 +62,12 @@ diagrams:
   - id: A4
     file: A4.yaml
     parent: A0
+  - id: A41
+    file: A41.yaml
+    parent: A4
+  - id: A42
+    file: A42.yaml
+    parent: A4
   - id: A5
     file: A5.yaml
     parent: A0

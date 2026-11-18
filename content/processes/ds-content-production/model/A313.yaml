@@ -1,5 +1,6 @@
 # IDEF0 decomposition A313 «Проверить и согласовать сценарий» (child of A31; format: FORMAT-ru.md).
 # Lesson line steps 8–11 (../process-to-be-ru.md, block 3). Leaves carry a DRAFT effort per lesson.
+# A3135 — the producer runs the approval route by the checklist across the four checks (2026-11-17).
 id: A313
 parent: A31
 title: Проверить и согласовать сценарий
@@ -20,6 +21,7 @@ icom:
   M4: M9
   M5: M10
   M6: M2
+  M7: M3
 boxes:
   - id: A3131
     name: Провести медрецензию сценария
@@ -87,12 +89,32 @@ boxes:
       driver: доля спонсорских уроков; максимум кругов и срок автоодобрения из договора
       iterations: круги этапа 1 фармы
       basis: "оценка аналитика; опора: согласование у фармы «днями и неделями» (L1661)"
+  - id: A3135
+    name: Вести маршрут согласования сценария по чек-листу
+    functions: []
+    mechanisms: [Продюсер]
+    note: >-
+      Новое (2026-11-17): держатель потока по чек-листу маршрута — кому и в каком порядке
+      отправить сценарий (рецензент, юрист, эксперт, через аккаунт — фарма), собрать ответы, дожать
+      по срокам и вернуть замечания на доработку. Большая часть — «отправить и ждать»: часов мало,
+      срок прохода — ожидание ответов, он идёт параллельно самим проверкам A3131–A3134. Повторяется
+      на каждый круг сценария. Содержание проверок не решает — только ведёт маршрут.
+    leaf: true
+    effort:
+      role: Продюсер
+      unit: урок
+      hours_draft: [0.5, 1]
+      lead_days_draft: [3, 8]
+      lead_days_basis: "оценка аналитика; ожидание ответов согласующих внутри прохода, параллельно A3131–A3134"
+      driver: число согласующих в маршруте; доля спонсорских уроков (юрист и фарма в маршруте)
+      iterations: итерации сценария до «зелёного»
+      basis: "оценка аналитика; встреча 2026-11-17 (M:2026-11-17-0959): координация — «написать одно сообщение и ждать ответ»"
 arrows:
   - id: I1
     label: Сценарий, рекламный текст
     objects: [O-082, O-092]
     from: { boundary: I1 }
-    to: { box: A3131, side: I }
+    to: [{ box: A3131, side: I }, { box: A3135, side: I }]
   - id: C1
     label: Закон о рекламе и маркировка
     objects: [O-153, O-157]
@@ -104,10 +126,13 @@ arrows:
     from: { boundary: C2 }
     to: { box: A3131, side: C }
   - id: C3
-    label: Двухэтапное одобрение фармы
-    objects: [O-222]
+    label: Двухэтапное одобрение фармы, сроки — чек-лист маршрута
+    objects: [O-222, O-173]
     from: { boundary: C3 }
-    to: [{ box: A3133, side: C }, { box: A3134, side: C }]
+    to:
+      - { box: A3133, side: C }
+      - { box: A3134, side: C }
+      - { box: A3135, side: C }
   - id: C4
     label: Независимое рецензирование
     objects: [O-221]
@@ -158,6 +183,11 @@ arrows:
     objects: [O-001]
     from: { boundary: M6 }
     to: { box: A3133, side: M }
+  - id: M7
+    label: Продюсер
+    objects: [O-004]
+    from: { boundary: M7 }
+    to: { box: A3135, side: M }
   - id: a01
     label: Сценарий с заключением рецензента
     objects: [O-082]
@@ -173,3 +203,12 @@ arrows:
     objects: [O-082]
     from: { box: A3133, side: O }
     to: { box: A3134, side: I }
+  - id: a04
+    label: Статус маршрута согласования, сроки ответов
+    objects: []
+    from: { box: A3135, side: O }
+    to:
+      - { box: A3131, side: C }
+      - { box: A3132, side: C }
+      - { box: A3133, side: C }
+      - { box: A3134, side: C }

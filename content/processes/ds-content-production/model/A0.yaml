@@ -191,6 +191,7 @@ boxes:
       - Коуч
       - Продуктовая команда
       - Менеджер эксперта
+      - Сервисный круг — юрист
 arrows:
   # ---- Boundary inputs (branches of A-0 I-arrows) ----
   - id: I1
@@ -249,6 +250,11 @@ arrows:
     objects: [O-133, O-205]
     from: { boundary: C6 }
     to: { box: A1, side: C }
+  - id: C7
+    label: Согласие на обработку персональных данных (152-ФЗ)
+    objects: [O-225]
+    from: { boundary: C7 }
+    to: { box: A6, side: C }
   # ---- Boundary mechanisms (branches per «Роли и круги» of each block) ----
   - id: M1
     label: Продуктовая команда
@@ -287,6 +293,7 @@ arrows:
         { box: A3, side: M },
         { box: A4, side: M },
         { box: A5, side: M },
+        { box: A6, side: M },
       ]
   - id: M6
     label: Ядро
@@ -297,7 +304,11 @@ arrows:
     label: Платформа DS
     objects: [O-185, O-184, O-207, O-218]
     from: { boundary: M7 }
-    to: [{ box: A3, side: M }, { box: A4, side: M }, { box: A5, side: M }]
+    to:
+      - { box: A3, side: M }
+      - { box: A4, side: M }
+      - { box: A5, side: M }
+      - { box: A6, side: M }
   - id: M8
     label: ИИ-инструменты
     objects: [O-183]
@@ -443,3 +454,13 @@ arrows:
     objects: [O-057, O-058, O-019]
     from: { box: A1, side: O }
     to: { box: A3, side: C }
+  - id: a19
+    label: Тема урока, клинический случай — для анонса
+    objects: [O-077, O-080]
+    from: { box: A3, side: O }
+    to: { box: A4, side: I }
+  - id: a20
+    label: Шаблоны договоров DS и маршрута одобрения
+    objects: [O-107, O-110]
+    from: { box: A6, side: O }
+    to: [{ box: A1, side: C }, { box: A2, side: C }]

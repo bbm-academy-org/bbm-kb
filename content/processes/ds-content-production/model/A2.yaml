@@ -11,6 +11,7 @@ icom:
   C2: C3
   C3: a01
   C4: a13
+  C5: a20
   O1: a02
   M1: M1
   M2: M1
@@ -177,6 +178,11 @@ arrows:
       - { box: A23, side: C }
       - { box: A24, side: C }
       - { box: A27, side: C }
+  - id: C5
+    label: Шаблон контракта с лидером
+    objects: [O-110]
+    from: { boundary: C5 }
+    to: { box: A27, side: C }
   - id: O1
     label: Программа, план конвейера, график мероприятий
     objects: [O-070, O-071, O-072, O-073, O-213, O-214]
