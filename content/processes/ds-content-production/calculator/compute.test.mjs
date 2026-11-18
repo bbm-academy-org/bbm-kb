@@ -73,23 +73,24 @@ test("loopRounds: script rounds derive from review and pharma stage 1 (rounds_fr
   assert.equal(loopRounds(model, null, U), 1);
 });
 
-test("productHours: lesson direct hours of line A31 = 77,5–155,5 per pass (effort-draft-ru.md)", () => {
+test("productHours: lesson direct hours of line A31 = 83,5–168 per pass (effort-draft-ru.md)", () => {
   const onePass = buildModel(inputs, allRoundsOne);
   const a31 = (m, c) =>
     productHours(m, "урок", c)
       .lines.filter((line) => line.class === "direct" && A31.test(line.leaf))
       .reduce((sum, line) => sum + line.hours, 0);
-  near(a31(onePass, at("smooth")), 77.5);
-  near(a31(onePass, at("usual")), 116.25);
-  near(a31(onePass, at("rework")), 155.5);
+  near(a31(onePass, at("smooth")), 83.5);
+  near(a31(onePass, at("usual")), 125.5);
+  near(a31(onePass, at("rework")), 168);
   for (const line of productHours(model, "урок", U).lines)
     near(line.hours, line.hoursPerPass * line.rounds * line.qty);
 });
 
-test("productHours: Медредактор-сценарист on a lesson = 81,75 h at «обычно» (capacity-ru.md)", () => {
+test("productHours: Медредактор-сценарист on a lesson = 86,25 h at «обычно» (capacity-ru.md)", () => {
   const { directByRole } = productHours(model, "урок", U);
-  near(directByRole["Медредактор-сценарист"], 81.75);
-  near(directByRole["Медиа-круг — монтажёр"], 29.5);
+  near(directByRole["Медредактор-сценарист"], 86.25);
+  near(directByRole["Медиа-круг — монтажёр"], 28);
+  near(directByRole["Продюсер"], 6.25);
   near(directByRole["Аккаунт"], 5.875);
 });
 
@@ -112,10 +113,10 @@ test("productHours: overhead leaves never land in direct hours", () => {
   near(lesson.overheadByRole["Сервисный круг — юрист"], 1.25 * 0.75);
 });
 
-test("teamCapacity: 4,4 lessons a month, bottleneck Медредактор-сценарист (capacity-ru.md)", () => {
+test("teamCapacity: 4,2 lessons a month, bottleneck Медредактор-сценарист (capacity-ru.md)", () => {
   const cap = teamCapacity(model, "урок", U);
   assert.equal(cap.bottleneck, "Медредактор-сценарист");
-  assert.equal(Math.round(cap.perMonth * 10) / 10, 4.4);
+  assert.equal(Math.round(cap.perMonth * 10) / 10, 4.2);
   const editor = cap.roles.find((r) => r.role === "Медредактор-сценарист");
   near(editor.available, 2.5 * P - 0.9375);
   const expertManager = cap.roles.find((r) => r.role === "Менеджер эксперта");
@@ -127,19 +128,19 @@ test("teamCapacity: 4,4 lessons a month, bottleneck Медредактор-сц�
   );
 });
 
-test("requiredFte: one lesson a week needs ≈ 2,44 FTE Медредактор-сценарист", () => {
+test("requiredFte: one lesson a week needs ≈ 2,57 FTE Медредактор-сценарист", () => {
   const fte = requiredFte(model, "урок", "Медредактор-сценарист", 1, U);
-  assert.equal(Math.round(fte * 100) / 100, 2.44);
+  assert.equal(Math.round(fte * 100) / 100, 2.57);
 });
 
-test("leadTime: lesson 91,25, episode ≈ 19, webinar 34,5, course design 61 working days", () => {
-  near(leadTime(model, "урок", U), 91.25);
+test("leadTime: lesson 91,75, episode ≈ 19, webinar 34,5, course design 61 working days", () => {
+  near(leadTime(model, "урок", U), 91.75);
   near(leadTime(model, "эпизод подкаста", U), 19.25);
   near(leadTime(model, "вебинар", U), 34.5);
   near(leadTime(model, "проектирование курса", U), 61);
   const takt = 21 / teamCapacity(model, "урок", U).perMonth;
-  near(leadTime(model, "модуль", U), 91.25 + 5 * takt);
-  near(leadTime(model, "курс", U), 61 + 91.25 + 17 * takt);
+  near(leadTime(model, "модуль", U), 91.75 + 5 * takt);
+  near(leadTime(model, "курс", U), 61 + 91.75 + 17 * takt);
 });
 
 // ── 2661-1 Engagement per role ──
@@ -481,11 +482,11 @@ test("2661-2: «Продуктовая команда» hours are exposed per me
 
 test("2661-5: a black box (decomposition: pending) is a «не задано: подпроцесс не раскрыт» line", () => {
   const lesson = unitCost(buildModel(inputs, { "var:extended_campaign": true }), "урок", U);
-  const line = lesson.trail.find((l) => l.leaf === "A47");
+  const line = lesson.trail.find((l) => l.leaf === "A414");
   assert.equal(line.class, "pending");
   assert.equal(line.cost, null);
   assert.equal(line.name, PENDING_LINE);
-  assert.ok(lesson.flags.some((f) => f.startsWith(PENDING_LINE) && f.includes("A47")));
+  assert.ok(lesson.flags.some((f) => f.startsWith(PENDING_LINE) && f.includes("A414")));
   assert.ok(!unitCost(model, "вебинар", U).trail.some((l) => l.class === "pending"));
 });
 
@@ -559,7 +560,7 @@ test("2661-7: extended campaign = cost per contact × planned contacts, its own 
   const line = withCampaign.externals.find((e) => e.id === "extended_campaign");
   near(line.cost, cpc * plan, 1e-6);
   near(withCampaign.total.byLoad - base.total.byLoad, cpc * plan, 1e-6);
-  assert.ok(withCampaign.trail.some((l) => l.leaf === "A47" && l.class === "pending"));
+  assert.ok(withCampaign.trail.some((l) => l.leaf === "A414" && l.class === "pending"));
   assert.ok(!base.externals.some((e) => e.id === "extended_campaign"));
 });
 
@@ -1055,12 +1056,12 @@ test("roleHourlyCost: circle = FTE-weighted member rates; proxy roles; lower-bou
 test("periodPlan: default = one direction team at capacity on the course mix; pool ∝ direct hours", () => {
   const plan = periodPlan(model, U);
   assert.equal(plan.bottleneck, "Медредактор-сценарист");
-  assert.ok(plan.units["урок"] > 4 && plan.units["урок"] < 4.44);
+  assert.ok(plan.units["урок"] > 4 && plan.units["урок"] < 4.22);
   near(plan.units["урок"], plan.units["эпизод подкаста"]);
   assert.ok(plan.poolCost > 0 && plan.directHours > 0);
   near(plan.overheadPerDirectHour, plan.poolCost / plan.directHours, 1e-9);
   assert.ok(plan.poolLines.some((line) => line.leaf === "A641"));
-  assert.ok(plan.poolLines.some((line) => line.leaf === "A42"));
+  assert.ok(plan.poolLines.some((line) => line.leaf === "A412"));
   assert.ok(!plan.poolLines.some((line) => line.leaf === "A312"));
 });
 
@@ -1084,7 +1085,7 @@ test("unitCost: overrides change exactly the targeted figures", () => {
     1e-9,
   );
   const fte = buildModel(inputs, { "fte:Медредактор-сценарист": 3 });
-  assert.equal(Math.round(teamCapacity(fte, "урок", U).perMonth * 10) / 10, 5.3);
+  assert.equal(Math.round(teamCapacity(fte, "урок", U).perMonth * 10) / 10, 5.1);
   const rounds = buildModel(inputs, { "loop:круги медрецензии до «зелёного»": 3 });
   assert.equal(loopRounds(rounds, "итерации сценария до «зелёного»", U), 4);
   const reserve = buildModel(inputs, { "var:signals_per_unit": 0 });

@@ -1427,7 +1427,7 @@ function leadingPrice(mode, value, cost) {
 /** Cost articles the advance share applies to (cost-model-ru.md, «Рекламные места и аванс»). */
 export const MANDATORY_ARTICLES = ["payroll", "contractors", "experts", "externals"];
 /** Operation that performs a placement switch — its role prices the replacement hours. */
-const REPLACEMENT_LEAF = "A48";
+const REPLACEMENT_LEAF = "A424";
 const LESSON = "урок";
 
 /** The placement directory (products.yaml placements, overrides applied) as a list. */

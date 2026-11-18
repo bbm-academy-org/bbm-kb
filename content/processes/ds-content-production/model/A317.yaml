@@ -1,0 +1,103 @@
+# IDEF0 decomposition A317 «Произвести микролернинги» (child of A31; format: FORMAT-ru.md). Lesson line,
+# step 15а of process block 3 (../process-to-be-ru.md): microlearnings are a stream of their own from the
+# clinical case and the programme, not a part of the video montage (2026-11-17). DRAFT effort per lesson.
+id: A317
+parent: A31
+title: Произвести микролернинги
+# Child boundary code → A31 arrow touching box A317 on that side.
+icom:
+  I1: a01
+  I2: I3
+  I3: a07
+  C1: C5
+  C2: C6
+  C3: C1
+  O1: a08
+  M1: M1
+  M2: M8
+boxes:
+  - id: A3171
+    name: Подготовить микролернинги по клиническому случаю
+    functions: []
+    mechanisms: [Медредактор-сценарист]
+    note: >-
+      Новое (2026-11-17): из принятого клинического случая и программы — темы, короткие сценарии и
+      разметка микролернингов с единым стартом (мини-ситуация, подводка, концовка); сценарий урока
+      для них не нужен, поэтому поток стартует параллельно A312. Рекламы в микролернинге нет.
+    leaf: true
+    effort:
+      role: Медредактор-сценарист
+      unit: урок
+      hours_draft: [3, 6]
+      lead_days_draft: [1, 3]
+      lead_days_basis: "оценка аналитика; от принятого материала A3113, параллельно сценарию"
+      driver: число микролернингов на урок; доля повторно используемых клинических случаев
+      basis: "оценка аналитика; опора: микролернинг ≈ 5 мин (L675)"
+  - id: A3172
+    name: Смонтировать микролернинги и нарезать записи мероприятий
+    functions: [F-048]
+    mechanisms: [Медиа-круг — монтажёр]
+    note: >-
+      Монтаж микролернингов по разметке A3171 с единым стартом, 4K, отдельно от монтажа ролика A3146;
+      сюда же — нарезка записей мероприятий на микролернинги (F-048, обратная связь A0 a04). Правки
+      по медпроверке A3161 — внутри диапазона часов.
+    leaf: true
+    effort:
+      role: Медиа-круг — монтажёр
+      unit: урок
+      hours_draft: [3, 6]
+      lead_days_draft: [1, 2]
+      lead_days_basis: "оценка аналитика"
+      driver: число микролернингов на урок; число записей мероприятий на нарезку
+      basis: "оценка аналитика; опора: микролернинг ≈ 5 мин (L675)"
+arrows:
+  - id: I1
+    label: Принятый материал по темам, клинический случай
+    objects: [O-077, O-080]
+    from: { boundary: I1 }
+    to: { box: A3171, side: I }
+  - id: I2
+    label: Записи мероприятий
+    objects: [O-064]
+    from: { boundary: I2 }
+    to: { box: A3172, side: I }
+  - id: I3
+    label: Правки монтажа
+    objects: [O-091]
+    from: { boundary: I3 }
+    to: { box: A3172, side: I }
+  - id: C1
+    label: Программа
+    objects: [O-070]
+    from: { boundary: C1 }
+    to: { box: A3171, side: C }
+  - id: C2
+    label: Единый старт микролернинга, правило декомпозиции, 4K, человек на каждом ИИ-этапе
+    objects: [O-147, O-148, O-168, O-140]
+    from: { boundary: C2 }
+    to: [{ box: A3171, side: C }, { box: A3172, side: C }]
+  - id: C3
+    label: Образовательная часть без рекламы
+    objects: [O-153]
+    from: { boundary: C3 }
+    to: [{ box: A3171, side: C }, { box: A3172, side: C }]
+  - id: O1
+    label: Микролернинги, нарезки записей мероприятий
+    objects: [O-044]
+    from: { box: A3172, side: O }
+    to: { boundary: O1 }
+  - id: M1
+    label: Медредактор-сценарист
+    objects: [O-010, O-011]
+    from: { boundary: M1 }
+    to: { box: A3171, side: M }
+  - id: M2
+    label: Медиа-круг — монтажёр
+    objects: [O-012, O-013]
+    from: { boundary: M2 }
+    to: { box: A3172, side: M }
+  - id: a01
+    label: Сценарии и разметка микролернингов
+    objects: [O-044]
+    from: { box: A3171, side: O }
+    to: { box: A3172, side: I }

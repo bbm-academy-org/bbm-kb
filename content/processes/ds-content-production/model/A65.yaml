@@ -1,8 +1,8 @@
-# IDEF0 decomposition A65 «Вести стандарты, СОП и метрики, калибровать себестоимость» (child of A6;
-# format: FORMAT-ru.md). Steps 8–11 of process block 7 (../process-to-be-ru.md). Per-period overheads.
+# IDEF0 decomposition A65 «Вести стандарты, шаблоны договоров, СОП и метрики, калибровать себестоимость» (child of A6;
+# format: FORMAT-ru.md). Steps 8–12 of process block 7 (../process-to-be-ru.md). Per-period overheads.
 id: A65
 parent: A6
-title: Вести стандарты, СОП и метрики, калибровать себестоимость
+title: Вести стандарты, шаблоны договоров, СОП и метрики, калибровать себестоимость
 # Child boundary code → A6 arrow touching box A65 on that side.
 icom:
   I1: I1
@@ -11,16 +11,18 @@ icom:
   O2: O1
   O3: O5
   O4: a03
+  O5: O7
   M1: M1
   M2: M3
+  M3: M4
 boxes:
   - id: A651
-    name: Сформировать и пересмотреть стандарты DS и шаблоны договоров
-    functions: [F-106, F-009]
+    name: Сформировать и пересмотреть стандарты DS
+    functions: [F-106]
     mechanisms: [Ядро — стандарты]
     note: >-
-      Шаг 8: advice process с публикацией; шаблоны договоров — с юристом по advice process; пул
-      рецензентов держит собственную политику независимости.
+      Шаг 8: advice process с публикацией; пул рецензентов держит собственную политику
+      независимости. Шаблоны договоров — отдельная операция юриста A655.
     leaf: true
     effort:
       role: Ядро — стандарты
@@ -29,6 +31,25 @@ boxes:
       lead_days_draft: [10, 20]
       lead_days_basis: "оценка аналитика"
       driver: число стандартов в ревизии; число затронутых команд в advice process
+      basis: оценка аналитика
+  - id: A655
+    name: Сформировать и пересмотреть шаблоны договоров
+    functions: [F-009]
+    mechanisms: [Сервисный круг — юрист]
+    note: >-
+      Шаг 12 (выделено 2026-11-17): юрист сервисного круга ведёт шаблоны договоров DS по видам
+      продукта — с фармой (стандартный договор, рамочный и допсоглашения, условия маршрута
+      одобрения) и с лидерами и экспертами. Решение — advice process с ядром и затронутыми
+      командами; ревизия — по обратной связи кругов договоров и отступлений от шаблона. Шаблоны —
+      управление заключения договоров A16 и A272.
+    leaf: true
+    effort:
+      role: Сервисный круг — юрист
+      unit: ревизия шаблонов договоров
+      hours_draft: [4, 12]
+      lead_days_draft: [5, 15]
+      lead_days_basis: "оценка аналитика; advice process с ядром и затронутыми командами внутри прохода"
+      driver: число видов продукта и шаблонов в ревизии; число отступлений от шаблона за период
       basis: оценка аналитика
   - id: A652
     name: Разработать СОП по специализации
@@ -85,6 +106,11 @@ arrows:
     objects: [O-138]
     from: { boundary: C1 }
     to: [{ box: A651, side: C }, { box: A653, side: C }]
+  - id: O5
+    label: Шаблоны договоров DS и маршрута одобрения
+    objects: [O-107, O-110]
+    from: { box: A655, side: O }
+    to: { boundary: O5 }
   - id: O1
     label: Стандарты DS, шаблоны, чек-лист приёмки
     objects: [O-141, O-097, O-145, O-146, O-147, O-148, O-168, O-169, O-221]
@@ -118,11 +144,16 @@ arrows:
       - { box: A651, side: M }
       - { box: A653, side: M }
       - { box: A654, side: M }
+  - id: M3
+    label: Сервисный круг — юрист
+    objects: [O-014]
+    from: { boundary: M3 }
+    to: { box: A655, side: M }
   - id: a01
     label: Стандарты DS
     objects: [O-141]
     from: { box: A651, side: O }
-    to: { box: A652, side: C }
+    to: [{ box: A652, side: C }, { box: A655, side: C }]
   - id: a02
     label: Метрики процесса
     objects: [O-177]

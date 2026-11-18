@@ -1,0 +1,182 @@
+# IDEF0 decomposition A41 «Выпустить и продвигать» (child of A4; format: FORMAT-ru.md). Steps 1–4 of
+# process block 5 (../process-to-be-ru.md): marking, publication, announcement and the extended
+# campaign — work started by the release date. Leaves carry a DRAFT effort (effort-draft-ru.md).
+id: A41
+parent: A4
+title: Выпустить и продвигать
+# Child boundary code → A4 arrow touching box A41 on that side.
+icom:
+  I1: I1
+  I2: a02
+  I3: a03
+  I4: I3
+  C1: C1
+  C2: C3
+  C3: C4
+  O1: O1
+  O2: O2
+  O3: O3
+  O4: a01
+  M1: M1
+  M2: M4
+  M3: M5
+  M4: M6
+boxes:
+  - id: A411
+    name: Промаркировать и присвоить теги
+    functions: [F-064]
+    mechanisms: [Медредактор-сценарист]
+    note: >-
+      Шаги 1–2: маркировка по типу контента и НМО; теги (препарат, МНН, рекомендация) при выпуске —
+      новое: без них поиск затронутых единиц (F-096, A421) становится ручным.
+    leaf: true
+    effort:
+      role: Медредактор-сценарист
+      unit: урок
+      hours_draft: [0.5, 1]
+      lead_days_draft: [0.5, 1]
+      lead_days_basis: "оценка аналитика"
+      driver: число тегов на урок; тип контента (спонсорский, брендированный, НМО)
+      basis: оценка аналитика
+  - id: A412
+    name: Опубликовать по очереди выпуска
+    functions: [F-069]
+    mechanisms: [Сервисный круг — оператор платформы]
+    note: >-
+      Шаг 3: загрузка и публикация на платформе DS по дате релиза; реклама — только в слое приложения.
+      Очередь и дату релиза держит продюсер — его часы в A3162 (приёмка и очередь). Здесь же
+      исполняются решения сопровождения A42: «промаркировать или снять» (A423) и новая версия урока
+      со сменённым рекламным местом (A424).
+    leaf: true
+    effort:
+      role: Сервисный круг — оператор платформы
+      unit: публикация
+      hours_draft: [0.25, 0.5]
+      lead_days_draft: [0.5, 1]
+      lead_days_basis: "оценка аналитика"
+      driver: число публикаций за период (ритм — 1 урок в неделю на направление); снятия по A423
+      basis: оценка аналитика
+  - id: A413
+    name: Анонсировать урок
+    functions: [F-070, F-071]
+    mechanisms: [Медиа-круг — анонсы]
+    note: >-
+      Шаг 4 — базовый анонс, входит в себестоимость единицы: тизер и анонс в соцсетях за неделю до
+      релиза, рилсы, анонс в календаре. Подготовка начинается, как только из A3 пришли тема урока и
+      клинический случай (решение 2026-11-17), а не после публикации; дата релиза — управление: она
+      задаёт, когда анонс выходит. Всё, что упоминает препарат, идёт по маршруту одобрения фармы из
+      договора. Расширенная кампания — отдельная опция пакета (A414).
+    leaf: true
+    effort:
+      role: Медиа-круг — анонсы
+      unit: урок
+      hours_draft: [2, 4]
+      lead_days_draft: 5
+      lead_days_basis: "оценка аналитика; опора: тизер за неделю до релиза (L1843)"
+      driver: число анонсов на урок (тизер, рилсы, календарь); каналы партнёра; доля анонсов с препаратом (маршрут одобрения)
+      basis: оценка аналитика
+  - id: A414
+    name: Провести расширенную кампанию продвижения
+    functions: []
+    mechanisms: [Медиа-круг — анонсы]
+    note: >-
+      Новое: опция пакета сверх базового анонса A413 — посевы в пабликах, рилсы врачам, рассылка
+      блогерам. Пока чёрный ящик — операции раскроются на следующем шаге декомпозиции.
+    decomposition: pending
+arrows:
+  # ---- Boundary ----
+  - id: I1
+    label: Собранные уроки, подкасты, записи, номер одобрения
+    objects: [O-041, O-197, O-048, O-064, O-065, O-093]
+    from: { boundary: I1 }
+    to: { box: A411, side: I }
+  - id: I2
+    label: Решение промаркировать или снять
+    objects: [O-157]
+    from: { boundary: I2 }
+    to: { box: A412, side: I }
+  - id: I3
+    label: Версия урока с новым рекламным местом
+    objects: [O-041, O-061]
+    from: { boundary: I3 }
+    to: { box: A412, side: I }
+  - id: I4
+    label: Тема урока, клинический случай — для анонса
+    objects: [O-077, O-080]
+    from: { boundary: I4 }
+    to: [{ box: A413, side: I }, { box: A414, side: I }]
+  - id: C1
+    label: Закон о рекламе и маркировка
+    objects: [O-153, O-157, O-161]
+    from: { boundary: C1 }
+    to:
+      - { box: A411, side: C }
+      - { box: A412, side: C }
+      - { box: A413, side: C }
+  - id: C2
+    label: Договор — срок сопровождения, маршрут одобрения фармы
+    objects: [O-107, O-170, O-222]
+    from: { boundary: C2 }
+    to:
+      - { box: A412, side: C }
+      - { box: A413, side: C }
+      - { box: A414, side: C }
+  - id: C3
+    label: Стандарты DS, полнота состава
+    objects: [O-141, O-169]
+    from: { boundary: C3 }
+    to:
+      - { box: A411, side: C }
+      - { box: A413, side: C }
+      - { box: A414, side: C }
+  - id: O1
+    label: Опубликованный урок
+    objects: [O-041, O-197, O-048]
+    from: { box: A412, side: O }
+    to: { boundary: O1 }
+  - id: O2
+    label: Тизер, анонс, рилсы
+    objects: [O-062, O-058]
+    from: { box: A413, side: O }
+    to: { boundary: O2 }
+  - id: O3
+    label: Расширенная кампания — паблики, рилсы врачам, рассылка блогерам
+    objects: [O-062]
+    from: { box: A414, side: O }
+    to: { boundary: O3 }
+  - id: O4
+    label: Теги выпущенных уроков
+    objects: [O-125]
+    from: { box: A411, side: O }
+    to: { boundary: O4 }
+  - id: M1
+    label: Медредактор-сценарист
+    objects: [O-010]
+    from: { boundary: M1 }
+    to: { box: A411, side: M }
+  - id: M2
+    label: Медиа-круг — анонсы
+    objects: [O-013]
+    from: { boundary: M2 }
+    to: [{ box: A413, side: M }, { box: A414, side: M }]
+  - id: M3
+    label: Сервисный круг — оператор платформы
+    objects: [O-194]
+    from: { boundary: M3 }
+    to: { box: A412, side: M }
+  - id: M4
+    label: Платформа DS
+    objects: [O-185]
+    from: { boundary: M4 }
+    to: { box: A412, side: M }
+  # ---- Internal ----
+  - id: a01
+    label: Промаркированный урок с тегами
+    objects: [O-157, O-125]
+    from: { box: A411, side: O }
+    to: { box: A412, side: I }
+  - id: a02
+    label: Дата релиза
+    objects: [O-127]
+    from: { box: A412, side: O }
+    to: [{ box: A413, side: C }, { box: A414, side: C }]

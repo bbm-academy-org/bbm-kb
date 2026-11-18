@@ -1,5 +1,5 @@
 # IDEF0 decomposition A6 «Развивать команды и систему производства» (child of A0; format: FORMAT-ru.md).
-# Steps 1–11 of process block 7 (../process-to-be-ru.md). A6 works per period and per team, not per
+# Steps 1–12 of process block 7 (../process-to-be-ru.md). A6 works per period and per team, not per
 # lesson: its hours are overheads allocated to units by hours (owner decision В8, effort-draft-ru.md).
 id: A6
 parent: A0
@@ -9,15 +9,19 @@ icom:
   I1: a11
   I2: a17
   C1: C4
+  C2: C7
   O1: a13
   O2: a14
   O3: a14
   O4: a14
   O5: a15
   O6: a16
+  O7: a20
   M1: M1
   M2: M1
   M3: M6
+  M4: M5
+  M5: M7
 boxes:
   - id: A61
     name: Открыть направление и запустить команду
@@ -74,10 +78,10 @@ boxes:
     mechanisms: [Продуктовая команда, Коуч, Менеджер эксперта]
     note: Шаги 5–7 — три роли, раскрыто диаграммой A64.
   - id: A65
-    name: Вести стандарты, СОП и метрики, калибровать себестоимость
+    name: Вести стандарты, шаблоны договоров, СОП и метрики, калибровать себестоимость
     functions: [F-106, F-009, F-107, F-111, F-109]
-    mechanisms: [Ядро, Продуктовая команда]
-    note: Шаги 8–11 — раскрыто диаграммой A65.
+    mechanisms: [Ядро, Продуктовая команда, Сервисный круг — юрист]
+    note: Шаги 8–12 — раскрыто диаграммой A65.
 arrows:
   # ---- Boundary ----
   - id: I1
@@ -100,6 +104,11 @@ arrows:
       - { box: A63, side: C }
       - { box: A64, side: C }
       - { box: A65, side: C }
+  - id: C2
+    label: Согласие на обработку персональных данных (152-ФЗ)
+    objects: [O-225]
+    from: { boundary: C2 }
+    to: { box: A64, side: C }
   - id: O1
     label: Рабочие стандарты DS, СОП, калькулятор
     objects:
@@ -144,6 +153,11 @@ arrows:
     objects: [O-001, O-177]
     from: { box: A64, side: O }
     to: { boundary: O6 }
+  - id: O7
+    label: Шаблоны договоров DS и маршрута одобрения
+    objects: [O-107, O-110]
+    from: { box: A65, side: O }
+    to: { boundary: O7 }
   - id: M1
     label: Продуктовая команда
     objects: [O-001]
@@ -166,6 +180,16 @@ arrows:
       - { box: A61, side: M }
       - { box: A64, side: M }
       - { box: A65, side: M }
+  - id: M4
+    label: Сервисный круг — юрист
+    objects: [O-014]
+    from: { boundary: M4 }
+    to: { box: A65, side: M }
+  - id: M5
+    label: Платформа DS — админка
+    objects: [O-185]
+    from: { boundary: M5 }
+    to: { box: A64, side: M }
   # ---- Internal ----
   - id: a01
     label: Запущенное направление — состав к найму
