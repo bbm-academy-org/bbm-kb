@@ -434,6 +434,25 @@
       }
     },
     {
+      "uuid": "L5Y5GBGtTXm4RdBooLhMNQ==",
+      "id": 88400586059,
+      "topic": "BBM Status meeting",
+      "start_time": "2026-11-19T06:59:56Z",
+      "timezone": "Europe/Moscow",
+      "duration": 64,
+      "participants": [
+        "Anton Sidorov",
+        "iPhone (Екатерина)",
+        "Julia Tarasenko",
+        "Евгения Генрих",
+        "Эдуард Ильдарханов",
+        "Petr Guryanov",
+        "Ильдарханова"
+      ],
+      "base": "2026-11-19-0959-bbm-status-meeting",
+      "description": "Основное внимание на встрече было уделено рассмотрению проектных задач и отслеживанию прогресса с использованием новой системы отслеживания в стиле…"
+    },
+    {
       "uuid": "DfapxOkpQOmJTnqXbs2j7g==",
       "id": 88400586059,
       "topic": "BBM Status meeting",
