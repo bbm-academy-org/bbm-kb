@@ -388,6 +388,21 @@
         "id": "Em-EIXXvnoo",
         "source": "upload"
       }
+    },
+    {
+      "uuid": "QfVuKMkoRf6h4Hy1m39n3g==",
+      "id": 88400586059,
+      "topic": "BBM Status meeting",
+      "start_time": "2026-11-18T08:19:44Z",
+      "timezone": "Europe/Moscow",
+      "duration": 65,
+      "participants": [
+        "Julia Tarasenko",
+        "Эдуард Ильдарханов",
+        "Anton Sidorov"
+      ],
+      "base": "2026-11-18-1119-bbm-status-meeting",
+      "description": "Основное внимание на этом совещании было уделено планированию организационной сессии для определения эволюционных целей и процессов принятия решений…"
     }
   ]
 }
