@@ -432,6 +432,20 @@
         "id": "7eARkMShcFY",
         "source": "upload"
       }
+    },
+    {
+      "uuid": "DfapxOkpQOmJTnqXbs2j7g==",
+      "id": 88400586059,
+      "topic": "BBM Status meeting",
+      "start_time": "2026-11-19T08:06:09Z",
+      "timezone": "Europe/Moscow",
+      "duration": 117,
+      "participants": [
+        "Petr Guryanov",
+        "Anton Sidorov"
+      ],
+      "base": "2026-11-19-1106-bbm-status-meeting",
+      "description": "Основное внимание на этой встрече было уделено технической организации и финансовым обсуждениям между Петром Гурьяновым и Антоном Сидоровым по…"
     }
   ]
 }
