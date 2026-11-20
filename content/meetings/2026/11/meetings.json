@@ -475,6 +475,21 @@
       }
     },
     {
+      "uuid": "pwuIWKoWRYSBQYiQ8igDxg==",
+      "id": 88400586059,
+      "topic": "BBM Status meeting",
+      "start_time": "2026-11-20T09:39:38Z",
+      "timezone": "Europe/Moscow",
+      "duration": 25,
+      "participants": [
+        "iPhone (Екатерина)",
+        "Anton Sidorov",
+        "Эдуард Ильдарханов"
+      ],
+      "base": "2026-11-20-1239-bbm-status-meeting",
+      "description": "Основное внимание на встрече было уделено доработке структуры оплаты и условий контракта для врачей, участвующих в проекте клинического случая.…"
+    },
+    {
       "uuid": "DJ0Jfia/Tu6ixs2u1D+OFA==",
       "id": 88400586059,
       "topic": "BBM Status meeting",
