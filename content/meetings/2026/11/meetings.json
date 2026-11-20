@@ -475,6 +475,21 @@
       }
     },
     {
+      "uuid": "K3lqwmXjSTipGZKG/qQPSQ==",
+      "id": 88400586059,
+      "topic": "BBM Status meeting",
+      "start_time": "2026-11-20T05:58:33Z",
+      "timezone": "Europe/Moscow",
+      "duration": 32,
+      "participants": [
+        "Anton Sidorov",
+        "Vera",
+        "Ильдарханова"
+      ],
+      "base": "2026-11-20-0858-bbm-status-meeting",
+      "description": "Эта встреча была интервью с Верой, игровым дизайнером, относительно потенциальной должности на неполный рабочий день в проекте медицинского…"
+    },
+    {
       "uuid": "9r64tM/CSMi2YQriVzkmlQ==",
       "id": 82177582106,
       "topic": "Осознание эволюционной цели",
