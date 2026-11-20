@@ -475,6 +475,22 @@
       }
     },
     {
+      "uuid": "4gqVRVWVR+GJm3VtRohzfw==",
+      "id": 88400586059,
+      "topic": "BBM Status meeting",
+      "start_time": "2026-11-20T12:00:26Z",
+      "timezone": "Europe/Moscow",
+      "duration": 58,
+      "participants": [
+        "Ильдарханова",
+        "Natalia",
+        "Anton Sidorov",
+        "Эдуард Ильдарханов"
+      ],
+      "base": "2026-11-20-1500-bbm-status-meeting",
+      "description": "Эта встреча была интервью с Натальей, гейм-дизайнером с четырехлетним опытом работы в Стокгольме, обсудившим потенциальный проект по…"
+    },
+    {
       "uuid": "JbkoG5PrT3yW4/zJRW007w==",
       "id": 88400586059,
       "topic": "BBM Status meeting",
