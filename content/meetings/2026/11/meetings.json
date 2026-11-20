@@ -475,6 +475,20 @@
       }
     },
     {
+      "uuid": "DJ0Jfia/Tu6ixs2u1D+OFA==",
+      "id": 88400586059,
+      "topic": "BBM Status meeting",
+      "start_time": "2026-11-20T10:54:03Z",
+      "timezone": "Europe/Moscow",
+      "duration": 36,
+      "participants": [
+        "Ильдарханова",
+        "Alena Burakhanova"
+      ],
+      "base": "2026-11-20-1354-bbm-status-meeting",
+      "description": "Встреча представляла собой интервью Ильдарханова и Алены Бурахановой по вопросу роли игрового дизайна в медицинском образовательном приложении."
+    },
+    {
       "uuid": "4gqVRVWVR+GJm3VtRohzfw==",
       "id": 88400586059,
       "topic": "BBM Status meeting",
