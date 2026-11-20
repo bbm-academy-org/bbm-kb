@@ -473,6 +473,21 @@
         "id": "cFZv1lQ97wM",
         "source": "upload"
       }
+    },
+    {
+      "uuid": "JbkoG5PrT3yW4/zJRW007w==",
+      "id": 88400586059,
+      "topic": "BBM Status meeting",
+      "start_time": "2026-11-20T12:59:05Z",
+      "timezone": "Europe/Moscow",
+      "duration": 68,
+      "participants": [
+        "Alexandr Gorbunov",
+        "Эдуард Ильдарханов",
+        "Ильдарханова"
+      ],
+      "base": "2026-11-20-1559-bbm-status-meeting",
+      "description": "На встрече обсуждалось приложение для медицинского образования с функциями интеграции спонсорства."
     }
   ]
 }
