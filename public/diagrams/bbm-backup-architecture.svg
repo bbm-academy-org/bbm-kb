@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="840" viewBox="0 0 920 840" role="img" aria-labelledby="title description">
+  <title id="title">Целевая схема резервного копирования BBM</title>
+  <desc id="description">Рабочие сервисы передают базы данных, файлы и конфигурации в действующую систему резервирования. Зашифрованные копии автоматически отправляются разным операторам в Азии и Океании. Из любой внешней копии проверяется восстановление и выполняется аварийный запуск. Ключи восстановления находятся в отдельном защищённом хранилище владельца. Свежесть, ошибки и результаты восстановления контролирует существующий мониторинг.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/>
+    </marker>
+    <style>
+      text { font-family: Arial, sans-serif; fill: #17212b; text-anchor: middle; }
+      .heading { font-size: 26px; font-weight: 700; }
+      .detail { font-size: 22px; }
+      .note { font-size: 19px; fill: #475569; }
+      .node { fill: #f8fafc; stroke: #94a3b8; stroke-width: 1.5; }
+      .external { fill: #edf4ff; stroke: #4d77b0; stroke-width: 1.5; }
+      .restore { fill: #eff8f2; stroke: #5c8c6b; stroke-width: 1.5; }
+      .flow { fill: none; stroke: #475569; stroke-width: 2; stroke-linejoin: round; marker-end: url(#arrow); }
+      .key-flow { fill: none; stroke: #475569; stroke-width: 2; stroke-dasharray: 7 6; marker-end: url(#arrow); }
+    </style>
+  </defs>
+
+  <rect width="920" height="840" fill="#ffffff"/>
+  <text class="note" x="460" y="29">Целевая архитектура</text>
+
+  <g id="services">
+    <rect class="node" x="250" y="56" width="420" height="108" rx="12"/>
+    <text class="heading" x="460" y="99">Рабочие сервисы BBM</text>
+    <text class="detail" x="460" y="135">Базы данных · файлы · настройки</text>
+  </g>
+
+  <path class="flow" d="M 460 164 V 206"/>
+  <g id="existing-backups">
+    <rect class="node" x="250" y="206" width="420" height="110" rx="12"/>
+    <text class="heading" x="460" y="248">Действующие бэкапы</text>
+    <text class="detail" x="460" y="285">Текущие задания и копии Timeweb</text>
+  </g>
+
+  <path class="flow" d="M 460 316 V 350 H 230 V 409"/>
+  <path class="flow" d="M 460 350 H 690 V 409"/>
+  <text class="detail" x="460" y="387">Шифрование и передача</text>
+
+  <g id="asia">
+    <rect class="external" x="50" y="409" width="360" height="110" rx="12"/>
+    <text class="heading" x="230" y="453">Азия · оператор A</text>
+    <text class="detail" x="230" y="489">Независимая внешняя копия</text>
+  </g>
+  <g id="oceania">
+    <rect class="external" x="510" y="409" width="360" height="110" rx="12"/>
+    <text class="heading" x="690" y="453">Океания · оператор B</text>
+    <text class="detail" x="690" y="489">Независимая внешняя копия</text>
+  </g>
+
+  <path class="flow" d="M 230 519 V 568 H 690 V 637"/>
+  <path class="flow" d="M 690 519 V 568"/>
+  <rect x="535" y="585" width="310" height="34" fill="#ffffff"/>
+  <text class="note" x="690" y="611">Из любой внешней копии</text>
+
+  <g id="owner-keys">
+    <rect class="node" x="50" y="637" width="360" height="123" rx="12"/>
+    <text class="heading" x="230" y="676">Ключи владельца</text>
+    <text class="detail" x="230" y="710">Отдельное защищённое</text>
+    <text class="detail" x="230" y="739">хранилище</text>
+  </g>
+  <path class="key-flow" d="M 410 699 H 510"/>
+  <g id="restore">
+    <rect class="restore" x="510" y="637" width="360" height="123" rx="12"/>
+    <text class="heading" x="690" y="676">Восстановление</text>
+    <text class="detail" x="690" y="710">Проверка на чистой площадке</text>
+    <text class="detail" x="690" y="739">Аварийный запуск сервисов</text>
+  </g>
+
+  <path d="M 50 791 H 870" fill="none" stroke="#cbd5e1" stroke-width="1"/>
+  <text class="note" x="460" y="821">Существующий мониторинг: свежесть · ошибки · результаты восстановления</text>
+</svg>
