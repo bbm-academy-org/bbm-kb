@@ -590,6 +590,22 @@
         "id": "yBZ8TKkywBk",
         "source": "upload"
       }
+    },
+    {
+      "uuid": "zrMKhCdERsCaxclSpbkYOw==",
+      "id": 88400586059,
+      "topic": "BBM Status meeting",
+      "start_time": "2026-11-21T09:00:29Z",
+      "timezone": "Europe/Moscow",
+      "duration": 47,
+      "participants": [
+        "Alexandr Gorbunov",
+        "Ильдарханова",
+        "Konstantinov Evgeny",
+        "Эдуард Ильдарханов"
+      ],
+      "base": "2026-11-21-1200-bbm-status-meeting",
+      "description": "На встрече обсуждалась разработка маркетинговой и рекламной стратегии медицинского образовательного продукта, включающего телесериал и приложение."
     }
   ]
 }
