@@ -612,6 +612,25 @@
       }
     },
     {
+      "uuid": "IDNZsLoIQ5ON43Zvc7lCjg==",
+      "id": 88400586059,
+      "topic": "BBM Status meeting",
+      "start_time": "2026-11-23T06:59:16Z",
+      "timezone": "Europe/Moscow",
+      "duration": 148,
+      "participants": [
+        "Alexandr Gorbunov",
+        "Anton Sidorov",
+        "Julia Tarasenko",
+        "Ильдарханова",
+        "Petr Guryanov",
+        "Эдуард Ильдарханов",
+        "iPhone (Екатерина)"
+      ],
+      "base": "2026-11-23-0959-bbm-status-meeting",
+      "description": "Основное внимание на встрече было уделено рассмотрению текущих проектных задач, обсуждению нового процесса производства уроков и разрешению конфликта…"
+    },
+    {
       "uuid": "1F+8XRpsSVKvVzS7DQ7fgA==",
       "id": 88400586059,
       "topic": "BBM Status meeting",
