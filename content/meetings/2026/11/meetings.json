@@ -610,6 +610,21 @@
         "id": "Qqk4jYL4uUI",
         "source": "upload"
       }
+    },
+    {
+      "uuid": "1F+8XRpsSVKvVzS7DQ7fgA==",
+      "id": 88400586059,
+      "topic": "BBM Status meeting",
+      "start_time": "2026-11-23T09:28:13Z",
+      "timezone": "Europe/Moscow",
+      "duration": 45,
+      "participants": [
+        "Julia Tarasenko",
+        "Anton Sidorov",
+        "Petr Guryanov"
+      ],
+      "base": "2026-11-23-1228-bbm-status-meeting",
+      "description": "Основное внимание на встрече было уделено совершенствованию управления проектами и прозрачности работы команды."
     }
   ]
 }
