@@ -652,6 +652,21 @@
         "id": "VEh89ejRCuY",
         "source": "upload"
       }
+    },
+    {
+      "uuid": "NZVyHFlCTV+YqiD5vIG+uQ==",
+      "id": 85891000359,
+      "topic": "Юридика",
+      "start_time": "2026-11-24T08:59:29Z",
+      "timezone": "Europe/Moscow",
+      "duration": 24,
+      "participants": [
+        "Julia Tarasenko",
+        "Андрей | Юрист",
+        "Petr Guryanov"
+      ],
+      "base": "2026-11-24-1159-yuridika",
+      "description": "Основное внимание на совещании было уделено правовой структуре и правам интеллектуальной собственности, касающимся контрактов с членами групп и…"
     }
   ]
 }
