@@ -654,6 +654,25 @@
       }
     },
     {
+      "uuid": "dlLsF1FfRCG0DKZT1qwTog==",
+      "id": 88400586059,
+      "topic": "BBM Status meeting",
+      "start_time": "2026-11-24T06:59:13Z",
+      "timezone": "Europe/Moscow",
+      "duration": 14,
+      "participants": [
+        "Евгения Генрих",
+        "Anton Sidorov",
+        "Alexandr Gorbunov",
+        "Dobroyar (Igor)",
+        "Petr Guryanov",
+        "iPhone (Екатерина)",
+        "Ильдарханова"
+      ],
+      "base": "2026-11-24-0959-bbm-status-meeting",
+      "description": "На этой встрече обсуждался статус команды, на которой Петр Гурьянов руководил обсуждением хода проекта и выполнения задач."
+    },
+    {
       "uuid": "NZVyHFlCTV+YqiD5vIG+uQ==",
       "id": 85891000359,
       "topic": "Юридика",
