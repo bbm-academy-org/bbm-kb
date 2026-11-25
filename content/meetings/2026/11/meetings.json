@@ -696,6 +696,25 @@
       }
     },
     {
+      "uuid": "ZE+WzKDgQT6vuaE56tAx5Q==",
+      "id": 88400586059,
+      "topic": "BBM Status meeting",
+      "start_time": "2026-11-25T06:59:09Z",
+      "timezone": "Europe/Moscow",
+      "duration": 41,
+      "participants": [
+        "Anton Sidorov",
+        "Эдуард Ильдарханов",
+        "Ильдарханова",
+        "Petr Guryanov",
+        "Alexandr Gorbunov",
+        "Julia Tarasenko",
+        "iPhone (Екатерина)"
+      ],
+      "base": "2026-11-25-0959-bbm-status-meeting",
+      "description": "На встрече обсуждались операционные обновления, технические проблемы и организация команды."
+    },
+    {
       "uuid": "yh2bH8NDTBexkONaEiLgig==",
       "id": 85891000359,
       "topic": "Юридика",
