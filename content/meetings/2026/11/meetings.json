@@ -694,6 +694,24 @@
         "id": "WQKaJ9Ul8fA",
         "source": "upload"
       }
+    },
+    {
+      "uuid": "JM8Fbj7ZTyCktZJUMMpI4Q==",
+      "id": 88400586059,
+      "topic": "BBM Status meeting",
+      "start_time": "2026-11-25T10:48:57Z",
+      "timezone": "Europe/Moscow",
+      "duration": 116,
+      "participants": [
+        "Эдуард Ильдарханов",
+        "Alexandr Gorbunov",
+        "Ильдарханова",
+        "Vera",
+        "Natalia",
+        "Alena Burakhanova"
+      ],
+      "base": "2026-11-25-1348-bbm-status-meeting",
+      "description": "Основное внимание на совещании было уделено разработке калькулятора для управления кампаниями по повышению осведомленности о бренде и взаимодействию,…"
     }
   ]
 }
