@@ -835,6 +835,21 @@
       }
     },
     {
+      "uuid": "owIGIZWeTN6YBJ4ojzrR/g==",
+      "id": 85891000359,
+      "topic": "Юридика",
+      "start_time": "2026-11-27T05:43:46Z",
+      "timezone": "Europe/Moscow",
+      "duration": 51,
+      "participants": [
+        "Эдуард Ильдарханов",
+        "Julia Tarasenko",
+        "Андрей | Юрист"
+      ],
+      "base": "2026-11-27-0843-yuridika",
+      "description": "На встрече обсуждалась необходимость создания формальных правовых отношений между командой и Андреем | Юристом."
+    },
+    {
       "uuid": "f9GnKPCzSV6vWj8wUYHipA==",
       "id": 82177582106,
       "topic": "Осознание эволюционной цели",
