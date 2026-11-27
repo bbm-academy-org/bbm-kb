@@ -835,6 +835,27 @@
       }
     },
     {
+      "uuid": "f9GnKPCzSV6vWj8wUYHipA==",
+      "id": 82177582106,
+      "topic": "Осознание эволюционной цели",
+      "start_time": "2026-11-27T07:00:01Z",
+      "timezone": "Europe/Moscow",
+      "duration": 150,
+      "participants": [
+        "Petr Guryanov",
+        "Julia Tarasenko",
+        "Anton Sidorov",
+        "Dobroyar (Igor)",
+        "Евгения Генрих",
+        "Ильдарханова",
+        "Эдуард Ильдарханов",
+        "iPhone (Екатерина)",
+        "Alexandr Gorbunov"
+      ],
+      "base": "2026-11-27-1000-osoznanie-evolyutsionnoy-tseli",
+      "description": "На встрече обсуждались вопросы определения и тестирования эволюционной цели команды и принципов ее работы."
+    },
+    {
       "uuid": "qm34Og6zRD6YjZj+r7Jk0Q==",
       "id": 88400586059,
       "topic": "BBM Status meeting",
